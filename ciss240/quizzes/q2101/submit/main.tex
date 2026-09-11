@@ -1,0 +1,98 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+The following questions involve writing function prototypes.
+\textsc{Warning:} Use \verb!&! only when absolutely necessary.
+
+%------------------------------------------------------------------------------
+\nextq
+The function \verb!swap! swaps the values of two \verb!int! variables.
+For instance if \verb!x! is \verb!0! and \verb!y! is \verb!1!,
+on returning from \verb!swap(x, y)!, \verb!x! is \verb!1! and
+\verb!y! is \verb!0!.
+Write down the function prototype of \verb!swap!.
+Do not include variable names in the function prototype.
+\\
+\ANSWER
+\begin{answercode}
+void swap(int&, int&);
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+The function \verb!swap_double! swaps the values of two
+\verb!double! variables.
+For instance is \verb!x! is \verb!0.0! and \verb!y! is \verb!1.1!,
+on returning from \verb!swap_double(x, y)!, \verb!x! is \verb!1.1! and
+\verb!y! is \verb!0.0!.
+Write down the function prototype of \verb!swap_double!.
+Do not include variable names in the function prototype.
+\\
+\ANSWER
+\begin{answercode}
+void swap_double(double&, double&);
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Let \verb!x! and \verb!y! be integer variables.
+On calling \verb!f(x, y)!, the average (as a \verb!double! value)
+of \verb!x! and \verb!y! is returned, \verb!x! is set to \verb!0!,
+\verb!y! is unchanged.
+Write down the function prototype of \verb!f!.
+Do not include variable names in the function prototype.
+\\
+\ANSWER
+\begin{answercode}
+double f(int&, int);
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+If \verb!x! is an integer array, \verb!n! is an integer variable,
+\verb!value! is an integer variable,
+then on calling \verb!fill(x, n, value)!,
+the function will set
+\verb!x[0]! to \verb!value!,
+\verb!x[1]! to \verb!value!,
+\verb!x[2]! to \verb!value!, ...,
+\verb!x[n - 1]! to \verb!value!.
+Write down the function prototype of \verb!fill!.
+You must include variable names in the function prototype
+(use \verb!x!, \verb!n!, \verb!value! for their names).
+\\
+\ANSWER
+\begin{answercode}
+void fill(int x[], int n, int value);
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+The function \verb!play_audio()! plays an audio file.
+The parameters are:
+\begin{enumerate}[nosep]
+\li \verb!filename!: a C-string that is the name of the audio file to be loaded.
+\li \verb!track_number!: an integer.
+$0$ is the first track, $1$ is the second track, etc.
+$-1$ is \lq\lq play all tracks".
+\li \verb!repeat!: a boolean.
+Track(s) will be played in a loop if \verb!repeat!
+is \verb!true!.
+\end{enumerate}
+The function returns a $0$ if there are no errors,
+a $-1$ if the file cannot be found using the \verb!filename!,
+$-2$ if the \verb!track_number! is not $-1$ and the track number is not found
+in the audio file.
+Write down the prototype of this function.
+You must include variable names in the function prototype
+(use \verb!filename!, \verb!track_number!, \verb!repeat! for their names).
+\\
+\ANSWER
+\begin{answercode}
+int play_audio(const char* filename, int track_number, bool repeat);
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

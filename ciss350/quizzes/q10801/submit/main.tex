@@ -1,0 +1,130 @@
+%-*-latex-*-
+\input{thispreamble}
+
+For the following questions,
+the following is how you describe a hashtable.
+Suppose you have a collection of information on
+people t-shirt size:
+\begin{console}[fontsize=\footnotesize]
+John, L
+Mary, L
+Sue, S
+Tom, XL
+\end{console}
+and you are using a table of size 5, and
+the mod 5 values of the hash of John, Mary, Sue, Tom are
+1, 0, 2, 4, you write
+you write
+\begin{console}[fontsize=\footnotesize]
+[0, Not-Available, Mary, L]
+[1, Not-Available, John, L]
+[2, Not-Available, Sue, S]
+[3, Available, None, None]
+[4, Not-Available, Tom, XL]
+\end{console}
+The first column is the index value, the second is the hashtable row flag
+which must be Available, Not-Available, or Deleted,
+and third column is the key (the person's name),
+and the fourth column is the t-shirt size.
+The flag for each row must be set to one of the above three values.
+The key column and value column (third and fourth column) are initialized
+to None.
+If there's collision, linear probing is used.
+
+TURN PAGE ...
+
+%------------------------------------------------------------------------------
+\newpage
+\nextq
+You work for NSA.
+A message in characters a, b, c, d, e, f, g, h has been encrypted into 4-bit
+codes, i.e.,
+each 4-bit sequence corresponding to one of the characters
+a, b, c, d, e, f, g, h.
+You do know the frequencies of a, b, c, d, e, f, g, h for the original message.
+For instance c is the most commonly occurring character.
+So you want to build a frequency table.
+Here's an example:
+\begin{console}[fontsize=\footnotesize]
+0000, 5
+0010, 6
+0100, 3
+0110, 8
+1000, 10
+1011, 12
+0111, 3
+\end{console}
+In this example 0000 occurs 5 times in the message, 0010 occurs 6 times in the
+message, etc.
+The above are the only possible 4-bit patterns in the message.
+Create a hashtable to build the frequency table of the following
+message:
+\[
+0010, 0000, 0100, 0110, 0111, 0010, 0000, 1000, 0100, 1011, 0111, 0100, 1000
+\]
+Assume the hash function on those bit patterns give you the following:
+\begin{console}[fontsize=\footnotesize]
+key   hash(key)
+0000  12
+0010  3
+0100  7
+0110  15
+1000  22
+1011  12
+0111  42
+\end{console}
+and assume that you are using a hashtable of size 20.
+Write down the resulting hashtable.
+\\
+\ANSWER
+\begin{answercode}
+Key   Hash  Index  Frequency
+0000  12    12     2
+0010  3     3      2
+0100  7     7      3
+0110  15    15     1
+1000  22    2      2
+1011  12    12     1
+0111  42    2      2
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+In the above, how many collisions did you encounter?
+\\
+\ANSWER
+\begin{answercode}
+2 collsions
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Which key search will result in the longest chain of probes?
+If there's more than one, write down all the bit patterns separated by
+comma.
+\\
+\ANSWER
+\begin{answercode}
+1000, 0111, 1011, 0000
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+You have just been informed that the message was corruped during
+transmission.
+All the 0000 should have been 0110.
+Write down the resulting new hashtable.
+\\
+\ANSWER
+\begin{answercode}
+Key   Hash  Index  Frequency
+0010  3     3      2
+0100  7     7      3
+0110  15    15     3
+1000  22    2      2
+1011  12    12     1
+0111  42    2      2
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

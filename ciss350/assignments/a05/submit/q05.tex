@@ -1,0 +1,96 @@
+%-*-latex-*-
+[Mergesort]
+
+Implement the mergesort algorithm in C\texttt{++}.
+The following is the prototype:
+
+\begin{console}[frame=single, fontsize=\footnotesize]
+template < typename T >
+void mergesort(T * start, T * end, bool verbose=false);
+
+template < typename T, typename C >
+void mergesort(T * start, T * end, const C & less, bool verbose=false);
+\end{console}
+
+You should probably have the following functions:
+\begin{Verbatim}[frame=single, commandchars=\~\!\@, fontsize=\footnotesize]
+template < typename T >
+void mergesort_(T * start, T * end, std::vector< T > & t,
+                bool verbose=false);
+
+template < typename T, typename C >
+void mergesort_(T * start, T * end, std::vector< T > & t,
+                const C & less, bool verbose=false);
+
+template < typename T >
+void merge(T * start0, T * end0,
+           T * start1, T * end1,
+           std::vector< T > & t);
+\end{Verbatim}
+Note that in the \verb!mergesort_! function, there's a parameter
+\verb!t!.
+This is a reference to a vector that is created in
+\verb!mergesort!.
+The vector that \verb!t! references is used for the merging process
+(Recall: I said in class that you do not need to create a temporary
+array for every merging process -- one can be shared among the
+recursive function calls of \verb!mergesort_!.
+The \verb!mergesort! function looks like this:
+\begin{Verbatim}[frame=single,commandchars=\~\!\@, fontsize=\footnotesize]
+template < typename T >
+void mergesort(T * start, T * end, bool verbose=false)
+{
+    int n = (end - start) / 2;
+    std::vector< T > t(n);
+    mergesort_(start, end, t, verbose);
+}
+\end{Verbatim}
+The second \verb!mergesort! with the comparator is similar.
+
+Now for the verbose printing of your mergesort.
+Suppose your array/vector is \\
+\verb!{3, 1, 5, 6, 4, 2}!,
+then your output should look like this:
+\begin{Verbatim}[frame=single,commandchars=\~\!\@,fontsize=\footnotesize]
+mergesort({3, 1, 5, 6, 4, 2})
+split({3, 1, 5, 6, 4, 2}) = {3, 1, 5}, {6, 4, 2}
+    mergesort({3, 1, 5})
+    split({3, 1, 5}) = {3}, {1, 5}
+        mergesort({3})
+        return {3}
+        mergesort({1, 5})
+        split({1, 5}) = {1}, {5}
+            mergesort({1}) 
+            return {1}
+            mergesort({5})
+            return {5}
+        merge({1}, {5}) = {1, 5}
+        return {1, 5}
+     merge({3}, {1, 5}) = {1, 3, 5}
+     return {1, 3, 5}
+     mergesort({6, 4, 2})
+     split({6, 4, 2}) = {6}, {4, 2}
+         mergesort({6})
+         return {6}
+         mergesort({4, 2})
+         split({4, 2}) = {4}, {2}
+             mergesort({4})
+             return {4}
+             mergesort({2})
+             return {2}
+         merge({4}, {2}) = {2, 4}
+         return {2, 4}
+     merge({6}, {2, 4}) = {2, 4, 6}
+     return {2, 4, 6}
+merge({1, 3, 5}, {2, 4, 6}) = {1, 2, 3, 4, 5, 6}
+return {1, 2, 3, 4, 5, 6}
+\end{Verbatim} 
+
+(Note that the above mergesort function does not
+return a value. Rather it \lq\lq returns by reference'', i.e.,
+the reference variable is used to hold the sorted vector.
+The \texttt{return} in the printout meant
+\lq\lq return via the reference
+variable''.)
+
+See section on \textsc{Pretty-print Recursion}.

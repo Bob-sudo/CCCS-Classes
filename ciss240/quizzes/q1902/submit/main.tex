@@ -1,0 +1,154 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+For each question below either write down the output or write ERROR if the
+program will not run.
+
+%------------------------------------------------------------------------------
+\nextq
+\begin{console}[fontsize=\footnotesize]
+#include <iostream>
+
+int f()
+{
+    return 42;
+}
+
+int main()
+{
+    std::cout << f(42) << std::endl;
+    return 0;
+}
+\end{console}
+\ANSWER
+\begin{answercode}
+ERROR
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+\begin{console}[fontsize=\footnotesize]
+#include <iostream>
+
+void f(int x)
+{
+    return 42;
+}
+
+int main()
+{
+    std::cout << f(42) << std::endl;
+    return 0;
+}
+\end{console}
+\ANSWER\vspace{0.2cm}
+\begin{console}
+ERROR
+\end{console}
+
+%------------------------------------------------------------------------------
+\newpage
+\nextq
+\begin{console}[fontsize=\footnotesize]
+#include <iostream>
+
+void f(int x)
+{
+    x = 0;
+    return;
+}
+
+int main()
+{
+    int x = 42;
+    f(x);
+    std::cout << x << std::endl;
+    return 0;
+}
+\end{console}
+\ANSWER
+\begin{answercode}
+42
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+\begin{console}[fontsize=\footnotesize]
+#include <iostream>
+
+int f(int x)
+{
+    return g(x + 1);
+}
+
+int g(int x)
+{
+    return x + 1;
+}
+
+int main()
+{
+    std::cout << f(42) << std::endl;
+    return 0;
+}
+\end{console}
+\ANSWER
+\begin{answercode}
+44
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\newpage
+\nextq
+\begin{console}[fontsize=\footnotesize]
+#include <iostream>
+
+int g(int x)
+{
+    return x + 1;
+}
+
+int f(int x)
+{
+    return g(x + 1);
+}
+
+int main()
+{
+    std::cout << f(42) << std::endl;
+    return 0;
+}
+\end{console}
+\ANSWER
+\begin{answercode}
+44
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+\begin{console}[fontsize=\footnotesize]
+#include <iostream>
+
+void f(int & x)
+{
+    x = 0;
+    return;
+}
+
+int main()
+{
+    int x = 42;
+    f(x);
+    std::cout << x << std::endl;
+    return 0;
+}
+\end{console}
+\ANSWER
+\begin{answercode}
+0
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

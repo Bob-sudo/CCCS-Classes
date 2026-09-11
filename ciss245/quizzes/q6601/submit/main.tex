@@ -1,0 +1,46 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+The C\texttt{++} source file below does not compile.
+Insert \textit{one} C\texttt{++} statement (see instruction in the
+\texttt{Rational} class) so that the source file compiles and runs and prints
+\begin{console}[fontsize=\footnotesize]
+1/2
+\end{console}
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+class Rational
+{
+public:
+    Rational(int n, int d)
+        : n_(n), d_(d)
+    {}
+
+    friend std::ostream & operator<<(std::ostream &, const Rational &);
+    
+private:
+    int n_, d_;
+};
+
+std::ostream & operator<<(std::ostream & cout, const Rational & r)
+{
+    cout << r.n_ << '/' << r.d_; // Note: nonmember operator<< uses private
+                                 // member variables of Rational
+    return cout;
+}
+
+int main()
+{
+    Rational r(1, 2);
+    std::cout << r << '\n';
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

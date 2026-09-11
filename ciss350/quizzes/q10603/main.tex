@@ -1,0 +1,103 @@
+%-*-latex-*-
+\input{thispreamble}
+
+For each of the following questions,
+evaluate the expression written in either prefix/Polish
+notation or postfix/Reverse Polish notation, or write ERROR if the expression is invalid.
+You only need to write down the answer. You need not explain.
+
+%------------------------------------------------------------------------------
+\nextq
+Polish notation:
+\verb!* + 3 5 - 7 2!
+\\
+\ANSWER
+\begin{answercode}
+40
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Polish notation: \verb!+ / 8 2 - 4 * 7 2!
+\\
+\ANSWER
+\begin{answercode}
+-6
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Polish notation: \verb!* 8 * 2 + 3 - 2 / 7 2!
+\\
+\ANSWER
+\begin{answercode}
+32
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Polish notation: \verb!/ + - * 2 3 7 4 2!
+\\
+\ANSWER
+\begin{answercode}
+0
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Reverse Polish notation: \verb!2 3 4 * 5 * +!
+\\
+\ANSWER
+\begin{answercode}
+62
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Reverse Polish notation: \verb!5 7 2 + 6 -!
+\\
+\ANSWER
+\begin{answercode}
+ERROR
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function that returns \verb!true! if the integer
+parameter \verb!n! is a palindrome.
+An integer is a palindrome if it's the same if the read it
+left-to-right or right-to-left.
+For instance \verb!0!, \verb!12321!, and \verb!123321! are palindromes.
+Reading \verb!12321! left-to-right, you see \verb!1, 2, 3, 2, 1!,
+which is the same if you read it right-to-left.
+But \verb!-1! and \verb!1232! are not palindromes.
+Note that reading \verb!-1! left-to-right gives you \verb!-, 1!
+and reading it right-to-left gives you \verb!1, -!.
+\\
+\ANSWER
+\begin{answercode}
+bool is_palindrome(int n)
+{
+  if (n < 0) return false;
+
+    int original = n;
+    int reversed = 0;
+
+    while (n > 0)
+    {
+        int digit = n % 10;
+        reversed = reversed * 10 + digit;
+        n /= 10;
+    }
+
+    return original == reversed;
+}
+\end{answercode}
+(HINT: You can use a stack.
+But you don't have to.
+There are basically two ways to solve this problem,
+you either look at the digits of $n$, or you form the reverse of $n$ with the
+digits. There are variations of the above ideas.)
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

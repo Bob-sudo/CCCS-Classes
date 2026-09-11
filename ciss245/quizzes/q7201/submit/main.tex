@@ -1,0 +1,132 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following bubblesort and swap function.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+template < typename T >
+void swap(T & a, T & b)
+{
+  T temp = a;
+  a = b;
+  b = temp;
+}
+
+// Sorts values from address start to address end - 1. Note that
+// the value at address end is *not* included in the sort. <-- CORRECTION
+// Use the above swap function.
+template < typename T >
+void bubblesort(T * start, T * end)
+{
+  for(T * i = start; i < end - 1; i++)
+  {
+    for (T * j = start; j < end - 1 - (i - start); j++)
+    {
+      if(*j > *(j + 1))
+      {
+        swap(j, *(j + 1);
+      }
+    }
+  }
+}
+
+int main()
+{
+    int x[] = {5, 3, 1, 2, 4};
+    bubblesort< int >(&x[0], &x[4]); // sorts {5, 3, 1, 2} (4 not included)
+
+    double y[] = {7, 5, 3, 1, 2, 4, 6, 8};
+    bubblesort< double >(&y[0], &y[6]);
+
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following \verb!Ptr! class which is similar to our \verb!IntPtr!
+class except that \verb!Ptr! is a class template.
+The following test code should work with your \verb!Ptr! class.
+Of course there should be no memory issues.
+\begin{console}[fontsize=\footnotesize]
+#include <iostream>
+#include "Ptr.h"
+
+int main()
+{
+    Ptr< int > p(42);
+    std::cout << *p << '\n';
+
+    Ptr< int > q(p);
+    std::cout << *q << '\n';
+
+    Ptr< int > r(0);
+    r = p;
+    std::cout << *r << '\n';
+
+    // Similar test cases for Ptr< double >, Ptr< char >, etc. should work.
+    return 0;
+}
+\end{console}
+\\
+\ANSWER
+\begin{answercode}
+# file: Ptr.h
+
+#ifndef PTR_H
+#define PTR_H
+
+#include <iostream>
+
+template < typename T >
+class Ptr
+{
+public:
+    Ptr(const T & val)
+
+    {
+      p_ = new T(val)
+    }
+    ~Ptr()
+    {
+      delete p_;
+    }
+    Ptr(const Ptr< T > & p)
+
+    {
+      p_ = new T(*other.p_);
+    }
+    const Ptr< T > & operator=(const Ptr< T > & p)
+    {
+      if (this != &p)
+      {
+        delete p_;
+        p_ = new T (*p.p_);
+      }
+      return *this;
+    }
+    T & operator*()
+    {
+      return *p_;
+    }
+private:
+    T * p_;
+};
+
+// you need something here
+template < typename T >
+std::ostream & operator<<(std::ostream & cout, const Ptr< T > & p)
+{
+  return cout << *p;
+}
+
+#endif
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

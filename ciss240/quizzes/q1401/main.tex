@@ -1,0 +1,41 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+Write a program that gets an integer $n$ from the user
+and prints the number of nonzero digits of $n$.
+Here's a test run:
+\begin{console}[fontsize=\small,commandchars=\\\{\}]
+\userinput{1705}
+3
+\end{console}
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+int main()
+{
+    int n;
+    std::cin >> n;
+
+    int nonzero_digits = 0;
+
+    while (n > 0)
+    {
+        if (n % 10 != 0) 
+        {
+            nonzero_digits++;
+        }
+        n /= 10; 
+    }
+
+    std::cout << nonzero_digits << '\n'; 
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

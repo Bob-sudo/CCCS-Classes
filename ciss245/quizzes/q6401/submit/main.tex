@@ -1,0 +1,142 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+In the Wumpus world, suppose you have several Wumpuses.
+When a hunter kills a Wumpus, say \verb!joe_wumpus!, the hunter earns
+\verb!joe_wumpus.points_!.
+You think it's reasonable for
+\verb!joe_wumpus.points_! to be 1000.
+When the hunter kills any Wumpus, the number of points
+awarded is the same.
+Of course each Wumpus has a row and a column for its position in the
+Wumpus World.
+Each Wumpus also has a direction (N, S, E, W) which is the direction
+that it is facing, i.e., if the Wumpus is facing N, then when it moves
+it will move in the north direction if it does not bump against a wall.
+
+Correct the following header file to optimize on memory usage
+when you have a huge number of Wumpuses.
+\\
+\ANSWER
+\begin{answercode}
+// file: Wumpus.h
+class Wumpus
+{
+public:
+    Wumpus()
+    : is_alive_(true), row_(0), col_(0), direction_('N')
+    {}
+    
+    int get_points() const;
+    // other methods not shown
+private:
+    bool is_alive_;
+    int row_;
+    int col_;
+    char direction_;
+    static const int points_ = 1000;
+};
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Refer to the question above.
+Complete the following by implementing
+\verb!Wumpus::Wumpus()!,
+\verb!Wumpus::get_points()!, and whatever is necessary.
+You need not implement methods not shown in the previous question.
+(There is something else besides the above two functions.)
+\\
+\ANSWER
+\begin{answercode}
+// file: Wumpus.cpp
+#include "Wumpus.h"
+int get_points() const
+{
+  return points;
+}
+
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+The \verb!DollarAmount! class behaves like this:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+DollarAmount amt0(1);
+DollarAmount amt1(1234);
+std::cout << amt0 << '\n'; // prints "$0.01" (without double-quotes)
+std::cout << amt1 << '\n'; // prints "$12.34" (without double-quotes)
+DollarAmount::set_format(1);
+std::cout << amt0 << '\n'; // prints "1c" (without double-quotes)
+std::cout << amt1 << '\n'; // prints "1234c" (without double-quotes)
+DollarAmount::set_format(0);
+std::cout << amt0 << '\n'; // prints "$0.01" (without double-quotes)
+std::cout << amt1 << '\n'; // prints "$12.34" (without double-quotes)
+\end{Verbatim}
+Complete and correct \verb!DollarAmount.h! so that the
+above code fragment works.
+Do not define the bodies of the methods (do that in the next question).
+\\
+\ANSWER
+\begin{answercode}
+// file: DollarAmount.h
+
+#ifndef DOLLARAMOUNT_H
+#define DOLLARAMOUNT_H
+
+#include <iostream>
+
+class DollarAmount
+{
+public:
+DollarAmount(int cents);
+static void set_format(int format);
+private:
+    int cents_;
+    int format_;
+};
+
+std::ostream& operator<<(std::ostream& cout, const DollarAmount& amt);
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Refer to the previous question.
+Complete \verb!DollarAmount.cpp! so that the code fragment in the previous
+question works.
+\\
+\ANSWER
+\begin{answercode}
+// file: DollarAmount.cpp
+
+#include <iostream>
+#include "DollarAmount.h"
+DollarAmount::DollarAmount(int cents)
+: cents_(cents)
+{}
+void DollarAmount::set_format(int format)
+{
+  format_ = f;
+}
+
+std::ostream& operator<<(std::ostream& cout, const DollarAmount)
+{
+  if(DollarAmount::format__ == 0)
+  {
+    int dollars = amt.cents_ / 100;
+    int cents = amt.cent_ % 100;
+    cout << '$' << dollars << std::setw(2) << std::setfill('0') << cents;
+  }
+  else
+  {
+    cout << amt.cents_ << 'c';
+  }
+  
+  return cout;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

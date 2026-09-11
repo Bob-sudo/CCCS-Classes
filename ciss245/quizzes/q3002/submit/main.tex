@@ -1,0 +1,80 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a struct for \verb!Human! so that a \verb!Human!
+variable has
+\begin{enumerate}[nosep]
+\li \verb!id!: an integer (to identify the human)
+\li \verb!father!: a pointer to \verb!Human! (NULL if not known)
+\li \verb!mother!: a pointer to \verb!Human! (NULL if not known)
+\li \verb!children!: an array to 10 Human pointers
+\li \verb!children_size!: number of children represented in \verb!children!.
+If \verb!children_size! is \verb!2!, then only
+\verb!children[0]! and \verb!children[1]! contains meaningful data.
+\end{enumerate}
+Then create the following;
+\begin{enumerate}
+\li 0 is a human. Father and mother unknown. Children are 2 and 3.
+\li 1 is a human. Father and mother unknown. Children are 2 and 3.
+\li 2 is a human. Father is 0 and mother is 1. No children.
+\li 3 is a human. Father is 0 and mother is 1. Child is 4.
+\li 4 is a human. Father is 3 and mother is unknown. No children.
+\end{enumerate}
+\ANSWER
+\begin{answercode}
+// create human struct here
+#include <iostream>
+
+struct Human
+{
+  int id
+  Human * father;
+  Human * mother;
+  Human * children[10];
+  int children_size;
+}
+
+// create humans 0,1,2,3,4 here
+
+int main()
+{
+  Human h0, h1, h2, h3, h4;
+
+  h0.id = 0;
+  h0.father = NULL;
+  h0.mother = NULL;
+  h0.children[0] = &h2;
+  h0.children[1] = &h3;
+  h0.children_size = 2;
+
+  h1.id = 1;
+  h1.father = NULL;
+  h1.mother = NULL;
+  h1.children[0] = &h2;
+  h1.children[1] = &h3;
+  h1.children_size = 2;
+
+  h2.id = 2;
+  h2.father = &h0;
+  h2.mother = &h1;
+  h2.children_size = 0;
+
+  h3.id = 3;
+  h3.father = &h0;
+  h3.mother = &h1;
+  h3.children[0] = &h4;
+  h3.children_size = 1;
+
+  h4.id = 4;
+  h4.father = &h3;
+  h4.mother = NULL;
+  h4.children_size = 0;
+
+  return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

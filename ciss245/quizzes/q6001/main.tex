@@ -1,0 +1,133 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+The class \verb!Date! has member functions
+\verb!add_y(int inc_y)!,
+\verb!add_m(int inc_m)!, and
+\verb!add_d(int inc_d)! that respectively increments the
+year, month, and day of a \verb!Date! object.
+Complete the following function that
+increments the year, month, day of a Date object.
+\\
+\ANSWER
+\begin{answercode}
+void Date::add_y_m_d(int inc_y, int inc_m, int inc_d)
+{
+  add_y(inc_y);
+  add_m(inc_m);
+  add_d(inc_d);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+You are given
+\begin{console}[fontsize=\footnotesize,frame=single]
+class Position
+{
+private:
+    int x_, y_;
+};
+\end{console}
+Add enough code to the above so that the following works:
+\begin{console}[fontsize=\footnotesize,frame=single]
+Position p;
+p.set_x(0); // p.x_ is set to 0
+p.set_y(1); // p.y_ is set to 1
+p.print();  // print "<0, 1>" (without double quotes)
+\end{console}
+\\
+\ANSWER
+\begin{answercode}
+class Position
+{
+public:
+void set_x(int x)
+{
+  x_ = x;
+}
+
+void set_y(int y)
+{
+  y_ = y;
+}
+
+void print() const
+{
+  std::cout << '<' << x_ << ", " << y_ << '>' << std::endl;
+}
+
+private:
+    int x_, y_;
+};
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+You are given
+\begin{console}[fontsize=\footnotesize,frame=single]
+class Array
+{
+public:
+    void push_back(int v)
+    {
+        if (size_ < capacity_)
+        {
+            x_[size_] = v;
+            ++size_;
+        }
+    }
+private:
+    int x_[1024];
+    int size_;
+    int capacity_;
+};
+\end{console}
+Add a method \verb!is_ascending()! that will return true
+of \verb!x_[0]!, ..., \verb!x_[size_  - 1]! is in ascending order.
+For instance
+\begin{console}[fontsize=\footnotesize,frame=single]
+Array a;
+a.push_back(1);
+a.push_back(3);
+a.push_back(3);
+a.push_back(5);
+std::cout << a.is_ascending() << '\n'; // prints 1
+\end{console}
+\\
+\ANSWER
+\begin{answercode}
+class Array
+{
+public:
+    void push_back(int v)
+    {
+        if (size_ < capacity_)
+        {
+            x_[size_] = v;
+            ++size_;
+        }
+    }
+
+    // YOUR ANSWER HERE
+    is_ascending()
+    {
+      for (int i = 0; i < size_ - 1; ++i)
+      {
+        if (x_[i] > x_[i + 1])
+        return false;
+      }
+      return true;
+    }
+
+private:
+    int x_[1024];
+    int size_;
+    int capacity_;
+};
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

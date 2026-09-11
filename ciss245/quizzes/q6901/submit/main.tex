@@ -1,0 +1,146 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+The following program
+\begin{Verbatim}[frame=single, fontsize=\footnotesize]
+#include <iostream>
+
+class Particle
+{
+public:
+    Particle(int id,
+             double position_x, double position_y,
+             double velocity_x, double velocity_y)
+        : id_(id),
+          position_x_(position_x), position_y_(position_y),
+          velocity_x_(velocity_x), velocity_y_(velocity_y)
+    {}
+    int id() const
+    {
+        return id_;
+    }
+    double position_x() const
+    {
+        return  position_x_;
+    }
+    double position_y() const
+    {
+        return  position_y_;
+    }
+    double velocity_x() const
+    {
+        return  velocity_x_;
+    }
+    double velocity_y() const
+    {
+        return  velocity_y_;
+    }
+private:
+    int id_;
+    double position_x_, position_y_;
+    double velocity_x_, velocity_y_;
+};
+
+std::ostream & operator<<(std::ostream & cout, const Particle & particle)
+{
+    cout << "<Particle "
+         << "id:" << particle.id() << ", "
+         << "position:<" << particle.position_x() << ", "
+         << particle.position_y() << ">, "
+         << "velocity:<" << particle.velocity_x() << ", "
+         << particle.velocity_y() << ">>";
+    return cout;
+}
+
+int main()
+{
+    Particle particle(42, 0, 1, 2, 3); // particle at <0, 1> traveling with
+                                       // velocity <2, 3>
+    std::cout << particle << '\n';
+    return 0;
+}
+\end{Verbatim}
+has the following output:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+<Particle id:42, position:<0, 1>, velocity:<2, 3>>
+\end{Verbatim}
+Rewrite the code using the given \verb!vec2d! class.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+  class vec2d
+  {
+    public:
+    vec2d(double x, double y)
+    : x_(x), y_(y)
+    {}
+    double operator[](int i) const
+    {
+      return (i == 0 ? x_ : y_);
+    }
+
+    // other methods not shown
+    private:
+    double x_, y_;
+  };
+
+  std::ostream & operator<<(std::ostream & cout, const vec2d & v)
+  {
+    cout << '<' << v[0] << ", " << v[1] << '>';
+    return cout;
+  }
+
+  class Particle
+  {
+    public:
+    Particle(int id, double position_x, double position_y,
+    double velocity_x, double velocity_y)
+    : id_(id), position_(position_x, position_y),
+    velocity_(velocity_x, velocity_y)
+    {}
+
+    int id() const
+    {
+      return id_;
+    }
+    const vec2d& position() const
+    {
+      return position_;
+    }
+
+    const vec2d& velocity() const
+    {
+      return velocity_;
+    }
+    private:
+    int id_;
+    vec2d position_;
+    vec2d velocity_;
+  };
+
+  std::ostream & operator<<(std::ostream & cout, const Particle & particle)
+  {
+    // CLEAN UP THE CODE ACCORDINGLY.
+    cout << "<Particle "
+    << "id:" << particle.id() << ", "
+    << "position:" << particle.position() << ", "
+    << "velocity:" << particle.velocity() << ">";
+    
+    return cout;
+  }
+
+  int main()
+  {
+    Particle particle(42, 0, 1, 2, 3); // particle at <0, 1> traveling with
+    // velocity <2, 3>
+    std::cout << particle << '\n';
+    return 0;
+  }
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

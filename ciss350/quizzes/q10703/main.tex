@@ -1,0 +1,157 @@
+%-*-latex-*-
+\input{thispreamble}
+
+The following is the node for the prefix tree (or trie) from our notes.
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+class TrieNode
+{
+public:
+    char flag;
+    TrieNode * v[26];
+};
+\end{Verbatim}
+The number of bytes used by such a node is 216.
+A pointer consumes 8 bytes.
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the function below to insert a word into the prefix tree.
+\\
+\ANSWER
+\begin{answercode}
+void insert(TrieNode ** p, const std::string & word)
+{
+  if(*p == NULL)
+  {
+    *p = new TrieNode;
+    (*p)->flag = 0;
+    for(int i = 0; i < 26; i++)
+      (*p)->v[i] = NULL;
+  }
+
+  TrieNode* curr = *p;
+
+  for(int i = 0; i < word.size(); i++)
+  {
+    int idx = word[i] - 'a';
+
+    if(curr->v[idx] == NULL)
+    {
+      curr->v[idx] = new TrieNode;
+      curr->v[idx]->flag = 0;
+      
+      for(int i = 0; i < 26; i++)
+        curr->v[idx]->v[i] = NULL;
+    }
+    curr = curr->v[idx];
+  }
+  curr->flag = '*';
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the function below to search for a word in the prefix tree.
+\\
+\ANSWER
+\begin{answercode}
+bool is_found(TrieNode * p, const std::string & word)
+{
+  if(p == NULL)
+    return false;
+
+  TrieNode* curr = p;
+
+  for(int i = 0; i < word.size(); i++)
+  {
+    int idx = word[i] - 'a';
+
+    if(curr->v[idx] == NULL)
+      return false;
+
+    curr = curr->v[idx];
+  }
+
+  return curr->flag == '*';
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Recall from the notes that when you delete a word, you might be able to
+reclaim the memory of some nodes.
+For instance if \verb!catch! is in the prefix tree and
+there is no word containing \verb!catch! as a prefix
+and the longest prefix \verb!catch! that is a word is \verb!cat!,
+then when you want to remove \verb!catch!, you can remove the nodes
+corresponding to the \verb!c! and the \verb!h!.
+But you can also do a \lq\lq lazy delete": you don't reclaim
+the nodes but set a relevant flag to \verb!' '!.
+Complete the following function to perform a lazy word delete from the
+prefix tree.
+\\
+\ANSWER
+\begin{answercode}
+void lazy_delete(TrieNode * p, const std::string & word)
+{
+  if(p == NULL)
+    return;
+
+  TrieNode * curr = p;
+
+  for(int i = 0; i < word.size(); i++)
+  {
+    int idx = word[i] - 'a';
+
+    if (curr->v[idx] == NULL)
+      return;
+
+    curr = curr->[idx];
+  }
+  curr->flag = 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Suppose the following are valid words:
+\verb!a!,
+\verb!aa!,
+\verb!aaa!.
+The first word uses 2 bytes (including \verb!'\0'!) for the data
+and also 8 bytes for a pointer to this string.
+The second word uses 3 bytes and 8 bytes for a pointer to this string.
+The third word uses 4 bytes and 8 bytes for a pointer to this string.
+So the total number of bytes used to describe the above 3 words
+when stored as an array of pointers to
+C-strings is $2 + 3 + 4 + 3 \times 8$ bytes.
+Of course you also have to point to the first pointer of this data
+structure. So you need
+$2 + 3 + 4 + 3 \times 8 + 8$ bytes.
+Altogether, how many bytes are used to store
+\verb!a!,
+\verb!aa!,
+\verb!aaa!, ... up to a string of 1000 \verb!a!'s?
+\\
+\ANSWER
+\begin{answercode}
+509508 bytes
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Refer to the previous question.
+If you use our prefix tree to store
+\verb!a!,
+\verb!aa!,
+\verb!aaa!, ... up to a string of 1000 \verb!a!'s,
+how many bytes are used by the prefix tree together with a pointer
+to the root of the tree?
+\\
+\ANSWER
+\begin{answercode}
+216008
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

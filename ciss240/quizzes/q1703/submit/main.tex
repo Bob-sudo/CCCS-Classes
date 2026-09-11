@@ -1,0 +1,103 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a C++ program that declares an array \verb$a$ of
+1000 doubles \textit{initializing} all the values to 0.0,
+obtain 1000 doubles from the user to be placed in the array (using a loop),
+compute and print the average of the values in the array (using another loop),
+and finally compute and print the average of the values in the array which are
+strictly positive (i.e., $> 0$) (using yet another loop).
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+int main()
+{
+    double a[1000] = {0.0};
+
+    for (int i = 0; i < 1000; ++i)
+    {
+        std::cin >> a[i];
+    }
+
+    double total_sum = 0.0;
+    for (int i = 0; i < 1000; ++i)
+    {
+        total_sum += a[i];
+    }
+    double overall_average = total_sum / 1000.0;
+    std::cout << overall_average << '\n';
+
+    double positive_sum = 0.0;
+    int positive_count = 0;
+    for (int i = 0; i < 1000; ++i)
+    {
+        if (a[i] > 0)
+        {
+            positive_sum += a[i];
+            positive_count++;
+        }
+    }
+
+    if (positive_count > 0)
+    {
+        double positive_average = positive_sum / positive_count;
+        std::cout << positive_average << '\n';
+    }
+    else
+    {
+        std::cout << "No positive values in the array.\n";
+    }
+
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+You are given the following array (which is sorted in ascending order):
+\begin{python}
+from latextool_basic import Plot, grid, array
+p = Plot()
+s = array(x0=0.5, y0=0.5, width=0.8, height=0.8,
+          xs=[-8,-7,-7,-3,-1,1,2,3,4,4,8,12,15,16,19])
+p.add(s)
+print(p)
+\end{python}
+Using the binary search algorithm from our notes, list down the
+index values and the corresponding array values of the array that was
+actually accessed during the
+search for the target value of \verb!2!.
+(I have already completed the first row for you.)
+\\
+\ANSWER
+\begin{answercode}
+7 3 5 6
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Refer to the above question.
+How many probes (i.e., number of times a value in the array was accessed)
+did the above binary search make?
+\\
+\ANSWER
+\begin{answercode}
+4
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Refer to the array in the above question.
+How many probes do you need if you use linear search to find 2?
+\\
+\ANSWER
+\begin{answercode}
+7
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

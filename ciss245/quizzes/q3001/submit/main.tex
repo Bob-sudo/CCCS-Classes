@@ -1,0 +1,141 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a struct for \verb!Martian! so that a \verb!Martian!
+variable has
+\begin{enumerate}[nosep]
+\li \verb!num_heads!: number of heads
+\li \verb!num_arms!: number of arms
+\li \verb!num_legs!: number of legs
+\li \verb!gender!: gender (as a \verb!char!)
+\li \verb!max_speed!: maximum speed of travel (as a \verb!double!)
+\end{enumerate}
+and create struct variable \verb!marvin! with 1 head, 2 arms, 3 legs,
+and gender of \verb!'r'! using an initializer list.
+\\
+\ANSWER
+\begin{answercode}
+// create Martian struct here
+Struct Martian
+{
+  int num_heads;
+  int num_arms;
+  int num_legs;
+  char gender;
+  double max_speed;
+}
+// create marvin here
+Martian marvin = {1, 2, 3, 'r', 0.0};
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+You are given
+\begin{console}[fontsize=\footnotesize]
+struct Position
+{
+    int x, y;
+};
+struct Alien
+{
+    Position p;
+    int health;
+};
+\end{console}
+Complete the following to create an array \verb!x! of 100 \verb!Alien!s,
+all at the given position \verb!p! (see below) and all with \verb!health!
+of 1000.
+\\
+\ANSWER
+\begin{answercode}
+Position p = {10, 20};
+
+// create x here
+Alien x[100];
+
+for (int i = 0; i < 100; ++i)
+{
+  x[i].p = p;
+  x[i].health = 1000;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+An \verb!Alien! struct value has a \verb!health! member variable.
+Something is not quite right with the following. Fix it so that it works.
+\\
+\ANSWER
+\begin{answercode}
+Alien * alien = new Alien;
+alien->health = 0;
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following (see STEP 1 and STEP 2))
+so that the program prints
+\begin{console}[fontsize=\footnotesize]
+<Weapon type:sword, name:guthwine>
+<Person name:eomer, health:1000, weapon:<Weapon type:sword, name:guthwine>>
+\end{console}
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+struct Weapon
+{
+    char type[1024];
+    char name[1024];
+};
+
+struct Person
+{
+    char name[1024];
+    int health;
+    Weapon * weapon;
+};
+
+void Weapon_print(Weapon & w)
+{
+    std::cout << "<Weapon type:" << w.type << ", name:" << w.name << '>';
+}
+
+void Weapon_println(Weapon & w)
+{
+    Weapon_print(w);
+    std::cout << '\n';
+}
+
+void Person_println(Person & p)
+{
+    std::cout << "<Person name:" << p.name
+              << ", health:" << p.health
+              << ", weapon:";
+    // STEP 2: Add a statement here to print the weapon of p
+    Weapon_print(*p.weapon);
+    std::cout << ">\n";
+}
+
+int main()
+{
+    Weapon w = {"sword", "guthwine"};
+    Weapon_println(w); // prints <Weapon type:sword, name:guthwine>
+
+    // STEP 1: Create variable p of type Person and with name of "eomer",
+    // health of 1000, and has weapon w (from above).
+    Person p = {``eomer'', 1000, &w};
+
+    // The following should print
+    // <Person name:eomer, health:1000, weapon:<Weapon type:sword, name:guthwine>>
+    Person_println(p);
+
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

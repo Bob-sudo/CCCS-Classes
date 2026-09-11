@@ -1,0 +1,113 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Make the least possible modification to the given program so that the output is
+\begin{console}[fontsize=\footnotesize]
+03
+\end{console}
+Do \textit{not} modify \verb!main()!.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+class A
+{
+public:
+    void m()
+    {
+        std::cout << '0';
+    }
+    virtual void n()
+    {
+        std::cout << '1';
+    }
+};
+
+class B: public A
+{
+public:
+    void m()
+    {
+        std::cout << '2';
+    }
+    void n()
+    {
+        std::cout << '3';
+    }
+};
+
+int main()
+{
+    A * p = new B;
+    p->m();
+    p->n();
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+John wants to put 42 and 3.14 into a vector and print their values.
+But the code below (obviously!) does not work.
+Help him out by correcting all the mistakes.
+(Hint: create a parent class \verb!Number! for both \verb!Int!
+and \verb!Double! and use polymorphism.)
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <vector>
+
+// Put a parent class here
+class Number
+{
+  public:
+  virtual void print() const;
+}
+
+class Int: public Number
+{
+public:
+    Int(int v)
+        : v_(v)
+    {}
+    void print() const
+    {
+        std::cout << v_ << '\n';
+    }
+    int v_;
+};
+
+class Double: public Number
+{
+public:
+    Double(double v)
+        : v_(v)
+    {}
+    void print() const
+    {
+        std::cout << v_ << '\n';
+    }
+    double v_;
+};
+
+int main()
+{
+    std::vector< Number > numbers;
+    numbers.push_back(Int(42));
+    numbers.push_back(Double(3.14));
+
+    for (int i = 0; i < 2; ++i)
+    {
+        numbers[i].print();
+    }
+
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

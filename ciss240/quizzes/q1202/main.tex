@@ -1,0 +1,83 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a program that continually get an integer from the
+user prints \verb!zero! if the input is \verb!0!,
+prints \verb!unit! is the input is \verb!1!,
+otherwise it prints \verb!prime! if the input is a prime number
+or it prints \verb!composite! if the input is not prime.
+If the user enters a negative number the program prints \verb!error!.
+To stop the loop and ends the program, the user enters \verb!-1!.
+Here's a sample test run:
+\begin{console}[commandchars=\\\{\},fontsize=\footnotesize]
+\userinput{0}
+zero
+\userinput{1}
+unit
+\userinput{2}
+prime
+\userinput{3}
+prime
+\userinput{4}
+composite
+\userinput{-5}
+error
+\userinput{-1}
+\end{console}
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <cmath>
+
+bool is_prime(int num)
+{
+    if (num < 2) return false;          
+    for (int i = 2; i <= std::sqrt(num); ++i)
+    {
+        if (num % i == 0) return false;
+    }
+    return true; 
+}
+
+int main()
+{
+    int input;
+
+    while (true)
+    {
+        std::cin >> input; 
+
+        if (input == -1)
+        {              
+            break;
+        }
+        else if (input == 0)
+        {
+            std::cout << "zero\n";
+        }
+        else if (input == 1)
+        {
+            std::cout << "unit\n";
+        }
+        else if (input < 0)
+        {
+            std::cout << "error\n";
+        }
+        else if (is_prime(input))
+        {
+            std::cout << "prime\n";
+        }
+        else
+        {
+            std::cout << "composite\n";
+        }
+    }
+
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

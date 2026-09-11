@@ -1,0 +1,16 @@
+Q1 [
+#include <iostream>
+
+int main()
+{
+    int n;
+    std::cin >> n;
+    int nonzero_digits = 0;
+
+
+
+    std::cout << nonzero_digits << '\n';
+    return 0;
+}
+]
+

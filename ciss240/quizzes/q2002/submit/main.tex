@@ -1,0 +1,122 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function that accepts an array and a length,
+and overwrites the negative values in the array with 0.
+For instance if the function is called with the array
+\verb!{-1, 2, -3, -4, 5, 6, -7, 4}! and $8$, on returning from the function, the array becomes \verb!{0, 2, 0, 0, 5, 6, 0, 4}!.
+\\
+\ANSWER
+\begin{answercode}
+void clear_negative(double x[], int len)
+{
+    for (int i = 0; i < len; ++i)
+    {
+        if (x[i] < 0)
+        {
+            x[i] = 0;
+        }
+    }
+}
+\end{answercode}
+
+\nextq
+Complete the following function that accepts a 2D array \verb!x! and
+\verb!n! (at most 1024)
+and fill \verb!x! with values so that for instance if \verb!n! is \verb!5!,
+\verb!x! is
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+1 1 1 1 1
+1 0 0 0 1
+1 0 0 0 1
+1 0 0 0 1
+1 1 1 1 1
+\end{Verbatim}
+i.e., \verb!1!s on the boundary of the $5 \times 5$ area surrounding \verb!0!s.
+(Top left corresponding to row 0, column 0 of the array.)
+\\
+\ANSWER
+\begin{answercode}
+void f(int x[1024][1024], int n)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            if (i == 0 || i == n - 1 || j == 0 || j == n - 1)
+            {
+                x[i][j] = 1;
+            }
+            else
+            {
+                x[i][j] = 0;
+            }
+        }
+    }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the output (or write ERROR).
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+int x[10][10] = {0};
+
+for (int i = 0; i < 10; i++)
+{
+    x[i][0] = 1;
+    x[0][i] = 1;
+}
+
+for (int i = 1; i < 10; i++)
+{
+    for (int j = 1; j < 10; j++)
+    {
+        x[i][j] = x[i - 1][j] + x[i][j - 1] + x[i - 1][j - 1];
+    }
+}
+
+std::cout << x[1][2] << '\n';
+\end{Verbatim}
+\ANSWER
+\begin{answercode}
+5
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the output (or write ERROR).
+\begin{console}[fontsize=\footnotesize]
+#include <iostream>
+
+void set_to_zero(int x)
+{
+    x = 0;
+}
+
+void set_to_one(int & x)
+{
+    x = 1;
+}
+
+int main()
+{
+    int x = 42;
+    set_to_zero(x);
+    std::cout << x << ' ';
+    set_to_one(x);
+    std::cout << x << '\n';
+    return 0;
+}
+\end{console}
+\ANSWER
+\begin{answercode}
+42 1
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

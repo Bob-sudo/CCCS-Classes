@@ -1,0 +1,56 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+Write a function that prints the value in an integer array:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+int x[] = {1, 3, 5, 2, 4};
+print(x, 3); // prints 1 3 5 (i.e., 3 values printed)
+print(x, 4); // prints 1 3 5 2 (i.e., 4 values printed)
+print(x, 5); // prints 1 3 5 2 4 (i.e., 5 values printed)
+\end{Verbatim}
+\ANSWER
+\begin{answercode}
+void print(int x[], int n)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        std::cout << x[i] << " ";
+    }
+    std::cout << std::endl;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following program that returns the number of occurrences of the
+value of \verb!target! in array \verb!x!.
+The variable \verb!len! gives the number of values that the function should
+test within array \verb!x!, i.e., the function search for occurrences of
+\verb!target! in \verb!x[0]!, \verb!x[1]!, ..., \verb!x[len - 1]!.
+For instance if \verb!y! is an array of doubles with values
+$1.1$, $2.1$, $3.1$, $2.1$, $5.1$,
+then calling \verb!count(y, 5, 2.1)! returns integer $2$ since \verb!2.1!
+occurs twice in \verb!y!.
+\\
+\ANSWER
+\begin{answercode}
+int count(double x[], int len, double target)
+{
+    int occurrences = 0;
+    for (int i = 0; i < len; ++i)
+    {
+        if (x[i] == target)
+        {
+            occurrences++;
+        }
+    }
+    return occurrences;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

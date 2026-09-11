@@ -1,0 +1,48 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+What is the output of the following code fragment that has a triple
+for-loop:
+\begin{console}
+for (int i = 1; i < 3; ++i)
+{
+    std::cout << "i:" << i << '\n';
+    for (int j = i; j >= 0; --j)
+    {
+        std::cout << " j:" << j << '\n';
+        for (int k = 0; k < i + j; ++k)
+        {
+            std::cout << "  k:" << k << '\n';
+        }
+    }
+}
+\end{console}
+\ANSWER
+\begin{answercode}
+i:1
+ j:1
+  k:0
+  k:1
+ j:0
+  k:0
+i:2
+ j:2
+  k:0
+  k:1
+  k:2
+  k:3
+ j:1
+  k:0
+  k:1
+  k:2
+ j:0
+  k:0
+  k:1
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

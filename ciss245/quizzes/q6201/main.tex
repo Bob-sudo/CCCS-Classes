@@ -1,0 +1,106 @@
+%-*-latex-*-
+\input{thispreamble}
+
+The questions below uses this class:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\#\!\@]
+class X
+{
+public:
+    X(int id)
+        : id_(id)
+    {}
+    ~X()
+    {
+        std::cout << id_ << " died\n";
+    }
+    int id_;
+};
+\end{Verbatim}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the output of this code fragment (or write ERROR)?
+The answer you write down must match the output exactly (watch out for
+spaces and newlines).
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+int main()
+{
+    X x(42);
+    for (int i = 0; i < 3; ++i)
+    {
+        X a(i);
+    }
+    return 0;
+}
+\end{Verbatim}
+\ANSWER
+\begin{answercode}
+0 died
+1 died
+2 died
+42 died
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the output of this code fragment (or write ERROR)?
+The answer you write down must match the output exactly (watch out for
+spaces and newlines).
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+void f(X x)
+{
+    std::cout << "f\n";
+    x.id_ = 0;
+    return;
+}
+void g(const X & x)
+{
+    std::cout << "g\n";
+    x.id_ = 1;
+    return;
+}
+X h(const X & x)
+{
+    std::cout << "h\n";
+    x.id_ = 2;
+    return x;
+}
+int main()
+{
+    X x(42);
+    f(x);
+    g(x);
+    X y = h(x);
+    y.id_ = 3;
+    return 0;
+}
+\end{Verbatim}
+\ANSWER
+\begin{answercode}
+ERROR
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the output of this code fragment (or write ERROR)?
+The answer you write down must match the output exactly (watch out for
+spaces and newlines).
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+int main()
+{
+    X * p = new X(0);
+    X * q = new X(1);
+    X * r = new X(2);
+    delete p;
+    delete r;
+    return 0;
+}
+\end{Verbatim}
+\ANSWER
+\begin{answercode}
+0 died
+2 died
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

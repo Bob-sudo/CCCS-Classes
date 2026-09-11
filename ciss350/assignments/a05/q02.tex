@@ -1,0 +1,23 @@
+%-*-latex-*-
+[Bubblesort variant 1]
+
+Modify the bubblesort so that the algorithm returns once
+no swap is performed during a pass.
+Call the function \verb!bubblesort2!.
+The prototypes are similar to \verb!bubblesort!:
+\begin{console}[frame=single, fontsize=\footnotesize]
+template < typename T >
+void bubblesort2(T * start, T * end, bool verbose=false);
+
+template < typename T, typename C >
+void bubblesort2(T * start, T * end, const C & less, bool verbose=false);
+\end{console}
+
+The following is a sample execution:
+\begin{Verbatim}[frame=single,commandchars=\~\!\@,fontsize=\footnotesize]
+~userinput!./a.out 42 4 10 1 0@
+{1, 9, 4, 2}
+{1, 4, 2, 9}
+{1, 2, 4, 9}
+\end{Verbatim}
+Notice that the above went through \textit{two} passes and stops.

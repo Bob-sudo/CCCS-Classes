@@ -1,0 +1,18 @@
+%-*-latex-*-
+\textsc{ASIDE 1: Comparator and
+\textnormal{\texttt{std::sort}} and \textnormal{\texttt{std::stable\_sort}}}
+
+\cpp\ STL provides
+\verb!std::sort!
+and \verb!std::stable_sort!.
+Check my chapter on comparison-based sorting algorithms for details.
+Both functions accept comparator functors.
+\VerbatimInput[frame=single,fontsize=\footnotesize]{cppsort.cpp}
+Usage of \verb!std::stable_sort! is similar.
+
+\newpage
+\textsc{ASIDE 2: Pointers and iterators}
+
+DIY: You should also add versions of your sorting functions that
+accept iterators to \verb!std::vector!.
+See \verb!cppsort.cpp! example from the previous section.

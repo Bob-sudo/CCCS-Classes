@@ -1,0 +1,231 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a function that accepts two C-strings \verb!x! and \verb!y! and
+computes the longest common substring in \verb!x! and \verb!y!:
+\begin{console}
+void longest_common_substring(const char * x, const char * y, char * z);
+\end{console}
+The longest common substring is placed in \verb!z!.
+
+For instance if \verb!x! is \verb!"hello world"! and \verb!y! is
+\verb!"Hello world"!, then \verb!z! is \verb!"ello world"!.
+When \verb!x! and \verb!y! are empty strings
+or when \verb!x! is \verb!"abc"! and \verb!y! is \verb!"def"!, the longest
+common substring is \verb!""!.
+If there are two longest common substrings, the first one that appears
+in \verb!x! is used.
+For instance if \verb!x! is \verb@"hello!world."@ and
+\verb!y! is \verb@"world.hello!"@, then there are two longest substrings
+that appear in \verb!x! and \verb!y!: \verb@"hello!"@ and \verb!"world."!,
+both of length 6. However \verb@"hello!"@ appears earlier in \verb!x!.
+Therefore \verb!z! is \verb@"hello!"@.
+
+Just use the simplest algorithm you can come up with.
+You don't have to be super efficient.
+The \lq\lq correct" algorithm is covered in CISS358.
+You may use the \verb!strlen! function from the C-string library.
+You can add helper functions.
+
+Recall that if \verb!x! has type \verb!const char *!,
+it means that \verb!x! points to a \verb!char! and cannot change
+the value that \verb!x! points to.
+If you have a function of the form
+\verb!void f(const char *)!
+then you can call \verb!f("abc")!.
+However you cannot call \verb!g("abc")! if \verb!g! has a prototype
+of \verb!void g(char *)!.
+This is because something like \verb!"abc"! is considered a
+constant C-string.
+
+TURN PAGE
+
+\newpage
+\ANSWER
+\begin{answercode}
+void longest_common_substring(const char * x, const char * y, char * z)
+{
+   int start = 0;
+   int maxLen = 0;
+    
+    for (int i = 0; x[i] != '\0'; i++)
+    {
+        for (int j = 0; y[j] != '\0'; j++)
+        {
+            int k = 0;
+            while (x[i + k] != '\0' && y[j + k] != '\0'
+                   && x[i + k] == y[j + k])
+            {
+                k++;
+            }
+            if (k > maxLen)
+            {
+                maxLen = k;
+                start = i;
+            }
+        }
+    }
+
+    for (int i = 0; i < maxLen; i++)
+    {
+        z[i] = x[start + i];
+    }
+}
+\end{answercode}
+
+TURN PAGE FOR SPOILER ONLY IF YOU WANT SOME HELP
+
+\newpage
+\textsc{Spoiler}
+
+Forget about the code.
+Think first.
+This problem involves comparing substrings of two strings
+\verb!x! and \verb!y!.
+This means that if you need to systematically iterate over all substrings
+of \verb!x! and all the substrings of \verb!y!,
+and then compare the two substrings:
+\begin{Verbatim}[fontsize=\small,frame=single]
+for s running over all substrings of x:
+    for t running over all substrings of y:
+        compare s and t
+\end{Verbatim}
+The question is then: What is a substring of \verb!x!?
+
+A substring of \verb!x! can be described by
+\verb!x!, \verb!start!, and \verb!end!
+where \verb!start! and \verb!end! are two index values.
+The substring is made up of the characters from index
+\verb!start! up to but not including \verb!end!, i.e.,
+\verb!x[start .. end - 1]!.
+
+For instance if \verb!x! is \verb!"hello"!
+and \verb!start! is 1 and \verb!end! is 4, then the
+substring is \verb!"ell"!.
+With the above idea you should be able to iterate over
+all substrings of \verb!"hello"! and get
+\verb!""!,
+\verb!"h"!,
+\verb!"he"!,
+\verb!"hel"!,
+\verb!"hell"!,
+\verb!"hello"!,
+\verb!""!,
+\verb!"e"!,
+\verb!"el"!,
+\verb!"ell"!,
+\verb!"ello"!,
+\verb!""!,
+\verb!"l"!,
+\verb!"ll"!,
+etc.
+Believe it or not, you have seen this double for-loop before in my
+notes on for-loops from CISS240 (the second set of notes on for-loops).
+If you print the index values processed by this double for-loop
+you might recognize it.
+
+Once you can do the above, for each substring of \verb!x!,
+you iterate over all substrings of
+\verb!y!, and compare the two substrings.
+There are some obvious optimizations of the above idea.
+But even with these optimizations, the algorithm is still going to be extremely
+slow.
+The \lq\lq correct" algorithm for this very important algorithm
+will be covered in CISS358.
+
+Also, instead of using two index values for \verb!x!, you can use
+two pointers.
+In fact it's a good idea to use pointers just for the sake of reviewing
+pointers.
+
+Here's a test code:
+\begin{Verbatim}[fontsize=\small,frame=single]
+void test(const char * x, const char * y)
+{
+    char z[1024];
+    std::cout << "Test [" << x << "] " << "[" << y << "]: ";
+    longest_common_substring(x, y, z);
+    std::cout << "[" << x << "] "
+              << "[" << y << "] "
+              << "[" << z << "]\n";
+}
+
+int main()
+{
+    test("abc", "def");
+    test("", "def");
+    test("abc", "");
+    test("abc", "abc");
+    test("abc", "Abc");
+    test("Abc", "abc");
+    test("abC", "abc");
+    test("abc", "abC");
+    test("abcd", "AbcD");
+    test("AbcD", "abcd");
+    test("abcd", "AAAAAAbcD");
+    test("AAAAAAbcD", "abcd");
+    test("abcd", "AAAAAAbcDDDDDDD");
+    test("abcd", "AAAAAAbcDDDDDDD");
+    test("AAAAAAbcDDDDDDD", "abcd");
+    test("abcd", "AabAabAAabcDDDDDabcdDD");
+    test("AabAabAAabcDDDDDabcdDD", "abcd");
+    test("abcd", "AabcdAAAabcDDDDDabdDaD");
+    test("abcd", "AAAAAAbcDDDDabDDD");
+    test("abcd", "AAAAAAbcdDDDDabcDDD");
+    test("AAAAAAbcdDDDDabcDDD", "!!!!!!!abcd@@@@@@@");
+
+    return 0;
+}
+\end{Verbatim}
+
+TURN PAGE FOR MORE SPOILER
+
+\newpage
+\textsc{More spoilers}
+
+Here's a function that will be helpful for printing while debugging:
+\begin{Verbatim}[fontsize=\small,frame=single]
+// Print p[0..len-1] where len = q - p.
+// "..............abcde...................."
+//                ^    ^
+//                |    |
+//                p    q
+void print(const char * p, const char * q)
+{
+    while (p < q)
+    {
+        std::cout << (*p);
+        ++p;
+    }
+}
+\end{Verbatim}
+And here's a function that will compare two subarrays of characters:
+\begin{Verbatim}[fontsize=\small,frame=single]
+// Return true if r[0 .. len-1] is p[0 .. len-1] where len = s - r.
+//
+// "...abcde...................."
+//     ^
+//     |
+//     p
+// "..............abcde...................."
+//                ^    ^
+//                |    |
+//                r    s
+bool isprefix(const char * p, const char * r, const char * s)
+{
+    while (r < s)
+    {
+        if (*p != *r)
+        {
+            return false;
+        }
+        ++p; ++r;
+    }
+    return true;
+}
+\end{Verbatim}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

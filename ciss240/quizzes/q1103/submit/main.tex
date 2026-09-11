@@ -1,0 +1,112 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+Write a program that prints solutions to
+the $x^3 + 3y^3 = nz^3$ where
+$n$ is an integer input from the user and
+$x,y,z$ are integers in the interval $[-10, 10]$.
+After the solutions are printed, the number of solutions is printed.
+Here's a test case:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\}]
+\userinput{5}
+-10 5 -5
+-8 4 -4
+-6 3 -3
+-4 2 -2
+-2 1 -1
+0 0 0
+2 -1 1
+4 -2 2
+6 -3 3
+8 -4 4
+10 -5 5
+11
+\end{Verbatim}
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <cmath>
+
+int main()
+{
+    int n;
+    std::cin >> n;
+
+    int count = 0;
+
+    for (int x = -10; x <= 10; ++x)
+    {
+        for (int y = -10; y <= 10; ++y)
+        {
+            for (int z = -10; z <= 10; ++z)
+            {
+                if (pow(x, 3) + 3 * pow(y, 3) == n * pow(z, 3))
+                {
+                    std::cout << x << " " << y << " " << z << '\n'; 
+                    count++;
+                }
+            }
+        }
+    }
+
+    std::cout << count << '\n';
+
+    return 0;
+}
+
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write an ASCII art program that does the following.
+3 test cases are shown.
+\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\}]
+\userinput{3}
+  *
+ *
+*
+\end{Verbatim}
+\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\}]
+\userinput{4}
+   *
+  *
+ *
+*
+\end{Verbatim}
+\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\}]
+\userinput{5}
+    *
+   *
+  *
+ *
+*
+\end{Verbatim}
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+int main()
+{
+    int n;
+    std::cin >> n;
+
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n - i - 1; ++j)
+        {
+            std::cout << " ";
+        }
+        std::cout << "*";
+        std::cout << '\n';
+    }
+
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

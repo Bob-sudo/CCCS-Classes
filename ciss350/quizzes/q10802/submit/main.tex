@@ -1,0 +1,70 @@
+%-*-latex-*-
+\input{thispreamble}
+
+You are given this class for the row of a hashtable:
+\begin{console}[fontsize=\footnotesize]
+const int Available = 0;
+const int NotAvailable = 1;
+const int Deleted = 2;
+
+class HashtableRow
+{
+public:
+    HashtableRow(int flag, int stu_id, double height)
+        : flag_(flag), stu_id_(std_id), height_(height)
+    {}
+    int flag_;
+    int stu_id_;
+    double height_;
+};
+
+int hash(int x)
+{
+    return 2 * x + 3;
+}
+\end{console}
+Complete the following function to insert a row into the given hashtable.
+This uses non-separate chaining.
+The index of the row where the insert occurs is returned.
+If the table is full, -1 is returned.
+$n$ is the size of the hashtable.
+\\
+\ANSWER
+\begin{answercode}
+int hashtable_insert(HashtableRow hashtable[], int n, int key, double value)
+{
+  int index = -1;
+  int h = hash(key) % n;
+  int start = h;
+
+  while(true)
+  {
+    if(hashtable[h].flag == 2) // Deleted
+      index = h
+    else if(hashtable[h].flag == 0) // Available
+    {
+      if(index == -1)
+        index = h;
+        
+      hashtable[h].stu_id_ = key;
+      hashtable[h].height_ = value;
+      hashtable[h].flag = 1;
+      
+      return index;
+    }
+    else if(hashtable[h].flag == 1) // Not Available
+    {
+      if(hashtable[h].stu_id_ == key)
+        return -1;
+    }
+
+    h = (h + 1) % n;
+
+    if(h == start)
+      return -1;
+  }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

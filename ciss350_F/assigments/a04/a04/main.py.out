@@ -1,0 +1,32 @@
+
+\begin{center}
+\begin{tikzpicture}[line width=1]
+\begin{axis}[width=6in, height=7in,
+             scatter/classes={a={mark=*,draw=black}},
+             xlabel={\mbox{}},
+             xlabel style={name=xlabel}, 
+             ylabel={\mbox{}}, 
+             legend style={
+                at={(xlabel.south)},
+                yshift=-1ex,
+                anchor=north,
+                legend cell align=left,
+                },
+        ]
+]
+\addplot[draw=red, line width=2] coordinates {(10000, 8.5)
+(20000, 9.7)
+(30000, 14.1)
+(40000, 18.8)
+(50000, 25.1)};\addlegendentry{Bubblesort runtime}\addplot[draw=green, line width=2] coordinates {(10000, 6.30957344480193)
+(20000, 14.495593273553904)
+(30000, 23.580092567898674)
+(40000, 33.30212829607491)
+(50000, 43.52752816480619)};\addlegendentry{$Cn^{d}$}\addplot[draw=blue, line width=2] coordinates {(15000, 0)
+(15000, 43.52752816480619)};\addlegendentry{$n = N$}
+\end{axis}\end{tikzpicture}\end{center}
+
+\[
+N = 15000, \hspace{0.5cm} C = 0.0001, \hspace{0.5cm} d = 1.2
+\]
+

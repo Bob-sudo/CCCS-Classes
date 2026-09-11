@@ -1,0 +1,137 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+A matrix is a 2D array of integers (for this question).
+Here's how you use it:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+Mat m(2, 3); // m models a 2-by-3 array of integers, all initialized to 0
+std::cout << m << '\n'; // prints like this:
+                        // 0 0 0
+                        // 0 0 0
+m(0, 0) = 42;           // sets row 0, column 0 entry to 42
+std::cout << m << '\n'; // prints like this:
+                        // 42 0 0
+                        // 0 0 0
+Mat n(2, 2);            // n is 2-by-2
+n = m;                  // n is 2-by-3 (like m) and values of m are copied over
+std::cout << n << '\n'; // prints like this:
+                        // 42 0 0
+                        // 0 0 0
+Mat p(m);
+std::cout << p << '\n'; // prints like this:
+                        // 42 0 0
+                        // 0 0 0
+\end{Verbatim}
+Complete the following header file.
+Do not implement any methods/functions in the header file
+(that's done in the question below).
+\\
+\ANSWER
+\begin{answercode}
+// file: Mat.h
+#include <iostream>
+class Mat
+{
+public:
+Mat(int r, int c);
+
+Mat(const Mat& other);
+Mat & operator=(const Mat & other);
+
+~Mat();
+
+int & operator()(int i, int j);
+const int & operator()(int i, int j) const;
+private:
+    int num_rows_; // number of rows
+    int num_cols_; // number of columns
+    int * p_;      // there's only one reason for this!
+};
+std::ostream & operator<<(std::ostream &, const Mat &);
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Refer to the question above.
+Complete the following implementation file for Matrix class.
+Obviously there must be no memory issues.
+\\
+\ANSWER
+\begin{answercode}
+// file: Mat.cpp
+#include <iostream>
+#include "Mat.h"
+
+Mat::Mat(int r, int c)
+: num_rows_(r), num_cols_(c), p_(new int[r * c])
+{
+  for (int i = 0; i < r * c; ++i)
+  {
+    p_[i] = 0;
+  }
+}
+
+Mat::Mat(const Mat & other)
+: num_rows_(other.num_rows_), num_cols_(other.num_cols_),
+p_(new int[other.num_rows_ * other.num_cols_])
+{
+  for (int i = 0; i < num_rows_ * num_cols_; ++i) {
+    p_[i] = other.p_[i];
+  }
+}
+
+Mat & Mat::operator=(const Mat & other)
+{
+  if (this != &other)
+  {
+    delete[] p_;
+
+    num_rows_ = other.num_rows_;
+    num_cols_ = other.num_cols_;
+    p_ = new int[num_rows_ * num_cols_];
+
+    for (int i = 0; i < num_rows_ * num_cols_; ++i)
+    {
+      p_[i] = other.p_[i];
+    }
+  }
+  return *this;
+}
+
+Mat::~Mat()
+{
+  delete[] p_;
+}
+
+int & Mat::operator()(int i, int j)
+{
+  return p_[i * num_cols_ + j];
+}
+
+const int & Mat::operator()(int i, int j) const
+{
+  return p_[i * num_cols_ + j];
+}
+
+std::ostream & operator<<(std::ostream & cout, const Mat & mat)
+{
+  for (int i = 0; i < mat.num_rows_; i++)
+  {
+    for (int j = 0; j < mat.num_cols_; j++)
+    {
+      cout << mat(i, j);
+      if (j < mat.num_cols_ - 1)
+      cout << ' ';
+    }
+    cout << '\n';
+  }
+  return cout;
+}
+
+\end{answercode}
+You are advised to use google's asan tool.
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

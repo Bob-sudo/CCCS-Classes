@@ -1,0 +1,182 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Wumpus lives in the Wumpus world, which is a 4-by-4 grid.
+Initially, Wumpus is at any cell of the grid except for (3, 0) (row 3,
+column 0).
+A hunter also lives in the Wumpus world.
+He/she walks in the direction he/she is facing.
+Initially he/she is facing N (north).
+In each time step in Wumpus world, the hunter
+(1) randomly selects a direction,
+(2) randomly decides to walk one step (in his/her direction) or not,
+and
+(3) randomly decides to fire one arrow (in his/her direction) or not.
+Here's a test run:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
++-+-+-+-+
+|W| | | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+|H| | | |
++-+-+-+-+
+Hunter direction: N
+
++-+-+-+-+
+| | | | |
++-+-+-+-+
+|W| | | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| |H| | |
++-+-+-+-+
+Hunter direction: E
+
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| |W| | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| |H| | |
++-+-+-+-+
+Hunter direction: S
+
++-+-+-+-+
+| |W| | |
++-+-+-+-+
+| |^| | |
++-+-+-+-+
+| |H| | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+Hunter direction: N
+
++-+-+-+-+
+| |w| | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | |H| |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+Hunter direction: E
+
++-+-+-+-+
+| |w| | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | |H|
++-+-+-+-+
+| | | | |
++-+-+-+-+
+Hunter direction: E
+\end{Verbatim}
+The \verb!^! is the arrow flying in the N direction.
+You should draw the arrow using
+\verb!^!,
+\verb!v!,
+\verb!>!,
+\verb!<! depending on the direction
+N,S,E,W (respectively)
+of flight.
+
+Note that when the hunter fires his/her arrow, the arrow will fly in the
+direction of the hunter (at that point in time).
+The hunter can only fire one arrow (too bad).
+
+When the arrow kills Wumpus (i.e., the arrow and Wumpus are
+at the same cell of the grid), a \verb!w! (lowercase of W)
+is printed at that cell.
+After that, Wumpus is dead and does not move (i.e., \verb!w! does not
+move).
+If hunter is in the same cell as the dead Wumpus, \verb!H! is printed.
+
+If Wumpus and the hunter are both in the same cell,
+Wumpus kills the hunter (sad),
+\verb!W! is printed at that cell.
+When Wumpus moves away from that cell, \verb!h! (the dead hunter)
+is printed.
+
+You are given this:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+// file: WumpusWorld.h
+#ifndef WUMPUSWORLD_H
+#define WUMPUSWORLD_H
+
+#include <iostream>
+
+class WumpusWorld
+{
+public:
+    WumpusWorld();       // initialize so that Wumpus is at any cell other than
+                         // (3,0).
+                         // hunter is at (3,0).
+    void println();      // print according to the above format
+    void move_wumpus();  // randomize a direction rand() % 4 where 0,1,2,3
+                         // are N,S,E,W for Wumpus. Of course Wumpus
+                         // must stay in the world.
+                         // If wumpus tries to move N but its row is 0,
+                         // wumpus stays put.
+                         // A dead Wumpus does not move.
+    void move_hunter();  // 1. randomize a direction rand() % 4 where 0,1,2,3
+                         //    are N,S,E,W for hunter.
+                         // 2. randomize whether to walk or not
+                         // 3. randomize whether to fire arrow or not
+                         // Of course hunter must stay in the world.
+                         // If hunter tries to move N but its row is 0,
+                         // hunter stays put.
+                         // A dead hunter does not move.
+    void move_arrow();   // move arrow if necessary
+private:
+    char world_[4][4];
+    int hunter_direction_;
+    int arrow_state_;    // 0-N, 1-S, 2-E, 3-W, 4-not fired, 5-hit something
+};
+#endif
+\end{Verbatim}
+
+You want to make the hunter wonder around like this:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include "WumpusWorld.h"
+
+int main()
+{
+    srand((unsigned int) time(NULL));
+
+    WumpusWorld ww;
+    ww.println();
+    for (int i = 0; i < 50; ++i)
+    {
+        ww.move_wumpus();
+        ww.move_hunter();
+        ww.move_arrow();
+        ww.println();
+    }
+    return 0;
+}
+\end{Verbatim}
+Complete the following cpp file that contains the implementation
+of the methods declared in the WumpusWorld class.
+\\
+\ANSWER
+\begin{answercode}
+// file: WumpusWorld.cpp
+
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

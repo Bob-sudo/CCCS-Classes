@@ -1,0 +1,77 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function to check if an integer is prime.
+For instance \verb!isprime(2)! returns true,
+\verb!isprime(-3)! returns false,
+\verb!isprime(1)! returns false,
+and
+\verb!isprime(10)! return false,
+\\
+\ANSWER
+\begin{answercode}
+// isprime(n) return true exactly when n is a prime.
+bool isprime(int n)
+{
+    if (n <= 1) return false;
+    for (int i = 2; i * i <= n; ++i)
+    {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function to compute powers.
+For instance \verb!mypow(2, 0)! returns 1 and
+\verb!mypow(2, 4)! returns 16.
+\\
+\ANSWER
+\begin{answercode}
+// mypow(x, y) return x to the power of y. Both x and y are integers.
+// Assume y >= 0. Obviously you are not allowed to use the pow function.
+// HINT: You need a loop.
+int mypow(int x, int y)
+{
+    int result = 1;
+    for (int i = 0; i < y; ++i)
+    {
+        result *= x;
+    }
+    return result;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function that returns the number of digits in an integer.
+For instance
+\verb!numdigits(0)! is 1,
+\verb!numdigits(4030201)! is 7,
+\verb!numdigits(-4030201)! is 7.
+\\
+\ANSWER
+\begin{answercode}
+int numdigits(int n)
+{
+    if (n < 0) n = -n;
+    if (n == 0) return 1;
+    int count = 0;
+    while (n > 0)
+    {
+        n /= 10;
+        count++;
+    }
+    return count;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

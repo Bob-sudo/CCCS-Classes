@@ -1,0 +1,113 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Correct the following.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <iomanip>
+
+class Time
+{
+public:
+    Time(int hour, int min, int sec)
+        : hour_(hour), min_(min), sec_(sec)
+    {}
+
+    void println() const
+    {
+        std::cout << std::setw(2) << std::setfill('0') << hour_ << ':'
+                  << std::setw(2) << std::setfill('0') << min_ << ':'
+                  << std::setw(2) << std::setfill('0') << sec_ << '\n';
+    }
+
+private:
+    int hour_, min_, sec_;
+};
+
+int main()
+{
+    Time t(1, 2, 3);
+    t.println();
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete \textit{and correct} the following.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <iomanip>
+
+class Rational
+{
+public:
+    Rational(int n, int d)
+    : n_(n), d_(d)
+    {}
+    Rational max(Rational r)
+    {
+        if(n_ * r.d_ > r.n_ * d_) return *this
+        else return r;
+    }
+    // ... other methods not shown ...
+private:
+    int n_, d_; // numerator and denominator
+};
+
+int main()
+{
+    Rational r0(1, 2);
+    Rational r1(2, 3);
+    Rational r2 = r0.max(r1); // r2 models 2/3
+    Rational r3 = r1.max(r0); // r3 models 2/3
+
+    // In other words f.max(g) returns the max of f and g.
+    // (Similar to the max of the Int class from my notes.)
+
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete \textit{and correct} the following.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <iomanip>
+
+class Robot
+{
+public:
+    Robot()
+        : x_(0), y_(0)
+    {}
+    Robot& walk_east()
+    {
+        x_++;
+        return *this;
+    }
+private:
+    int x_, y_;
+};
+
+int main()
+{
+    Robot r2d2;                               // r2d2.x_ is 0
+    r2d2.walk_east();                         // r2d2.x_ is 1
+    r2d2.walk_east().walk_east();             // r2d2.x_ is 3
+    r2d2.walk_east().walk_east().walk_east(); // r2d2.x_ is 6
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

@@ -1,0 +1,41 @@
+Q1 [
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+int main()
+{
+    double max_x;                     // x where max of function occurs
+    double max_y;                     // max value of function
+    double a =       , b =        ;   // endpoints
+    int n =      ;                    // number of points 
+    double dx =                     ; // distance between consecutive points 
+    for (              ;                 ;               )
+    {
+    }
+    std::cout << std::       << std::                   << max_x
+              << std::       << std::                   << max_y
+              << std::endl;
+    return 0;
+}
+]
+
+Q2 [
+#include <iostream>
+#include <cmath>
+
+int main()
+{
+    int n;
+    std::cin >> n;
+
+    // compute the number of digits in n and store in num_digits
+    int num_digits;
+
+    // compute the sum of digits in n and store in sum_digits
+    int sum_digits = 0;
+
+    std::cout << sum_digits << '\n';
+    return 0;
+}
+]

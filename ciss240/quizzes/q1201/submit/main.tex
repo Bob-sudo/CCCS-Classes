@@ -1,0 +1,53 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+What is the output of this program:
+\begin{console}[fontsize=\small]
+int i = 2;
+int j = 1;
+while (i < 5)
+{
+    j += i;
+    std::cout << i << ' ' << j << std::endl;
+    ++i;
+}
+std::cout << i << ' ' << j << std::endl;
+\end{console}
+\ANSWER
+\begin{answercode}
+2 3
+3 6
+4 10
+5 10
+
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the output of this program:
+\begin{console}[fontsize=\small]
+int i = 5;
+int j = 3;
+while (i > 2)
+{
+    j += i;
+    std::cout << i << ' ' << j << std::endl;
+    --i;
+}
+std::cout << i << ' ' << j << std::endl;
+\end{console}
+\ANSWER
+\begin{answercode}
+5 8
+4 12
+3 15
+2 15
+
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

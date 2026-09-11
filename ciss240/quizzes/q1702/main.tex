@@ -1,0 +1,63 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+You are given that \verb!x! is an array of $1000$ integers and another
+integer variable \verb!target!.
+Write a code segment that computes the first occurrence of the value of
+\verb!target! in the array \verb!x! (scanning from the smallest to the largest index values) and store this index value in the integer variable \verb!index!. If the value is not found in the array,  the value of index must be $-1$.
+Next, scan the array from index 999 to index 0 and find the index where
+\verb!target! occurs in this scan and store it in integer variable
+\verb!rindex! (r = reverse).
+\\
+\ANSWER
+\begin{answercode}
+int index = -1;
+int rindex = -1;
+
+for (int i = 0; i < 1000; ++i)
+{
+    if (x[i] == target)
+    {
+        index = i;
+        break;
+    }
+}
+
+for (int i = 999; i >= 0; --i)
+{
+    if (x[i] == target)
+    {
+        rindex = i;
+        break;
+    }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+You are given that \verb!x! is an array of $10$ integers.
+Write a code fragment to bubblesort \verb!x! in \textit{descending} order.
+\\
+\ANSWER
+\begin{answercode}
+for (int i = 0; i < 10 - 1; ++i)
+{
+    for (int j = 0; j < 10 - i - 1; ++j)
+    {
+        if (x[j] < x[j + 1]) 
+        {
+            int temp = x[j];
+            x[j] = x[j + 1];
+            x[j + 1] = temp;
+        }
+    }
+}
+
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

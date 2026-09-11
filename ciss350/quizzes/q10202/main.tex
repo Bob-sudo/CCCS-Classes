@@ -1,0 +1,84 @@
+%-*-latex-*-
+\input{thispreamble}
+
+\LATEXHELPTHREEFIVEZERO
+
+\TURNPAGE
+
+%------------------------------------------------------------------------------
+\newpage
+\textsc{Runtime for array swap}
+
+The goal is to compute the big-O runtime of the basic array
+swapping algorithm (i.e., swap the contents between two arrays).
+
+For the next few questions,
+the goal is to analyze the runtime of this algorithm:
+\begin{Verbatim}[frame=single]
+for i = 0, ..., n - 1:
+    t = x[i]
+    x[i] = y[i]
+    y[i] = t
+\end{Verbatim}
+
+%------------------------------------------------------------------------------
+\nextq
+Rewrite the above algorithm with
+goto statements, assign constant times to each statement and
+compute the time taken as a function of $n$, $t_1$, $t_2$, $t_3$, ....
+where $t_1, t_2, t_3, ...$ are runtimes for each statement in your
+algorithm. Make sure you
+number these times starting with $t_1$, then
+$t_2$, etc.
+Include the number of times each statement is executed.
+\\
+\ANSWER
+\begin{answercode}
+          i = 0                   t1      1
+LOOP:     if i > n - 1:           t2      n + 1
+              goto ENDLOOP        t3      1
+          t = x[i]                t4      n
+          x[i] = y[i]             t5      n
+          y[i] = t[i]             t6      n
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Let $T(n)$ be the runtime function of the above algorithm.
+Write $T(n)$ as a polynomial in descending power of $n$, i.e.,
+the \textit{highest degree term appearing first}.
+\\
+\ANSWER
+\begin{answerlong}
+$T(n) = (t_2 + t_4 + t_5 + t_6)n + (t_1 + t_2 + t_3)$
+\end{answerlong}
+(Correct the above.)
+
+%------------------------------------------------------------------------------
+\nextq
+Simplify the runtime function $T(n)$
+by giving names $A$, $B$, $C$, $D$, ...
+to the constants of the function from (a). (The $t_1, t_2, ...$ should
+disappear.)
+\\
+\ANSWER
+\begin{answerlong}
+$T(n) = An + B$
+\end{answerlong}
+(Correct the above.)
+
+%------------------------------------------------------------------------------
+\nextq
+Fudge away the constants and write down the simplest $g(n)$ such
+that the runtime is a big-O of your $g(n)$.
+Your $g(n)$ should be either $n$ or $n^2$ or $n^3$ or $n^{102.25}$ ...
+\\
+\ANSWER
+\begin{answerlong}
+$T(n) = O(n)$
+\end{answerlong}
+(Correct the above.)
+\qed
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

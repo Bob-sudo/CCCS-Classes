@@ -1,0 +1,158 @@
+%-*-latex-*-
+\input{thispreamble}
+
+The following is the node for the binary search tree.
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+class BSTNode
+{
+public:
+    int key_;
+    BSTNode * parent_;
+    BSTNode * left_, * right_;
+};
+\end{Verbatim}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function to insert \verb!key! into a BST.
+For simplicity, assume that \verb!key! is not in the BST.
+\\
+\ANSWER
+\begin{answercode}
+void bst_insert(BSTNode ** p, int key)
+{
+  if (*p == NULL)
+  {
+    *p = new BSTNode();
+    (*p)->key_ = key;
+    (*p)->left_ = NULL;
+    (*p)->right_ = NULL;
+    return;
+  }
+  else
+  {
+    if ((*p)->left_ == NULL)
+    {
+      (*p)->left_ = new BSTNode();
+      (*p)->left_->key_ = key;
+      (*p)->left_->left_ = NULL;
+      (*p)->left_->right_ = NULL;
+      (*p)->left_->parent_ = *p;
+    }
+    else
+    {
+      bst_insert(&((*p)->left_), key);
+    }
+  }
+  
+  else
+  {
+    if ((*p)->left_ == NULL)
+    {
+      (*p)->right_ = new BSTNode();
+      (*p)->right_->key_ = key;
+      (*p)->right_->left_ = NULL;
+      (*p)->right_->right_ = NULL;
+      (*p)->right_->parent_ = *p;
+    }
+    else
+    {
+      bst_insert(&((*p)->right_), key);
+    }
+  }
+}
+\end{answercode}
+
+For the following questions,
+to describe this BST
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+in text, write
+\begin{console}[fontsize=\footnotesize]
+[10, [4, 25]]
+[4, [1, None]]
+[25, [12, 27]]
+[1, [None, None]]
+[12, [None, None]]
+[27, [None, 29]]
+[29, [None, None]]
+\end{console}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the height of an empty tree?
+\\
+\ANSWER
+\begin{answercode}
+-1
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the height of this tree?
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+\\
+\ANSWER
+\begin{answercode}
+3
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Let $T$ be a BST with values $1, 4, 10, 12, 25, 27, 29$ with the
+\textit{smallest} possible height.
+Describe $T$ in text (see above on how to describe a BST in text)
+\\
+\ANSWER
+\begin{answercode}
+[12, [4, 27]]
+[4, [1, 10]]
+[27, [25, 29]]
+[1, [None, None]]
+[10, [None, None]]
+[25, [None, None]]
+[29, [None, None]]
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+List the least number of key(s) that when deleted from this BST
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+will make the resulting BST unbalanced.
+If you need to delete more than one key, list the keys in ascending order
+and separate by commas.
+If there are many ways to make this BST unbalanced,
+choose the key(s) that comes first in the dictionary order.
+For instance if you think deleting $12, 25$ and $12, 27$ will make the
+BST unbalanced, you should enter $12, 25$.
+\\
+\ANSWER
+\begin{answercode}
+Delete 1
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

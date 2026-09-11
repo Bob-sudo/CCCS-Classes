@@ -1,0 +1,74 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+What is the final values of \verb!i!, \verb!j!, and \verb!k!?
+\begin{console}[fontsize=\footnotesize]
+int main()
+{
+    int i = 3, k = 4, j = 1;
+
+    i += k;
+    j++;
+    k += j;
+
+    i += k;
+    j++;
+    k += j;
+
+    i -= k;
+    j--;
+    k -= j;
+
+    j *= j;
+
+    // What is the final value of i, j, k?
+
+    return 0;
+}
+\end{console}
+(a) Final value of \verb!i!:
+\\
+\ANSWER
+\begin{answercode}
+4
+\end{answercode}
+
+(b) Final value of \verb!j!:
+\\
+\ANSWER
+\begin{answercode}
+4
+\end{answercode}
+(c) Final value of \verb!k!:
+\\
+\ANSWER
+\begin{answercode}
+7
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Rewrite the following with pre-increment, post-increment, pre-decrement,
+post-decrement, augmented operators:
+\begin{console}[fontsize=\small]
+for (int i = 0; i < 100; i = i + 1)
+{
+    x = x + i;
+    y = y * i;
+}
+\end{console}
+\ANSWER\vspace{5pt}
+\begin{answercode}[fontsize=\small]
+for (int i = 0; i < 100; i++)
+{
+    x += i;
+    y *= i;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

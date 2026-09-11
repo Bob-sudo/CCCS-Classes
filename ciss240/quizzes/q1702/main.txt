@@ -1,0 +1,21 @@
+Q1 [
+int index =    ;
+int rindex =   ;
+
+for (  ;  ;  )
+{
+}
+for (  ;  ;  )
+{
+}
+]
+
+Q2 [
+for (  ;  ;  )
+{
+    for (  ;  ;  )
+    {
+    }
+}
+]
+

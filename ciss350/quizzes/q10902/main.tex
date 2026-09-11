@@ -1,0 +1,114 @@
+%-*-latex-*-
+\input{thispreamble}
+
+Here's how you describe (in text) for a binary tree with a heap tree structure.
+For this tree
+\begin{console}[fontsize=\footnotesize]
+             (10)
+           /      \
+        (6)        (7)
+       /   \      /   \
+    (5)     (2)(0)     (3)
+   /
+(1)
+\end{console}
+you write
+\begin{console}[fontsize=\footnotesize]
+{10, 6, 7, 5, 2, 0, 3, 1}
+\end{console}
+i.e., list the values using breadth-first traversal (like what we did in class).
+
+%------------------------------------------------------------------------------
+\nextq
+Execute \verb!build_heap! on the array
+$\{7, 5, 3, 1, 2, 4, 6, 8\}$ and describe the resulting maxheap
+as an array.
+(Note: \verb!build_heap! builds the maxheap \textit{bottom-up}.)
+\\
+\ANSWER
+\begin{answercode}
+{8, 7, 6, 5, 2, 4, 3, 1}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+The following is already a maxheap:
+\begin{console}[fontsize=\footnotesize]
+              (9)
+           /       \
+        (8)         (7)
+       /   \       /   \
+    (6)     (3) (1)     (4)
+   /   \
+(5)     (2)
+\end{console}
+During heapsort, what is the resulting array after
+\textit{four} extract-root operations.
+Recall that for heapsort the roots extracted are \textit{not} thrown away!
+\\
+\ANSWER
+\begin{answercode}
+{5, 3, 4, 2, 1, 6, 7, 8, 9}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Suppose your \verb!std::vector< int >! is sorted (in ascending order).
+What is the runtime of the \textit{fastest} algorithm
+\begin{console}
+void ascending_to_maxheap(std::vector< int > & v);
+\end{console}
+that converts it a maxheap?
+\\
+\ANSWER
+\begin{answerlong}
+$T(n) = O(n)$
+\end{answerlong}
+(You should only have
+$O(1)$ or $O(\lg n)$ or $O(n)$ or $O(n \lg n)$ or $O(n^2)$ or ..., i.e.,
+it should be of the form $O(n^a \lg^b n)$.)
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+\nextq
+Write a function that checks if a \verb!std::vector< int >! object is a maxheap,
+returning the \textit{first} index
+(scanning \textit{from index 0} to the end of the array)
+where the maxheap property is violated.
+If the \verb!std::vector< int >! object is a maxheap, \verb!-1! is returned.
+\begin{console}[fontsize=\footnotesize]
+int maxheap_violation_index(const std::vector< int > & v);
+\end{console}
+\\
+\ANSWER
+\begin{answercode}
+int LEFT(int i)
+{
+  return 2 * i + 1;
+}
+
+int RIGHT(int i)
+{
+  return 2 * i + 2;
+}
+
+int maxheap_violation_index(const std::vector< int > & v)
+{
+  for(int i = 0; i < v.size(); i++)
+  {
+    int l = LEFT(i);
+    int r = RIGHT(i);
+
+    if (l < v.size() && v[i] < v[l])
+      return i;
+
+    if (r < v.size() && v[i] < v[r])
+      return i;
+  }
+  return -1;
+}
+\end{answercode}
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

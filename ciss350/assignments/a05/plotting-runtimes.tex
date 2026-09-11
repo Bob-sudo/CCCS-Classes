@@ -1,0 +1,81 @@
+%-*-latex-*-
+\newpage\textsc{Plotting Runtimes}
+
+Let me show you how to create a graph in a pdf using a library that I built.
+Here's a graph:
+
+\begin{python}
+from latextool_basic import *
+plot = FunctionPlot(width="3in", height="2in")
+plot.add(((100, 1),
+          (200, 2),
+          (300, 0.5)),
+          line_width='2', color='red', legend='bubblesort')
+plot.add(((100, 5),
+          (200, 3),
+          (300, 7)),
+          line_width='2', color='green', legend='bubblesort2')
+plot.add(((100, 7),
+          (200, 4),
+          (300, 5)), line_width='2', color='blue', legend='selectionsort')
+print(plot)
+\end{python}
+
+The above graph is built by this code:
+\begin{console}[fontsize=\footnotesize]
+\begin{python}
+from latextool_basic import *
+plot = FunctionPlot(width="3in", height="2in")
+
+plot.add(((100, 1),
+          (200, 2),
+          (300, 0.5)),
+         line_width='2', color='red', legend='bubblesort')
+         
+plot.add(((100, 5),
+          (200, 3),
+          (300, 7)),
+         line_width='2', color='green', legend='bubblesort2')
+         
+plot.add(((100, 7),
+          (200, 4),
+          (300, 5)),
+         line_width='2', color='blue', legend='selectionsort')
+
+print(plot)
+\end{python}
+\end{console}
+
+In \verb!q07.tex!, modify the graph with your own data.
+It should be clear where to put your data.
+Look at the \verb!plot.add!.
+\verb!plot.add! adds a graph:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+plot.add(((100, 1),
+          (200, 2),
+          (300, 0.5)),
+         line_width='2', color='red', legend='Bubble sort')
+\end{Verbatim}
+The \verb!(100, 1)!, etc are the points on this graph.
+Be careful you don't lose any parentheses or commas, or add any extras.
+Then run \verb!make! and a file \verb!main.pdf! will be
+generated -- your graph should appear in the pdf.
+
+If you run \verb!make! and have problems, you must talk to
+someone in CS hangout or in CCCS Discord right away --
+this means that something is wrong with your
+virtual machine.
+
+The above graph covers an area of 3-by-2 inches.
+You should probably use a larger graphing area.
+You should increase the width and height of the graph.
+Also, here are some options for color:
+red,
+green,
+blue,
+cyan,
+yellow,
+black,
+pink,
+brown,
+teal.

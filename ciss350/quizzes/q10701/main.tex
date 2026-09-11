@@ -1,0 +1,95 @@
+%-*-latex-*-
+\input{thispreamble}
+
+You are given the following binary tree node class:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+class BTNode
+{
+public:
+    int key_;
+    BTNode * parent_, * left_, * right_;
+};
+\end{Verbatim}
+The following questions uses this class.
+
+(You should create test cases to check that your functions work.)
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the function below that returns the pointer
+pointing to the sibling node.
+For instance of a node \verb!n1! has left child \verb!n2! and
+right child \verb!n3!,
+and \verb!p! points to node \verb!n2!, then \verb!sibling(p)! will return
+the address of \verb!n3!.
+If there is no sibling, \verb!NULL! is returned.
+(For instance if \verb!p! points to the root node, \verb!NULL!
+is returned.
+Also, if the parent of \verb!*p! has only one child, then \verb!NULL! is
+also returned.)
+\\
+\ANSWER
+\begin{answercode}
+BTNode * sibling(BTNode * p)
+{
+  if (p == NULL)
+      return NULL;
+  
+  BTNode * q = p->parent_;
+
+  if(q->left_ == p)
+      return q->right_;
+  if(q->right_ == p)
+      return q->left_;
+  else
+      return NULL;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function that returns the size of the
+tree that \verb!p! points to (i.e., \verb!p! points to the root of this tree).
+\\
+\ANSWER
+\begin{answercode}
+int size(BTNode * p)
+{
+  if (p == NULL)
+      return 0;
+
+  BTNode * left = p->left_;
+  BTNode * right = p->right_;
+
+  return 1 + (size(left) + size(right));
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function that returns the maximum value of the
+tree that \verb!p! points to (i.e., \verb!p! points to the root of this tree).
+In other words, it returns the maximum of all the \verb!key_! values
+of the nodes in the tree that \verb!p! points to.
+\\
+\ANSWER
+\begin{answercode}
+int max(BTNode * p)
+{
+  if(p == NULL)
+      return 0;
+
+  int leftMax = max(p->left_);
+  int rightMax = max(p->right_);
+
+  int m = p->key_;
+
+  if(leftMax > m) m = leftMax;
+  if(rightMax > m) m = rightMax;
+
+  return m;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

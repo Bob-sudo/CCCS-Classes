@@ -1,0 +1,90 @@
+%-*-latex-*-
+\textsc{Pretty-print Recursion}
+
+For the verbose output, it's particularly important to know how to display
+things in a nice format to help with debugging.
+Because of the nature of function calling for recursive functions,
+if you simply print everything straight to the stdout, things will be extremely
+hard to read.
+So let me show you a method that I use for verbose printing for debugging
+recursive functions.
+First here's the standard Fibonacci sequence. Run it:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+#include <iostream>
+
+int f(int n)
+{
+    if (n < 2)
+    {
+        return 1;
+    }
+    else
+    {
+        return f(n - 1) + f(n - 2);
+    }
+}
+
+int main()
+{
+    std::cout << "VALUE:" << f(3) << '\n';
+    return 0;
+}
+\end{Verbatim}
+It's simple enough that you won't get it wrong.
+But suppose for debugging you want to show when you first enter the function and the output from each function.
+Run this: 
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+#include <iostream>
+
+int f(int n)
+{
+    std::cout << "f(" << n << ") enter ...\n";
+    if (n < 2)
+    {
+        int ret = 1;
+        std::cout << "f(" << n << ") = " << ret << '\n';
+        return ret;
+    }
+    else
+    {
+        int ret = f(n - 1) + f(n - 2);
+        std::cout << "f(" << n << ") = " << ret << '\n';
+        return ret;
+    }
+}
+
+int main()
+{
+    std::cout << "VALUE:" << f(3) << '\n';
+    return 0;
+}
+\end{Verbatim}
+You'll see that it's rather confusing even for such a small recursive function.
+Finally run this:
+{\footnotesize
+\includesourcenonumbers{pretty-print-recursion.cpp}
+}
+
+Here's the output
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+f(3) enter ...
+    f(2) enter ...
+        f(1) enter ...
+        f(1) = 1
+        f(0) enter ...
+        f(0) = 1
+    f(2) = 2
+    f(1) enter ...
+    f(1) = 1
+f(3) = 3
+VALUE:3
+\end{Verbatim}
+
+Study the output and you'll see the point.
+Make sure you study the above code -- it's very important because
+I don't see this method of debug-printing for recursion ever mentioned in
+beginner's C\texttt{++} books.
+Note that I've used a static \verb!int! which you should review 
+if you don't recall the point of a static variable.
+You will find the above method extremely useful in the future whenever you
+have to debug recursion.

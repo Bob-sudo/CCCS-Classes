@@ -1,0 +1,17 @@
+#include <iostream>
+
+char cointoss()
+{
+    rand() % 2 == 0 ? return 'H' : return 'T';
+}
+
+void threeheads(int)
+{
+   
+}
+
+int main()
+{
+    srand((unsign int)) time(NULL);
+    std::cout << cointoss() << '\n';
+}

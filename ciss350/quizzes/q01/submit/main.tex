@@ -1,0 +1,108 @@
+%-*-latex-*-
+\input{thispreamble}
+
+For each of the functions below, you are only allowed to use one loop.
+
+(TURN PAGE)
+
+%------------------------------------------------------------------------------
+\newpage
+\nextq
+Write a function \verb!replace()! that replaces a character in a C-string
+with another.
+For instance suppose you have
+\vspace{-2mm}
+\begin{Verbatim}[frame=single,fontsize=\small]
+char x[1024] = "helloworld";
+\end{Verbatim}
+\vspace{-5mm}
+If you call
+\vspace{-3mm}
+\begin{Verbatim}[frame=single,fontsize=\small]
+replace(x, 'o', 'a');
+\end{Verbatim}
+\vspace{-4mm}
+and then you print \verb!x!, the output is
+\vspace{-3mm}
+\begin{Verbatim}[frame=single,fontsize=\small]
+hellawarld
+\end{Verbatim}
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+void replace(char * x, char src, char dest)
+{
+  while(*x != '\0')
+  {
+    if(*x == src)
+        *x = dest;
+    x++;
+  }
+}
+
+int main()
+{
+    char x[1024];
+    char src, dest;
+    std::cin >> x >> src >> dest;
+    replace(x, src, dest);
+    std::cout << '[' << x << "]\n";
+    return 0;
+}
+\end{answercode}
+
+(TURN PAGE)
+
+%------------------------------------------------------------------------------
+\newpage
+\nextq
+Write a function \verb!remove()! that removes all occurrences of a
+character from a C-string.
+For instance suppose you have
+\vspace{-2mm}
+\begin{Verbatim}[frame=single,fontsize=\small]
+char x[1024] = "helloworld";
+\end{Verbatim}
+\vspace{-5mm}
+If you call
+\vspace{-3mm}
+\begin{Verbatim}[frame=single,fontsize=\small]
+remove(x, 'o');
+\end{Verbatim}
+\vspace{-4mm}
+and then you print \verb!x!, the output is
+\vspace{-3mm}
+\begin{Verbatim}[frame=single,fontsize=\small]
+hellwrld
+\end{Verbatim}
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+void remove(char * x, char c)
+{
+  int i = 0;
+  int j = 0;
+  while(x[i] != '\0')
+  {
+    if(x[i] != c)
+      x[j++] = x[i];
+    i++;
+  }
+  x[j] = '\0';
+}
+
+int main()
+{
+    char x[1024];
+    char c;
+    std::cin >> x >> c;
+    remove(x, c);
+    std::cout << '[' << x << "]\n";
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

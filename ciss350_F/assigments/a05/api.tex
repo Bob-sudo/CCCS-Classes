@@ -1,0 +1,81 @@
+%-*-latex-*-
+\textsc{Common interface}
+
+All the sorting functions in this section have a common interface.
+If \verb!x! is an array or
+a \verb!std::vector< int >! object, then
+\begin{console}[fontsize=\footnotesize]
+bubblesort(&x[2], &x[6]);
+\end{console}
+will perform bubblesort on the values of \verb!x[2..5]!.
+The sorting is done in ascending order.
+You can also execute
+\begin{console}[fontsize=\footnotesize]
+bubblesort(&x[2], &x[6], less);
+\end{console}
+where \verb!less! is a comparator functor that specifies the order of the
+sorting.
+Specifically, \verb!less(a, b)! is true is either \verb!a! is the same as
+\verb!b! or \verb!a! should appear before \verb!b! in the array
+that is sorted.
+For both prototypes above, there's an extra boolean parameter that specifies
+if the function should display the progress of the sorting process.
+This boolean parameter has a default value of \verb!false!.
+So calling
+\begin{console}[fontsize=\footnotesize]
+bubblesort(&x[2], &x[6], true);
+\end{console}
+will result in displaying the bubblesorting process.
+For instance you might see this:
+\begin{console}[fontsize=\footnotesize]
+{1, 9, 4, 2}
+{1, 4, 2, 9}
+{1, 2, 4, 9}
+{1, 2, 4, 9}
+\end{console}
+
+Here's an example on sorting two integers where the sorting uses
+a comparator functor for determining the order of sorting.
+Study this carefully.
+Modification to the bubblesort using a functor for comparison will be easy
+using this example as a guide.
+\VerbatimInput[fontsize=\footnotesize,frame=single]{sort2.cpp}
+
+I already mentioned in CISS245, when writing a template
+(class or function or struct),
+it's usually a good idea to start off with a non-template version.
+
+
+
+\newpage
+\textsc{C\texttt{++} lambda expressions}
+
+The above section is enough.
+This section is optional, but you should probably study it.
+
+In the previous section, the ordering of the sorting process
+is determined by a comparator functor.
+The functor is an object.
+So you need to write a class for any comparator functor.
+There's another way to achieve the same thing, but with
+something called a lambda expression.
+(Details about functional programming, lambda functions, etc. is covered
+in CISS445.)
+
+\VerbatimInput[fontsize=\footnotesize,frame=single]{sort2-lambda.cpp}
+
+The
+\[
+\texttt{[](int x, int y)\{ return x < y; \}}
+\]
+and the
+\[
+\texttt{[](int x, int y)\{ return x > y; \}}
+\]
+are \cpp\ lambda expressions.
+You can think of them as anonymous functions, i.e.,
+functions without names.
+
+Compare the above with the code from the previous section
+and you should be able to figure out what the lambda expressions
+achieve.

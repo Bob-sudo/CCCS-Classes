@@ -1,0 +1,126 @@
+%-*-latex-*-
+\input{thispreamble}
+
+\LATEXHELPTHREEFIVEZERO
+
+\TURNPAGE
+
+%------------------------------------------------------------------------------
+\newpage
+\textsc{Compute best and worst runtime}
+
+The goal is to compute the best and worst runtime for this algorithm:
+\begin{Verbatim}[frame=single,fontsize=\small]
+y = x[0]
+z = x[1]
+for i = 2, ..., n - 1:
+    y = y + z
+    if y + z + x[i] > 0:
+        y = y + x[i - 2]
+        z = x[i - 1]
+    x[i - 2] = y
+\end{Verbatim}
+Clearly, the best case scenario is when the body of the if statement does not
+execute
+(for each iteration).
+The worst case is when the body of the if statement executes executes
+for each iteration.
+First of all, here's the algorithm written in the simplest language
+and with times attached.
+Study it carefully, especially how to translate the if into
+if-goto.
+\begin{Verbatim}[frame=single,fontsize=\small]
+          y = x[0]                  t1      
+          z = x[1]                  t2     
+          i = 2                     t3      
+LOOP:     if i >= n:                t4      
+              goto ENDLOOP          t5 
+          y = y + z                 t6      
+          if y + z + x[i] <= 0:     t7
+              goto ENDIF            t8
+          y = y + x[i - 2]          t9
+          z = x[i - 1]              t10
+ENDIF:    x[i - 2] = y              t11
+          i = i + 1                 t12
+          goto LOOP                 t13
+ENDLOOP:
+\end{Verbatim}
+
+\TURNPAGE
+\newpage
+
+%------------------------------------------------------------------------------
+\nextq
+For the best runtime,
+include the number of times each statement is executed.
+\\
+\ANSWER
+\begin{answercode}
+          y = x[0]                  t1    1
+          z = x[1]                  t2    1
+          i = 2                     t3    1
+LOOP:     if i >= n:                t4    1
+              goto ENDLOOP          t5    1
+          y = y + z                 t6    0
+          if y + z + x[i] <= y:     t7    0
+              goto ENDIF            t8    0
+          y = y + x[i - 2]          t9    0
+          z = x[i - 1]              t10   0
+ENDIF:    x[i - 2] = y              t11   0
+          i = i + 1                 t12   0
+          goto LOOP                 t13   0
+ENDLOOP:
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write down the best runtime function $T_b(n)$ as an expression involving
+$n$ and constant times
+$t_{1}$, $t_{2}$, ..., $t_{12}$.
+Write $T_b(n)$ as a polynomial in descending power of $n$ -- i.e.,
+the \textit{highest degree term appearing first}.
+\\
+\ANSWER
+\begin{answerlong}
+$T_b(n) = (t_1 + t_2 + t_3 + t_4)$
+\end{answerlong}
+(Correct the above)
+
+%------------------------------------------------------------------------------
+\nextq
+Simplify the runtime function $T_b(n)$
+by giving names $A$, $B$, $C$, $D$, ...
+to the constants of the function from (a). (The $t_1, t_2, ...$ should
+disappear.)
+\\
+\ANSWER
+\begin{answerlong}
+$T_b(n) = A$
+\end{answerlong}
+(Correct the above)
+
+%------------------------------------------------------------------------------
+\nextq
+Fudge away the constants and write down the simplest $g(n)$ such
+that the time in (b) is a big-O of your $g(n)$.
+Your $g(n)$ should be either $n$ or $n^2$ or $n^3$ or $n^{102.25}$ ...
+\\
+\ANSWER
+\begin{answerlong}
+$T_b(n) = O(1)$
+\end{answerlong}
+(Correct the above)
+
+%------------------------------------------------------------------------------
+\nextq
+Second, write down the worst runtime of the above algorithm.
+(You need not go through all the computations. You just need to state
+the worst runtime.)
+\\
+\ANSWER
+\begin{answerlong}
+$T_w(n) = O(n)$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

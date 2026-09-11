@@ -1,0 +1,19 @@
+from latextool_basic import *
+plot = FunctionPlot(width="3in", height="2in")
+plot.add(((20000, 0.89),
+          (40000, 0.953),
+          (60000, 0.962)),
+          (80000, 1.06),
+          (100000, 1.324),
+          line_width='1', color='blue', legend='Set')
+
+plot.add(((20000, 133.244),
+          (40000, 168.023),
+          (60000, 237.957)),
+          (80000, 415.032),
+          (100000, 440.331),
+          line_width='1', color='orange', legend='BST')
+
+
+print(plot)
+

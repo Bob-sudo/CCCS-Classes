@@ -1,0 +1,121 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a function that computes the sum of the
+values in array \verb!x! from index 0 up to
+and including index \verb!size - 1!.
+The function prototype is
+\begin{console}
+double sum(double x[], int size);
+\end{console}
+\ANSWER
+\begin{answercode}
+double sum(double x[], int size)
+{
+  double num = 0;
+  for(int i = 1; i < size; i++)
+  {
+    num += x[i];
+  }
+  return num;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a function that
+computes the maximum of the
+values in array \verb!x! from index 0 up to
+and including index \verb!size - 1!.
+The function prototype is
+\begin{console}
+int max(int x[], int size);
+\end{console}
+\ANSWER
+\begin{answercode}
+int max(int x[], int size)
+{
+  int max = 0;
+  for(int i = 0; i < size; i++)
+  {
+    if(max < x[i])
+    {
+      max = x[i];
+    }
+  }
+  return max;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a function that performs a linear search
+for \verb!target! in array \verb!x! from index 0 up to
+and including index \verb!size - 1!.
+If \verb!target! is not found, \verb!-1! is returned.
+The function prototype is
+\begin{console}
+int linearsearch(int x[], int size, int target);
+\end{console}
+\ANSWER
+\begin{answercode}
+int linearseach(int x[], int size, int target)
+{
+  for(int i = 0; i < size; i++)
+  {
+    if(x[i] == target)
+    {
+      return i;
+    }
+  }
+  return -1;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a function that counts the number of times
+\verb!target! appears in
+array \verb!x! from index 0 up to
+and including index \verb!size - 1!.
+The function prototype is
+\begin{console}
+int count(int x[], int size, int target);
+\end{console}
+\ANSWER
+\begin{answercode}
+int count(int x[], int size, int target)
+{
+  int c = 0;
+  for(int i = 0; i < size; i++)
+  {
+    if(x[i] == target)
+    {
+      c++;
+    }
+  }
+  return c;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a function that swaps the values of two integer variables.
+Part of the function prototype is given:
+\begin{console}
+    swap(     x,    y);
+\end{console}
+\ANSWER
+\begin{answercode}
+void swap(int & x, int & y)
+{
+  int temp = y;
+  y = x;
+  x = temp;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

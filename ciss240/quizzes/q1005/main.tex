@@ -1,0 +1,65 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following code fragment to compute
+the sum $1 + 2 + 3 + \cdots + 1000$.
+\\
+\ANSWER
+\begin{answercode}
+      sum = 0; // declare and initialize
+for (int i = 1; i <= 1000; i++)
+{
+    sum += i; 
+}
+std::cout << sum << std::endl;
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following code fragment to compute
+the sum $10 + 12 + 14 + \cdots + 996 + 998 + 1000$.
+\\
+\ANSWER
+\begin{answercode}
+      sum = 0; // declare and initialize
+for (int i = 10; i <= 1000; i += 2)
+{
+    sum += i;
+}
+std::cout << sum << std::endl;
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following code fragment to compute
+the sum of the integers 10, 12, 14, ..., 996, 998, 1000
+\textit{except} for the integers
+in [100, 200], i.e., compute and print
+\[
+10 + 12 + 14 + \cdots + 94 + 96 + 98 + 202 + 204 + 206 + \cdots + 996 + 998 + 1000
+\]
+You must use only one for-loop.
+Of course this can be done in two separate for-loops, but for this
+question you have to following the given code fragment
+and use only one for-loop.
+(You need an if statement.)
+\\
+\ANSWER
+\begin{answercode}
+      sum = 0; // declare and initialize
+for (int i = 10; i < 1000; i += 2)
+{
+    if(i != 100 || i != 200)
+    {
+        sum += i; 
+    }
+}
+std::cout << sum << std::endl;
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

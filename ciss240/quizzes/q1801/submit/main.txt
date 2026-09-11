@@ -1,0 +1,38 @@
+Q1 []
+
+Q2 [
+#include <iostream>
+
+int main()
+{
+    char s[1024];
+    std::cin >> s;
+    
+    int str_len = 0;
+    // TODO
+
+    std::cout << str_len << '\n';
+    
+    return 0;
+}
+]
+
+Q3 [
+#include <iostream>
+
+int main()
+{
+    char s[1024];
+    std::cin >> s;
+    char target;
+    std::cin >> target;
+    
+    int count = 0;
+    // TODO
+
+    std::cout << count << '\n';
+    
+    return 0;
+}
+]
+

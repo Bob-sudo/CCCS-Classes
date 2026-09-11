@@ -1,0 +1,86 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+Declare an array \verb!x! of $100$ doubles and initialize all the values in
+\verb!x! to $0.0$ without using a loop.
+\\
+\ANSWER
+\begin{answercode}
+double x[100] = {0.0};
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Assume that array \verb!y! is already declared.
+Assign $42.24$ to the first element in array \verb!y!.
+\\
+\ANSWER
+\begin{answercode}
+y[0] = 42.24;
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Assume that integer
+arrays \verb!y! and \verb!z! both of size 10 are already declared.
+Assign to the second element in array \verb!z! the sum of the first and second
+elements of array \verb!y!.
+\\
+\ANSWER
+\begin{answercode}
+z[1] = y[0] + y[1];
+\end{answercode}
+
+\nextq
+Assume that integer
+arrays \verb!x! of size 10 is already declared.
+Using a loop, get 10 integers from the user and put them into \verb!x!.
+\\
+\ANSWER
+\begin{answercode}
+int n;
+
+for(int i = 0; i < 10; i++)
+{
+     std::cin >> n;
+     x[i] = n;
+}
+\end{answercode}
+
+\nextq
+Fix the following code fragment that declares an array and initializes all
+elements of the array to \verb!42!.
+\\
+\ANSWER
+\begin{answercode}
+int x[100];
+for (int i = 0; i < 100; ++i)
+{
+    x[i] = 42;
+}
+\end{answercode}
+
+\nextq
+Assume that integer
+arrays \verb!x! of size 100 is already declared.
+Assume that integer variable \verb!prod! is already declared but has not been
+initialized.
+Using a loop, compute the product of all the integers in \verb!x!
+and store it in \verb!prod!.
+\\
+\ANSWER
+\begin{answercode}
+int prod = 0;
+
+for(int i = 0; i < 100; i++)
+{
+     prod += x[i];
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

@@ -1,0 +1,93 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Suppose you are working with \textit{sorted} singly linked list (i.e., the keys
+in the singly linked list are in ascending order).
+Complete the \verb!SLList::insert_sorted! method
+so that if \verb!list! is sorted, then after calling
+\verb!list.insert_sorted(key)!,
+\verb!list! will be the original list but
+with \verb!key! inserted into the right place, i.e., the keys
+in the new \verb!list! are also in ascending order.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <string>
+
+class SLNode
+{
+public:
+    SLNode(int key, SLNode * next)
+    : key_(key), next_(next)
+    {}
+    int key_;
+    SLNode * next_;
+};
+
+std::ostream & operator<<(std::ostream & cout, const SLNode & n)
+{
+    cout << n.key_;
+    return cout;
+}
+
+class SLList
+{
+public:
+    SLList()
+        : phead_(NULL)
+    {}
+    void insert_sorted(int key)
+    {
+      if (phead_ == NULL || key < phead_->key_)
+      {
+        phead_ = new SLNode(key, phead_);
+        return;
+      }
+      
+      SLNode * curr = phead_;
+
+      while(curr->next_ == NULL && curr->next_->key_ < key)
+      {
+        curr = curr->next_;
+      }
+      
+      curr->next = new SLNode(key, curr->next_);
+    }
+    SLNode * phead_;
+};
+
+std::ostream & operator<<(std::ostream & cout, const SLList & list)
+{
+    std::string delim = "";
+    cout << "[";
+    SLNode * p = list.phead_;
+    while (p != NULL)
+    {
+        cout << delim << (*p);
+        delim = ", ";
+        p = p->next_;
+    }
+    cout << "]";
+    return cout;
+}
+
+int main()
+{
+    SLList list;
+    list.insert_sorted(10); // expected: [10]
+    std::cout << list << '\n';
+    list.insert_sorted(5); // expected: [5, 10]
+    list.insert_sorted(8); // expected: [5, 8, 10]
+    list.insert_sorted(3); // expected: [3, 5, 8, 10]
+    list.insert_sorted(0); // expected: [0, 3, 5, 8, 10]
+    list.insert_sorted(6); // expected: [0, 3, 5, 6, 8, 10]
+    std::cout << list << '\n';
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

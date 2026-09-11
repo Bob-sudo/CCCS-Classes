@@ -1,0 +1,132 @@
+%-*-latex-*-
+\input{thispreamble}
+
+For the following questions,
+here's an example on how to describe a binary tree in text.
+For this tree
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+you write
+\begin{console}[fontsize=\footnotesize]
+[10, [4, 25]]
+[4, [1, None]]
+[25, [12, 27]]
+[1, [None, None]]
+[12, [None, None]]
+[27, [None, 29]]
+[29, [None, None]]
+\end{console}
+
+%------------------------------------------------------------------------------
+\nextq
+For this tree:
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+What is the tree after performing a left rotation at the node
+with key value of $10$?
+\\
+\ANSWER
+\begin{answercode}
+[25, [10, 27]]
+[10, [4, 12]]
+[27, [None, 29]]
+[4, [1, None]]
+[12, [None, None]]
+[29, [None, None]]
+[1, [None, None]]
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+For this tree:
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+What is the tree after performing a right rotation at the node
+with key value of $10$?
+\\
+\ANSWER
+\begin{answercode}
+[4, [1, 10]]
+[1, [None, None]]
+[10, [None, 25]]
+[25, [12, 27]]
+[12, [None, None]]
+[27, [None, 29]]
+[29, [None, None]]
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+For this BST:
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+insert 30 and then balance it (if necessary).
+Write the resulting tree in text below.
+\ANSWER
+\begin{answercode}
+[25, [10, 29]]
+[10, [4, 12]]
+[29, [27, 30]]
+[4, [1, None]]
+[12, [None, None]]
+[27, [None, None]]
+[30, [None, None]]
+[1, [None, None]]
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+For this BST:
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+insert 2 and then balance it (if necessary).
+Write the resulting tree in text below.
+\ANSWER
+\begin{answercode}
+[10, [4, 25]]
+[2, [1, 4]]
+[25, [12, 27]]
+[1, [None, None]]
+[4, [None, None]]
+[12, [None, None]]
+[27, [None, 29]]
+[29, [None, None]]
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

@@ -1,0 +1,167 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Infix to Polish notation:
+\\
+Convert the following in infix notation \verb!1 + (2 + 3) * 4 + 5! to
+Polish notation.
+If what is given has an error, write ERROR.
+Note that you are converting the expression, you are not
+evaluating the expression.
+\\
+\ANSWER
+\begin{answercode}
++ + 1 * + 2 3 4 5
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Polish to infix notation:
+\\
+Convert the following in Polish notation \verb!+ / 8 2 - 4 * 7 2!
+to infix notation.
+If what is given has an error, write ERROR.
+Note that you are converting the expression, you are not
+evaluating the expression.
+\\
+\ANSWER
+\begin{answercode}
+8 / 2 + (4 - 7 * 2)
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Infix to Reverse Polish notation:
+\\
+Convert the following in infix notation \verb!1 / (2 + 3 * 4) * 5! to
+Reverse Polish notation.
+If what is given has an error, write ERROR.
+Note that you are converting the expression, you are not
+evaluating the expression.
+\\
+\ANSWER
+\begin{answercode}
+1 2 3 4 * + / 5 *
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Reverse Polish to infix notation:
+\\
+Convert the following in Reverse Polish notation \verb!2 3 4 * 5 * +!
+to infix notation.
+If what is given has an error, write ERROR.
+Note that you are converting the expression, you are not
+evaluating the expression.
+\\
+\ANSWER
+\begin{answercode}
+2 + (3 * 4 * 5)
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Using five \verb!1!s and as many \verb!+!s as you like,
+write a mathematical expression in Reverse Polish notation
+that will have the largest possible
+stack during the evaluation of the expression.
+\\
+\ANSWER
+\begin{answercode}
+1 1 1 1 1 + + + +
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Using five \verb!1!s and as many \verb!+! as you like,
+write a mathematical expression in Reverse Polish notation
+that will have the smallest possible
+stack during the evaluation of the expression.
+\\
+\ANSWER
+\begin{answercode}
+1 1 + 1 + 1 + 1 +
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function that returns \verb!true! if the vector
+of numeric and operator strings is a valid RPN expression.
+For instance \verb!{"1", "2", "+"}! is valid and
+\verb!{"1", "+", "2"}! is not valid.
+Note that you are not evaluating the expression.
+The following functions are provided:
+\begin{Verbatim}[fontsize=\footnotesize,frame=single]
+bool is_numeric(const std::string & s);
+bool is_operator(const std::string & s);
+\end{Verbatim}
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stack>
+
+// Returns true if string is numeric.
+// Assume s.size() > 0 and no sign ('+' or '-')
+bool is_numeric(const std::string & s)
+{
+    if (s.size() == 0) return false;
+    for (unsigned int i = 0; i < s.size(); ++i)
+    {
+        if (s[i] < '0' || '9' < s[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Returns true if string is an operator.
+// Assume operator is +, -, *, /, %
+bool is_operator(const std::string & s)
+{
+    if (s.size() != 1) return false;
+    return (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/' ||
+            s[0] == '%');
+}
+
+bool is_rpn(const std::vector< std::string > & v)
+{
+  int count = 0;
+  
+  for (unsigned int i = 0; i < v.size(); ++i)
+  {
+    std::string t = v[i];
+
+    if(is_numeric(t))
+    {
+      count++;
+    }
+    else if (is_operator(t))
+    {
+      if (count < 2)
+          return false;
+      count--;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  return count == 1;
+}
+
+int main()
+{
+    std::vector< std::string > v {"1", "2", "+"};
+    std::cout << is_rpn(v) << '\n';
+    return 0;
+}
+\end{answercode}
+(Hint: Do you really need a stack?)
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

@@ -1,0 +1,46 @@
+%-*-latex-*-
+[Bubblesort]
+
+Implement the standard bubblesort algorithm in C\texttt{++}.
+The following are the prototypes:
+\begin{console}[frame=single, fontsize=\footnotesize]
+template < typename T >
+void bubblesort(T * start, T * end, bool verbose=false);
+
+template < typename T, typename C >
+void bubblesort(T * start, T * end, const C & less, bool verbose=false);
+\end{console}
+The \verb!verbose! parameter, when \verb!true!, will
+display the values at address \verb!start! up to but not including \verb!end!,
+and also at the \textit{end} of each pass with the values
+separated by \verb!", "! and
+a newline is printed after printing each pass.
+Actually I will only test your code for the first prototype, where
+sorting is done in the default ascending order.
+So the second prototype is optional.
+
+Here's an example execution:
+\begin{Verbatim}[frame=single,commandchars=\~\!\@,fontsize=\footnotesize]
+~userinput!./a.out 42 4 10 1 0@
+{1, 9, 4, 2}
+{1, 4, 2, 9}
+{1, 2, 4, 9}
+{1, 2, 4, 9}
+\end{Verbatim}
+The first output \verb!{1, 9, 4, 2}! is the randomize vector with 4
+values (unsorted),
+the second output is the vector at the end of the first pass,
+the third output is the vector at the end of the second pass, and the
+last output is the vector at the end of the third pass.
+
+Make sure your output matches the format \textit{exactly}
+or your implementations will be considered incorrect.
+
+I recommend the following steps:
+\begin{enumerate}[nosep]
+\item Write a bubblesort that accepts pointers to two integers.
+\item Add verbose printing.
+\item Add functor for specifying sort order.
+\item Convert to function template.
+\end{enumerate}
+

@@ -1,0 +1,152 @@
+%-*-latex-*-
+\input{thispreamble}
+
+Here's how you describe (in text) for a binary tree with a heap tree structure.
+For this tree
+\begin{console}[fontsize=\footnotesize]
+              (10)
+           /        \
+        (6)          (7)
+       /   \        /   \
+    (5)     (2)  (0)     (3)
+   /
+(1)
+\end{console}
+you write
+\begin{console}[fontsize=\footnotesize]
+{10, 6, 7, 5, 2, 0, 3, 1}
+\end{console}
+i.e., list the values using breadth-first traversal (like what we did in class).
+
+%------------------------------------------------------------------------------
+\nextq
+Describe (using text) the following maxheap after you have inserted 9 to it.
+\begin{console}[fontsize=\footnotesize]
+              (10)
+           /        \
+        (6)          (7)
+       /   \        /   \
+    (5)     (2)  (0)     (3)
+   /
+(1)
+\end{console}
+
+\ANSWER
+\begin{answercode}
+{10, 6, 7, 5, 2, 0, 3, 1, 9}
+{10, 6, 7, 9, 2, 0, 3, 1, 5}
+{10, 9, 7, 6, 2, 0, 3, 1, 5}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Describe (using text) the following \textit{min}heap after you have inserted 0
+to it.
+\begin{console}[fontsize=\footnotesize]
+              (1)
+           /       \
+        (3)         (2)
+       /   \       /   \
+    (6)     (4) (8)     (5)
+   /   \
+(9)     (7)
+\end{console}
+
+\ANSWER
+\begin{answercode}
+[1, 3, 2, 6, 4, 8, 5, 9, 7, 0]
+[1, 3, 2, 6, 0, 8, 5, 9, 7, 4]
+[1, 0, 2, 6, 3, 8, 5, 9, 7, 4]
+[0, 1, 2, 6, 3, 8, 5, 9, 7, 4]
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Describe (using text) the following maxheap after you have performed
+extract-root on it.
+\begin{console}[fontsize=\footnotesize]
+              (10)
+           /        \
+        (6)          (7)
+       /   \        /   \
+    (5)     (2)  (0)     (3)
+   /
+(1)
+\end{console}
+
+\ANSWER
+\begin{answercode}
+[10, 6, 7, 5, 2, 0, 3, 1]
+
+[1, 6, 7, 5, 2, 0, 3]
+[7, 6, 1, 5, 2, 0, 3]
+[7, 6, 3, 5, 2, 0, 1]
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following maxheap insert function where \verb!std::vector< int >!
+is used for the array representation of the maxheap.
+
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <string>
+#include <vector>
+
+std::ostream & operator<<(std::ostream & cout, const std::vector< int > & v)
+{
+    cout << '[';
+    std::string delim = "";
+    for (auto & e: v)
+    {
+        cout << delim << e; delim = ", ";
+    }
+    cout << ']';
+    return cout;
+}
+
+int PARENT(int i)
+{
+  return (i - 1) / 2;
+}
+
+int LEFT(int i)
+{
+  return 2 * i + 1;
+}
+
+int RIGHT(int i)
+{
+  return 2 * i + 1;
+}
+
+void maxheap_insert(std::vector< int > & v, int x)
+{
+  v.push_back(x);
+
+  int n = v.size() - 1;
+  while(n > 0 && v[n] > v[PARENT(n)]
+  {
+    int temp = v[n];
+    v[n] = v[PARENT(n)];
+    v[PARENT(n)];
+    n = PARENT(i);
+  }
+}
+
+int main()
+{
+    std::vector< int > heap;
+    std::vector< int > data {5, 3, 1, 2, 4, 6, 0};
+    for (auto & e: data)
+    {
+        maxheap_insert(heap, e);
+        std::cout << heap << '\n';
+    }
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

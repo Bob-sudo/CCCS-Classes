@@ -1,0 +1,118 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+The following program does not run. Insert one statement to correct the problem.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+// insert statement here
+int sum(int start, int end, int step);
+
+int main()
+{
+    std::cout << sum(5, 10, 1) << std::endl;
+    return 0;
+}
+
+int sum(int start, int end, int step)
+{
+    int s = 0;
+    for (int i = start; i <= end; i += step)
+    {
+        s += i;
+    }
+    return s;
+}
+\end{answercode}
+
+%-------------------------------------------------------------------------------
+\nextq
+The following program does not run. Insert one statement to correct the problem.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+// insert statement here
+void swap(int &x, int &y);
+
+int main()
+{
+    int i, j;
+    std::cin >> i >> j;
+    swap(i, j);
+    std::cout << i << ' ' << j << '\n';
+    return 0;
+}
+
+void swap(int &x, int &y)
+{
+    int t = x;
+    x = y;
+    y = t;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+The function \verb!play_audio()! plays an audio file. The parameters are:
+\begin{enumerate}
+\li \verb!filename!: a C-string that is the name of the audio file to be loaded.
+\li \verb!track_number!: an integer.
+$0$ is the first track, $1$ is the second track, etc.
+\li \verb!repeat!: a boolean.
+\end{enumerate}
+The function returns $0$ if there are no errors,
+returns $-1$ if the file cannot be found using the \verb!filename!,
+and returns $-2$ if the \verb!track_number! is not found.
+Write down the prototype of this function.
+\\
+\ANSWER
+\begin{answercode}
+int play_audio(const char* filename, int track_number, bool repeat);
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+The function \verb!copy_array()! copies the values of an array to another.
+The parameters are:
+\begin{enumerate}
+\li \verb!x!: the target integer array.
+\li \verb!x_length!: an integer reference variable.
+\li \verb!y!: the source integer array
+\li \verb!y_length!: an integer variable.
+\end{enumerate}
+When you call \texttt{copy\_array(x, x\_length, y, y\_length)} the values
+\verb!y[0]!,...,\texttt{y[y\_length - 1]} are copied to
+\verb!x[0]!,...,\verb!x[y_length - 1]! (respectively) and
+\verb!x_length! is set to \verb!y_length!.
+Write down the prototype of this function.
+\\
+\ANSWER
+\begin{answercode}
+void copy_array(int x[], int &x_length, const int y[], int y_length);
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+What is a suitable prototype for \verb!array_equals()! that
+compares the values of two integer arrays \verb!x! and \verb!y!
+from returns \verb!true!
+when
+\verb!x[0]!,...,\verb!x[n - 1]!
+and
+\verb!y[0]!,...,\verb!y[n - 1]!
+are the same (respectively), and \verb!false! otherwise.
+\\
+\ANSWER
+\begin{answercode}
+bool array_equals(const int x[], const int y[], int n);
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

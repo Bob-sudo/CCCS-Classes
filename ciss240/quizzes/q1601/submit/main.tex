@@ -1,0 +1,127 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+What is the output of this code fragment:
+\begin{console}[fontsize=\scriptsize]
+int i = 5, j = 3;
+std::cout << "start\n";
+if (i > 2)
+{
+    std::cout << i << ' ' << j << std::endl;
+    int j = 6;
+    std::cout << i << ' ' << j << std::endl;
+    if (j < 5)
+    {
+        int i = 8;
+        std::cout << i << ' ' << j << std::endl;
+    }
+    else
+    {
+        int i = 9;
+        std::cout << i << ' ' << j << std::endl;
+    }
+    std::cout << i << ' ' << j << std::endl;
+}
+else
+{
+    std::cout << i << ' ' << j << std::endl;
+    int j = 7;
+    std::cout << i << ' ' << j << std::endl;
+    if (j < 5)
+    {
+        int i = 6;
+        std::cout << i << ' ' << j << std::endl;
+    }
+    else
+    {
+        int i = 7;
+        std::cout << i << ' ' << j << std::endl;
+    }
+    std::cout << i << ' ' << j << std::endl;
+}
+std::cout << i << ' ' << j << std::endl;
+std::cout << "end\n";
+\end{console}
+\ANSWER
+\begin{answercode}
+start
+5 3
+5 6
+9 6
+5 6
+5 3
+end
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+In the following code fragment
+\begin{console}[fontsize=\scriptsize, numbers=left]
+int i = 5;
+int i = 6;
+\end{console}
+there's an error at line 2 because there's a re-declaration of \verb!i!.
+
+For the code fragment below,
+write down the line numbers of every statements that has an error.
+They all involve variable declaration.
+If there's an error for lines 4, 5, 6, 8 you write \verb!4 5 6 8!
+with the line numbers in ascending order and a space between two consecutive
+line numbers.
+\begin{console}[fontsize=\scriptsize, numbers=left]
+int i = 5, j = 3;
+
+if (i > 2)
+{
+    std::cout << i << ' ' << j << std::endl;
+    int j = 6;
+    std::cout << i << ' ' << j << std::endl;
+    if (j < 5)
+    {
+         int i = 8;
+         int j = 7;
+         std::cout << i << ' ' << j << std::endl;
+    }
+    else
+    {
+        int i = 9;
+        int j = 10;
+        std::cout << i << ' ' << j << std::endl;
+    }
+    int j = 11;
+    std::cout << i << ' ' << j << std::endl;
+}
+else
+{
+    std::cout << i << ' ' << j << std::endl;
+    int j = 7;
+    std::cout << i << ' ' << j << std::endl;
+    if (j < 5)
+    {
+        int i = 6;
+        int j = 7;
+        std::cout << i << ' ' << j << std::endl;
+    }
+    else
+    {
+        int i = 7;
+        int j = 8;
+        std::cout << i << ' ' << j << std::endl;
+    }
+    int j = 9;
+    std::cout << i << ' ' << j << std::endl;
+}
+int j = 10;
+std::cout << i << ' ' << j << std::endl;
+\end{console}
+\ANSWER
+\begin{answercode}
+5 10 24 30 44 47
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

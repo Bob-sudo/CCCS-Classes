@@ -1,0 +1,90 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Add code to your Rational class so that the following works:
+\begin{Verbatim}[frame=single, fontsize=\footnotesize]
+Rational f(5, 2); // f models 5/2
+int i = int(f);   // i is 2
+int j = f;        // THIS WILL FAIL
+\end{Verbatim}
+\ANSWER
+\begin{answercode}
+class Rational
+{
+public:
+    Rational(int n, int d)
+        : n_(n), d_(d)
+    {}
+
+    operator int() const
+    {
+      return n_ / d_;
+    }
+
+    // other methods not shown
+private:
+    int n_, d_;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Correct the code below so that it produces the following output:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+<Werewolf john>
+<Lucan john>
+\end{Verbatim}
+\begin{answercode}
+#include <iostream>
+#include <string>
+
+class Lucan
+{
+public:
+    Lucan(const std::string name)
+        : name_(name)
+    {}
+
+    std::string name_;
+};
+
+std::ostream & operator<<(std::ostream & cout, const Lucan & l)
+{
+    cout << "<Lucan " << l.name_ << '>';
+    return cout;
+}
+
+class Werewolf
+{
+public:
+    Werewolf(const std::string name)
+        : name_(name)
+    {}
+
+    operator Lucan() const
+    {
+        return Lucan(name_);
+    }
+
+    std::string name_;
+};
+
+std::ostream & operator<<(std::ostream & cout, const Werewolf & w)
+{
+    cout << "<Werewolf " << w.name_ << '>';
+    return cout;
+}
+
+int main()
+{
+    Werewolf w("john");
+    std::cout << w << '\n';
+    std::cout << Lucan(w) << '\n';
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

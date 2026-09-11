@@ -1,0 +1,50 @@
+%-*-latex-*-
+\textsc{Comamnd-line arguments}
+
+Compile this program say the executable is \texttt{main.exe}:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+#include <iostream>
+
+int main(int argc, char * argv[])
+{
+    for (int i = 0; i < argc; ++i)
+    {
+        std::cout << i << " ... " << argv[i] << '\n';
+    }
+    return 0;
+}
+\end{Verbatim}
+Now in your shell run the program this way:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+[student@localhost cpp-cmd-line-args]$ g++ main.cpp -o main.exe
+[student@localhost cpp-cmd-line-args]$ ./main.exe abc def hello
+0 ... ./main.exe
+1 ... abc
+2 ... def
+3 ... hello
+\end{Verbatim}
+
+So you see the following: when you issue a command in your
+bash shell to run the program \verb!./main.exe! and a sequence
+of strings, i.e., \texttt{abc}, \texttt{def}, \texttt{hello},
+The strings
+\verb!"./main.exe"!,
+\verb!"abc"!,
+\verb!"def"!, and
+\verb!"hello"!
+are stored in the array of C-string \texttt{argv} (the \lq\lq argument vector"
+where in this case vector means array).
+Furthermore the number of such strings (an integer) is stored in
+the integer variable \texttt{argc} (the \lq\lq argument count").
+Note that the first C-string, \texttt{argv[0]}, is the program path.
+
+By the way, the type of \verb!argv! is an array of pointers.
+If you think about that carefully it means that the following works too:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+#include <iostream>
+
+int main(int argc, char ** argv)
+{
+    ...
+}
+\end{Verbatim}

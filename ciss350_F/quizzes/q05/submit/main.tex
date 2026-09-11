@@ -1,0 +1,104 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following recursive function to compute GCD.
+(Yes I know this is straight from my notes. Do it anyway.)
+\\
+\ANSWER
+\begin{answercode}
+// Do NOT use for-loops or while-loops or do-while-loops
+int gcd(int m, int n)
+{
+  if (n == 0)
+  {
+    return m;
+  }
+  else
+  {
+    return gcd(n, m % n);
+  }
+}
+\end{answercode}
+
+TURN PAGE
+
+%------------------------------------------------------------------------------
+\newpage
+\nextq
+Complete the following recursive function
+\verb!print(m, n)! that prints a sequence
+of consecutive integers starting with \verb!m!
+and ending with \verb!n - 1!.
+For instance the output of
+\begin{console}[fontsize=\small]
+print(2, 6);   // prints 2 3 4 5 and newline
+print(10, 18); // prints 10 11 12 13 14 15 16 17 and newline
+\end{console}
+is
+\begin{console}[fontsize=\small]
+2 3 4 5
+10 11 12 13 14 15 16 17
+\end{console}
+Note that the function must be recursive.
+\\
+\ANSWER
+\begin{answercode}
+// Do NOT use for-loops or while-loops or do-while-loops
+void print(int m, int n)
+{
+    if (m >= n)
+    {
+        std::cout << ' ';        // <-- Write ONE statement here
+    }
+    else
+    {
+        std::cout << m << ' ';   // <-- Write ONE statement here
+        print(m + 1, n);         // <-- Do not change this statement
+    }
+}
+\end{answercode}
+
+TURN PAGE
+
+%------------------------------------------------------------------------------
+\newpage
+\nextq
+Complete the following recursive function
+\texttt{int count(int *start, int *end, int target)}
+that counts the number of times \verb!target!
+appears in
+\verb!*start!, \verb!*(start + 1)!, \verb!*(start + 2)!,
+..., \verb!*(end - 1)!.
+For instance the output of
+\begin{console}[fontsize=\small]
+int x[] = {1, 2, 3, 4, 3, 2, 1, 2, 3, 4};
+std::cout << count(x + 2, x + 8, 3) << '\n';
+\end{console}
+is \verb!2!.
+Note that the function must be recursive.
+\\
+\ANSWER
+\begin{answercode}
+// Do NOT use for-loops or while-loops or do-while-loops
+int count(int * start, int * end, int target)
+{
+    int c = 0;
+    if (start >= end)
+    {
+        return 0;
+    }
+    else
+    {
+      if (*start == target)
+      {
+        c++;
+      }
+      return c + count(start + 1, end, target);
+    }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

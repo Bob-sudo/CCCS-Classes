@@ -1,0 +1,33 @@
+Q1 [
+for (               ;               ;               )
+{
+    std::cout << i << '\n';
+    for (               ;               ;               )
+    {
+        std::cout << ' ' << j;
+    }
+    std::cout << '\n';
+}
+]
+
+Q2 [
+for (              ;              ;              )
+{
+    std::cout << i << '\n';
+    if (                ) // CASE: i is odd. Print j running from i to 1
+    {
+        for (               ;               ;               )
+        {
+            std::cout << ' ' << j;
+        }
+    }
+    else // CASE: i is even. Print j running up 1 to i
+    {
+        for (               ;               ;               )
+        {
+            std::cout << ' ' << j;
+        }
+    }
+    std::cout << '\n';
+}
+]

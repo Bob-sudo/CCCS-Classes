@@ -1,0 +1,120 @@
+%-*-latex-*-
+\input{thispreamble}
+
+\LATEXHELPTHREEFIVEZERO
+
+\TURNPAGE
+
+%------------------------------------------------------------------------------
+\newpage
+\textsc{Runtime for linear filter on 1D array }
+
+The goal is to compute the big-O runtime of an array averaging computation
+for an array of squares (as well as the initialization of the array of
+squares):
+\begin{Verbatim}[frame=single,fontsize=\small]
+for i = 0, ..., n - 1:
+    y[i] = i * i
+
+for i = 1, ..., n - 2:
+    z[i] = (y[i - 1] + y[i] + y[i + 1]) / 3
+
+z[0] = z[1]
+z[n - 1] = z[n - 2]
+\end{Verbatim}
+The array \verb!y! contains a collection of (some) values, which in this
+case is an array of squares.
+Recall from CISS240 that this is an example of a running average computation,
+each \verb!z[i]! is the average of 3 values of \verb!y! around the
+same index \verb!i!.
+(We say the averaging window has size 3.)
+This is a basic statistical computation that can be used for instance in
+smoothing out a graph of stock prices throughout the day.
+In signal processing, this is also an example of one of the simplest
+linear filters.
+Another example of a linear filter is one where
+\verb!z[i] = (y[i - 1] + 2 * y[i] + y[i + 1]) / 4!
+where the central value has a higher weight;
+in this case the weights are $(1, 2, 1)$.
+And in the case of image processing the arrays would be
+2D arrays of pixels and the average calculation would be averaging over
+9 pixels around a pixel location \verb!(r, c)! (including itself)
+and the computation would remove \lq\lq noise" from the image.
+An example is the Gaussian filter
+\begin{Verbatim}[fontsize=\small]
+z[r][c] = (    y[r - 1][c - 1] + 2 * y[r - 1][c] +     y[r - 1][c + 1]
+          (2 * y[  r  ][c - 1] + 4 * y[  r  ][c] + 2 * y[  r  ][c + 1]
+          (    y[r + 1][c - 1] + 2 * y[r + 1][c] +     y[r + 1][c + 1]) / 16
+\end{Verbatim}
+
+Back to our algorithm,
+take note of this: we are running two for-loops.
+In real wallclock time, the total runtime would take more time than the time
+taken for each individual for-loop.
+But what about the \underline{\textit{big-O}} of the total runtime?
+
+%------------------------------------------------------------------------------
+\nextq
+Rewrite the above algorithm with
+goto statements, assign constant times to each statement and
+compute the time taken as a function of $n$, $t_1$, $t_2$, $t_3$, ....
+where $t_1, t_2, t_3, ...$ are runtimes for each statement in your
+algorithm. Make sure you
+number these times starting with $t_1$, then
+$t_2$, etc.
+Include the number of times each statement is executed.
+\\
+\ANSWER
+\begin{answercode}
+          i = 0                   t1      1
+LOOP1:    if i >= n:              t2      n + 1
+              goto ENDLOOP1       t3      1
+          y[i] = i * i            t4      n
+ENDLOOP1: i = 1                   t5      1
+LOOP2:    if i >= n - 1:          t6      n - 1
+              goto ENDLOOP2       t7      1
+          z[i] = (y[i - 1] + y[i] + y[i + 1]) / 3      t8      n - 2    
+ENDLOOP2: z[0] = z[1]             t9      1
+          z[n - 1] = z[n - 2]     t10     1
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Let $T(n)$ be the runtime function of the above algorithm.
+Write $T(n)$ as a polynomial in descending power of $n$, i.e.,
+the \textit{highest degree term appearing first}.
+\\
+\ANSWER
+\begin{answerlong}
+$T(n) = (t_2 + t_4 + t_6 + t_8)n + (t_1 + t_2 + t_3 + t_5 - t_6 - 2t_8 + t_7 + t_9 + t_{10})$
+\end{answerlong}
+(Correct the above.)
+
+%------------------------------------------------------------------------------
+\nextq
+Simplify the runtime function $T(n)$
+by giving names $A$, $B$, $C$, $D$, ...
+to the constants of the function from (a). (The $t_1, t_2, ...$ should
+disappear.)
+\\
+\ANSWER
+\begin{answerlong}
+$T(n) = An + B$
+\end{answerlong}
+(Correct the above.)
+
+%------------------------------------------------------------------------------
+\nextq
+Fudge away the constants and write down the simplest $g(n)$ such
+that the runtime is a big-O of your $g(n)$.
+Your $g(n)$ should be either $n$ or $n^2$ or $n^3$ or $n^{102.25}$ ...
+\\
+\ANSWER
+\begin{answerlong}
+$T(n) = O(n)$
+\end{answerlong}
+(Correct the above.)
+\qed
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

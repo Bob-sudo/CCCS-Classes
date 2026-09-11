@@ -1,0 +1,120 @@
+%-*-latex-*-
+\input{thispreamble}
+
+Here's an example on sorting a vector:
+\VerbatimInput[frame=single,fontsize=\footnotesize]{sort.cpp}
+This sorts the whole vector.
+(Note that \verb!std::sort! is not stable.)
+For details on \verb!begin()! and \verb!end()!, see
+chapter on Containers (on iterators).
+\newpage
+
+%------------------------------------------------------------------------------
+\nextq
+Party planning problem.
+There are $n=5$ friends living on a street at address $0, 5, 3, 9, 3$.
+The address are integers from $0$ to $N - 1$
+where $N$ is huge, say $N = 1000000$.
+The houses are on a straight line.
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+            P
+            P
+P                   P               P
++---+---+---+---+---+---+---+---+---+---+---+---+---+ ...
+0   1   2   3   4   5   6   7   8   9   10  11  12  13 ...
+\end{Verbatim}
+(\verb!P! marks an address where a friend lives there.)
+The distance between 0 and 1 is 1, the distance between 1 and 2 is 1, etc.
+The friends are planning a party and they have decided to hold it at the house
+at address 5.
+The total distance travelled by everyone to 5 is $5+2+2+0+4 = 13$.
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+            P------>
+            P------>
+P------------------>P<--------------P
++---+---+---+---+---+---+---+---+---+---+---+---+---+ ...
+0   1   2   3   4   5   6   7   8   9   10  11  12  13 ...
+\end{Verbatim}
+Find \lq\lq best house", i.e.,
+the one where the total distance travelled is the smallest.
+Note that the brute force solution (using CISS240 methods) would run in $O(n^2)$.
+Your algorithm must run with time of $O(n \lg n)$ and a space complexity
+of $O(1)$.
+(There's actually a faster algorithm that runs with $O(n)$ time.)
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <cstdlib>
+#include <vector>
+#include <algorithm>
+
+int main()
+{
+    int seed;
+    std:cin >> seed;
+    srand(seed);
+    int n = 1000000;
+    std::vector< int > x(n);
+    for (int i = 0; i < n; ++i)
+    {
+        x[i] = rand() % 1000000;
+    }
+    int best_address = x[0];
+
+    std::sort(x.begin(), x.end());
+
+    int best_address = x[n / 2];
+
+    std::cout << best_address << '\n';
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+A permutation is a shuffle of values.
+For instance 1, 3, 5, 6, 4 is a permutation of 3, 1, 4, 6, 5.
+Complete the following problem.
+Clearly, your code that sets \verb!is_permutation! to \verb!true!
+if and only if \verb!u! is a permutation of \verb!v!.
+This must work for different vectors including vectors
+of large sizes.
+You should not assume the values are unique.
+Your algorithm must run with time of $O(n \lg n)$ and a space complexity
+of $O(1)$.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <cstdlib>
+#include <vector>
+#include <algorithm>
+
+int main()
+{
+    std::vector< int > u {1, 3, 5, 6, 4};
+    std::vector< int > v {3, 1, 4, 6, 5};
+    bool is_permutation = true;
+
+    if(u.size() != v.size())
+    {
+      is_permutation = false;
+    }
+    else
+    {
+      std::sort(u.begin(), u.end());
+      std::sort(u.begin(), u.end());
+
+      if(u[i] != v[i])
+      {
+        is_permutation = false;
+        break;
+      }
+    }
+
+    std::cout << is_permutation << '\n';
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

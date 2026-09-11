@@ -1,0 +1,76 @@
+%-*-latex-*-
+Collect actual runtime data for each algorithm you have implemented in this
+assignment
+(bubblesort, bubblesort2, insertionsort, selectionsort,
+mergesort, quicksort)
+and create a graph.
+See the section \textsc{Plotting Runtimes}
+on drawing line graphs in \LaTeX.
+
+For each algorithm you have implemented, collect data for 
+vector of size 2000, 4000, 6000, 8000, ....
+and for each size, you should use an average of about 5 cases.
+Make sure you have enough data points to see the trend of your graph.
+Of course the size of the array for sorting depends on your laptop.
+Faster laptops will need larger array sizes, otherwise all the times
+are too small to see the trend.
+The values used in your vector should be integers --
+see the skeleton code.
+Make sure you have a legend for the plot.
+
+Of course when collecting runtime data, you should set
+\verb!verbose! to \verb!false! so that output is minimal.
+This will ensure that the time collected is due to the sorting process
+and not due to output.
+
+SOLUTION:
+
+[Open q07.tex and modify the graph below with your own data.]
+\begin{python}
+from latextool_basic import *
+plot = FunctionPlot(width="3in", height="2in")
+plot.add(((20000, 1415.32),
+          (40000, 6760.78),
+          (60000, 15740.2)),
+          (80000, 28559.6),
+          (100000, 46939.8),
+          line_width='1', color='red', legend='bubblesort')
+
+plot.add(((20000, 1446.79),
+          (40000, 6972.08),
+          (60000, 15645.1)),
+          (80000, 28387.8),
+          (100000, 45319.5),
+          line_width='1', color='pink', legend='bubblesort2')
+
+plot.add(((20000, 329.594),
+          (40000, 1299.52),
+          (60000, 2948.29)),
+          (80000, 5210.6),
+          (100000, 8105.46),
+          line_width='1', color='blue', legend='selectionsort')
+
+plot.add(((20000, 335.602),
+          (40000, 1339.08),
+          (60000, 3024.16)),
+          (80000, 5318.92),
+          (100000, 8389.44),
+          line_width='1', color='cyan', legend='insertionsort')
+
+plot.add(((20000, 9.36516),
+          (40000, 18.1088),
+          (60000, 27.9483)),
+          (80000, 36.7915),
+          (100000, 45.6424),
+          line_width='1', color='yellow', legend='mergesort')
+
+plot.add(((20000, 212.403),
+          (40000, 778.008),
+          (60000, 1946.52)),
+          (80000, 2866.38),
+          (100000, 4787.08),
+          line_width='1', color='green', legend='quicksort')
+          
+print(plot)
+\end{python}
+

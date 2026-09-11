@@ -1,0 +1,94 @@
+%-*-latex-*-
+\input{thispreamble}
+
+All questions below refer to our standard quicksort.
+(Unless otherwise state, the pivot selection is by median-of-three
+and the partition algorithm is what I call pLRT.)
+For big-O,
+your answer should be of the form $O(n^k \lg^\ell n)$ for
+$k=0, 1, 2, ...$.
+$\ell=0, 1, 2, ...$.
+Of course $O(n^0)$ is $O(1)$.
+
+%------------------------------------------------------------------------------
+\nextq
+Suppose you want to perform quicksort on
+$x = \{ 5, 3, 1, 4, 6 \}$.
+What is the array after performing the median-of-3 in order to
+compute the pivot? What is the pivot value?
+\\
+\ANSWER
+\begin{answerlong}
+$x = \{ 1, 3, 5, 4, 6 \}$, pivot value = 5
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+Suppose you want to perform quicksort on
+$x = \{ 1, 9, 4, 5, 7, 2, 8 \}$.
+Perform ONE partition on $x$ assuming the pivot is $5$.
+\\
+\ANSWER
+\begin{answerlong}
+$\{ 1, 4, 2, 5, 7, 9, 8 \}$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+The following array has gone through one partitioning:
+$x = \{ 3, 1, 4, 5, 7, 9, 8 \}$.
+List the possible value(s) that was used as pivot.
+\\
+\ANSWER
+\begin{answerlong}
+4, 5, 7
+\end{answerlong}
+(Erase unused ?)
+
+%------------------------------------------------------------------------------
+\nextq
+Is it stable?
+If it is, write YES.
+If it is not, write NO and then write down
+the simplest array
+of smallest size and using smallest positive integers $> 0$
+which when traced will show that the sorting is not stable.
+\\
+\ANSWER
+\begin{answerlong}
+NO. $\{ 2_a, 1, 2_b\}$
+    $\{ 1, 2_b, 2_a\}$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the big-O of the runtime
+in terms of $n$ where $n$ is the size of the array?
+\\
+\ANSWER
+\begin{answerlong}
+$O(nlogn)$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the big-O of the average runtime
+in terms of $n$ where $n$ is the size of the array?
+\\
+\ANSWER
+\begin{answerlong}
+$O(nlogn)$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the space complexity (i.e., memory usage)
+in terms of $n$ where $n$ is the size of the array?
+\\
+\ANSWER
+\begin{answerlong}
+$O(logn)$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

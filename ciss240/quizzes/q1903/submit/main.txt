@@ -1,0 +1,22 @@
+Q1 [
+          sign(               )
+{
+
+}
+]
+
+Q2 [
+     swap(                       )
+{
+
+}
+]
+
+Q3 [
+     cut_tens(          )
+{
+    int digit = ????;
+    x = ????;
+    return digit
+}
+]

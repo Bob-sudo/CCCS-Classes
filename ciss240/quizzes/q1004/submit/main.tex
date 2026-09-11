@@ -1,0 +1,59 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+For each of the following questions,
+write down the output of the code fragment if it ends or write
+INFINITE LOOP if it has an infinite loop or write ERROR is it has
+a syntax error (so that the program does not even compile).
+
+%------------------------------------------------------------------------------
+\nextq
+\begin{console}[fontsize=\footnotesize]
+int j = 0, k = 2;
+for (int i = 0; i < k + 10; ++j)
+{
+    std::cout << i + j + k << ' ';
+}
+\end{console}
+\\
+\ANSWER
+\begin{answercode}
+INFINITE LOOP
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+\begin{console}[fontsize=\footnotesize]
+int j = 0, k = 10;
+for (int i = j; i < k; ++i)
+{
+    --k;
+    j += k;
+}
+std::cout << j << std::endl;
+\end{console}
+\ANSWER
+\begin{answercode}
+35
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+\begin{console}[fontsize=\footnotesize]
+int j = 1, k = 10;
+for (int i = j; i < k; ++i)
+{
+    j += i + k;
+    k--;
+}
+std::cout << i << ' ' << j << ' ' << k << std::endl;
+\end{console}
+\ANSWER
+\begin{answercode}
+56
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

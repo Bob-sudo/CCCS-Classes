@@ -1,0 +1,147 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+You want to sort an array of size $n$ (which is $\geq 1000000000$)
+of integer value in the range 0..9.
+You want the fastest sorting algorithm.
+Complete the following function to essentially perform a counting sort on \verb!x!.
+\\
+\ANSWER
+\begin{answercode}
+// Sort x[0..n-1]
+void sort(int x[], int n)
+{
+  int count[10] = {0};
+
+  for(int i = 0; i < n; ++i)
+  {
+    count[x[i]]++;
+  }
+
+  int index = 0;
+  for(int i = 0; i < 10; i++)
+  {
+    while(count[i] > 0)
+    {
+      x[index++];
+      count[i]--;
+    }
+  }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+You want to sort an array of size $n$ (which is $\geq 1000000000$).
+of integer value in the range 100000..100020.
+The device is memory-constrained -- besides the input array,
+you can afford to use at most
+the equivalent of 100 integers for your computations (for variables).
+Complete the following function to essentially perform a counting sort on \verb!x!.
+\\
+\ANSWER
+\begin{answercode}
+// Sort x[0..n-1]
+void sort(int x[], int n)
+{
+  const int min = 100000;
+  const int range = 21;
+
+  count[range] = 0;
+
+  for (int i = 0; i < n; ++i)
+  {
+    count[x[i] - MIN]++;
+  }
+
+  int index = 0;
+  for (int i = 0; i < RANGE; ++i)
+  {
+    while (count[i] > 0)
+    {
+      x[index++] = i + MIN;
+      count[i]--;
+    }
+  }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+You want to sort an array of size $n$ (which is $\geq 1000000000$)
+and contains
+double values -5.0, -4.5, -4.0, -3.5, -3.0, ..., -0.5, 0.0, 0.5, ..., 4.5, 5.0.
+The device is memory-constrained -- besides the input array,
+you can afford to use at most
+the equivalent of 100 integers for your computations (for variables).
+Complete the following function to essentially perform a counting sort on \verb!x!.
+\\
+\ANSWER
+\begin{answercode}
+// Sort x[0..n-1]
+void sort(double x[], int n) // correction: int x[] should be double x[].
+{
+  const int RANGE = 21; // -5.0 to 5.0 step 0.5
+  int count[RANGE] = {0};
+
+  for (int i = 0; i < n; ++i)
+  {
+    int idx = (int)((x[i] + 5.0) / 0.5);
+    count[idx]++;
+  }
+
+  int index = 0;
+  for (int i = 0; i < RANGE; ++i)
+  {
+    double value = -5.0 + i * 0.5;
+    while (count[i] > 0)
+    {
+      x[index++] = value;
+      count[i]--;
+    }
+  }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Given a string, you want to return the character which appears most
+frequently in the string.
+For instance if the most frequently occurring character in
+\verb!"hello world"! is \verb!'l'!.
+Use the idea from \verb!countingsort! to count the number of times
+a character occurs in a string \verb!s! and then perform a max
+computation to compute the most commonly occurring character in the given
+string.
+\\
+\ANSWER
+\begin{answercode}
+char most_common_char(char s[])
+{
+  int count[256]; // count[i] is the number of times char(i) occurs in s
+
+  for (int i = 0; s[i] != '\0'; ++i)
+  {
+    count[(int)s[i]]++;
+  }
+
+  int max = 0;
+  char result = s[0];
+
+  for (int i = 0; i < 256; ++i)
+  {
+    if (count[i] > max)
+    {
+      max = count[i];
+      result = (char)i;
+    }
+  }
+
+  return result;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

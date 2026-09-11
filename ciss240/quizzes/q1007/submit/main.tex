@@ -1,0 +1,99 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+The following is a plot of
+\[
+f(x) = 2 x^{2.3} \cos{(x^{4.5} + 1)} + 20
+\]
+\begin{python}
+from latextool_basic import *
+p = FunctionPlot(domain='0:3.5', height='1.5in')
+p.add('2 * x**2.3 * cos(x**4.5 + 1) + 20', color='red', python=1, pin='below', num_points=2000,
+pin_message='')
+print(p)
+\end{python}
+Write a program that prints the value of $x$ from $a=1$ to $b=1.5$ where
+$f(x)$ reaches a maximum value using a  (brute force) search with
+1000 equally spaced points on the interval $[1, 1.5]$.
+The printout must be in fixed point format with 5 decimal places.
+Skeleton code is provided.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+int main()
+{
+    double max_x = 0.0;               // x where the max of the function occurs
+    double max_y = -1000000000.0;     // max value of functions
+    double a = 1.0, b = 1.5;          // endpoints
+    int n = 1000;                     // number of points
+    double dx = (b - a) / n;          // distance between consecutive points
+
+    for (int i = 0; i <= n; ++i)      
+    {
+        double x = a + i * dx;        
+        double y = 2 * pow(x, 2.3) * cos(pow(x, 4.5) + 1) + 20;)
+
+        if (y > max_y)
+        {
+            max_y = y;                // Update max_y
+            max_x = x;                // Update max_x
+        }
+    }
+    std::cout << std::fixed << std::setprecision(5)
+              << "Max x: " << max_x << std::endl
+              << "Max y: " << max_y << std::endl;
+
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a program that gets a positive integer $n$ from the user
+and prints the sum of the digits of $n$.
+For instance if the user enters \verb!2407!, the program prints
+\verb!13!:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\}]
+\userinput{2407}
+13
+\end{Verbatim}
+Skeleton code is provided.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <cmath>
+
+int main()
+{
+    int n;
+    std::cin >> n;
+
+    // compute the number of digits in n and store in num_digits
+    int num_digits;
+
+    // compute the sum of digits in n and store in sum_digits
+    int sum_digits = 0;
+
+    while(n > 0)
+    {
+         sum_digits += n % 10;
+         n /= 10;
+         num_digits++;
+    }
+    
+    std::cout << sum_digits << '\n';
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

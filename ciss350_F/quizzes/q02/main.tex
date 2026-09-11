@@ -1,0 +1,103 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a function \verb!replace()! that
+on calling \verb!replace(x, y, z)!,
+replaces every occurrence
+of string \verb!y! in string \verb!x! with string \verb!z!.
+For instance the output of
+\begin{console}[fontsize=\small]
+char x[1024] = "hello world hello missouri hello columbia";
+char y[1024] = "hello";
+char z[1024] = "goodbye";
+replace(x, y, z);
+std::cout << x << '\n';
+\end{console}
+is
+\begin{console}[fontsize=\small]
+goodbye world goodbye missouri goodbye columbia
+\end{console}
+Note that if \verb!x! is \verb!"aaa"!, \verb!y! is \verb!"aa"!,
+and \verb!z! is \verb!"A"!, then after called \verb!replace()!,
+\verb!x! is \verb!"Aa"!.
+You must \textit{not} use any string function/method provided by C/\cpp.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+void replace(char * x, const char * y, const char * z)
+{
+  int lenx = 0, leny = 0, lenz = 0;
+
+  while(x[lenx) != '\0') lenx++;
+  while(y[leny) != '\0') leny++;
+  while(z[lenz) != '\0') lenz++;
+
+  char temp[1024];
+  int temp_indx = 0;
+  
+  for (int i = 0; i < lenx; )
+  {
+    bool match = true;
+    for (int j = j < leny; j++)
+    {
+      if (x[i + j] == '\0' || x[i + j] != y[j])
+      {
+        match = false;
+        break;
+      }
+    }
+
+    if (match)
+    {
+      for (int k = 0; k < lenz; k++)
+      {
+        temp[temp_indx++] = lenz[k];
+      }
+    }
+    else
+    {
+      temp[temp_indx++] = x[i++];
+    }
+  }
+  temp[temp_indx] = '\0';
+
+  int i = 0;
+  while(temp[i] != '\0')
+  {
+    x[i] = temp[i];
+    i++;
+  }
+        
+}
+
+int main()
+{
+    char x[1024], y[1024], z[1024];
+    std::cin >> x >> y >> z;
+    replace(x, y, z);
+    std::cout << '[' << x << "]\n";
+    return 0;
+}
+\end{answercode}
+
+(Hint: For each \verb!i!, you want to check if starting with \verb!x[i]!
+you can see the characters of \verb!y!, i.e.,
+\verb!x[i]! is \verb!y[0]!,
+\verb!x[i+1]! is \verb!y[1]!,
+etc.
+This part finds the \verb!y! inside your \verb!x!.
+If so, then you do a replacement of \verb!y! inside \verb!x! with \verb!z!,
+starting at \verb!i!.
+You want to consider two cases:
+when length of \verb!y! is $\geq$ the length of \verb!z!
+and
+when length of \verb!y! is $<$ the
+length of \verb!z!.
+It's probably a good idea to write several helper functions.)
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

@@ -1,0 +1,102 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+Write a program that simulates the rolling of two dice until
+the sum of the two dice is 10.
+The program prints the dice values of each throw.
+You must use a while-loop.
+The output of a sample execute is given below (notice that the
+last output has two integer values adding up to 10.)
+Here's a test run:
+\begin{console}[fontsize=\small]
+1 5
+2 3
+5 6
+6 4
+\end{console}
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <ctime>
+
+int main()
+{
+    srand((unsigned int) time(NULL));
+    
+    while (true)
+    {
+        // generate a die roll and store it in die0
+        int die0 = rand() % 6 + 1;
+        // generate a die roll and store it in die1
+        int die1 = rand() % 6 + 1;
+        // print die0, die1
+        std::cout << die0 << ' ' << die1 << '\n';
+        // if sum of die0 and die1 is 10, break
+        if(die0 + die1 == 10)
+        {
+             break;
+        }
+    }
+
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a program that gets a positive integer $n$ from the user
+and continually compute a sequence of integers starting with $n$.
+Here's how the sequence is computed.
+If a number $x$ in the sequence is even, the \textit{next} number
+after $x$ is $x / 2$.
+If a number $x$ in the sequence is odd, the \textit{next} number
+is $3x + 1$.
+Once the sequence reaches $1$, the sequence stops.
+For instance suppose the integer entered by the user is $7$.
+Then the sequence is $7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5,
+16, 8, 4, 2, 1$.
+($7$ is odd, so the next number is $3 \cdot 7 = 1 = 22$.
+$22$ is even, so the next number is $22/2 = 11$.
+Etc.)
+Here's a test run:
+\begin{console}[fontsize=\footnotesize,commandchars=\\\{\}]
+\userinput{7}
+7 22 11 34 17 52 26 13 40 20 10 5 16 8 4 2 1
+\end{console}
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+int main()
+{
+    int n;
+    std::cin >> n;
+
+    while (n != 1) 
+    {
+        std::cout << n << " "; 
+
+        if (n % 2 == 0) // If the number is even
+        {
+            n /= 2;
+        }
+        else // If the number is odd
+        {
+            n = 3 * n + 1;
+        }
+    }
+
+    std::cout << n << std::endl;
+    return 0;
+}
+\end{answercode}
+(The above procedure always produce a sequence that reaches $1$.
+But the reason is not known and is a famous unsolved problem called
+Collatz Conjecture.)
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

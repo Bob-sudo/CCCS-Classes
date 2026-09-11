@@ -1,0 +1,47 @@
+Q1 [
+#include <iostream>
+
+// insert statement here
+
+int main()
+{
+    std::cout << sum(5, 10, 1) << std::endl;
+    return 0;
+}
+
+int sum(int start, int end, int step)
+{
+    int s = 0;
+    for (int i = start; i <= end; i += step)
+    {
+        s += i;
+    }
+    return s;
+}
+]
+
+Q2 [
+#include <iostream>
+
+// insert statement here
+
+int main()
+{
+    int i, j;
+    std::cin >> i >> j;
+    swap(i, j);
+    std::cout << i << ' ' << j << '\n';
+    return 0;
+}
+
+void swap(int & x, int & y)
+{
+    int t = x;
+    x = y;
+    y = t;
+}
+]
+
+Q3 [ ]
+
+Q4 [ ] 

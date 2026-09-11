@@ -1,0 +1,89 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+What is the length of C-string \verb!s! given the following definition of
+\verb!s!:
+\begin{console}[fontsize=\footnotesize]
+char s[100] = {'l', 'i', 'f', 'e', '\0', 'i', 's', '\0', 'g', 'o', 'o', 'd', '\0'};
+\end{console}
+\ANSWER
+\begin{answercode}
+4
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following program that computes the length of string \verb!s!.
+Here's a test case:
+\begin{console}[fontsize=\footnotesize,commandchars=\\\{\}]
+\userinput{hello}
+5
+\end{console}
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+int main()
+{
+    char s[1024];
+    std::cin >> s;
+
+    int str_len = 0;
+
+    // TODO
+    while (s[str_len] != '\0') 
+    {
+        str_len++;
+    }
+
+    std::cout << str_len << '\n';
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following program that computes the number of times
+\verb!target! appears in string \verb!s!.
+Here's a test case:
+\begin{console}[fontsize=\footnotesize,commandchars=\\\{\}]
+\userinput{apple_pies}
+\userinput{p}
+3
+\end{console}
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+int main()
+{
+    char s[1024];
+    std::cin >> s; 
+    char target;
+    std::cin >> target; 
+
+    int count = 0;
+
+    // TODO
+    for (int i = 0; s[i] != '\0'; ++i)
+    {
+        if (s[i] == target)
+        {
+            count++;
+        }
+    }
+
+    std::cout << count << '\n';
+    return 0;
+}
+
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

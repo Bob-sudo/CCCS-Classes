@@ -1,0 +1,289 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a class \verb!Time! that has private members
+\verb!hh_!,
+\verb!mm_!,
+\verb!ss_!,
+for hours, minutes, seconds in 24-hour format, i.e.,
+hours is in the range 0..23.
+Write enough public methods so that you can
+create an array \verb!t! of 10 \verb!Time! objects
+so that
+\verb!t[0]! models the time 00:00:00,
+\verb!t[1]! models the time 00:01:00,
+\verb!t[2]! models the time 00:02:00,
+...
+\verb!t[9]! models the time 00:0\textred{9}:00.
+Print all the object\textred{s} in \verb!t!.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+class Time
+{
+public:
+void set_time(int hh, int mm, int ss)
+{
+  hh_ = hh;
+  mm_ = mm;
+  ss_ = ss;
+}
+
+void println() const
+{
+  std::cout << std::setw(2) << std::setfill('0') << hh_ << ":"
+  << std::setw(2) << std::setfill('0') << mm_ << ":"
+  << std::setw(2) << std::setfill('0') << ss_ << std::endl;
+}
+private:
+int hh_;
+int mm_;
+int ss_;
+};
+
+int main()
+{
+    // Declare t to be an array of 10 Time objects
+    Time t[10];
+    // In a loop, let t[i] invoke method setHHMMSS(hh, mm, ss)
+    // with the right values for hh, mm, ss.
+    for (int i = 0; i < 10; i++)
+    {
+      time[i].set_time(0, i, 0);
+    }
+    // In a loop, let t[i] invoke method println() to print
+    // the values in t[i] in the format hh:mm:ss, followed by newline.
+    // Note that hh:mm:ss must be zero-filled. For instance
+    // midnight must be printed by 00:00:00 and not 0:0:0.
+
+    for (int i = 0; i < 10; ++i)
+    {
+      t[i].println();
+    }
+    
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+This is the same as the previous question \textit{except}
+that \verb!t! is an array of \verb!Time! pointers.
+You can copy the \verb!Time! class from above to the answer here.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+class Time
+{
+public:
+void set_time(int hh, int mm, int ss)
+{
+  hh_ = hh;
+  mm_ = mm;
+  ss_ = ss;
+}
+
+void println() const
+{
+  std::cout << std::setw(2) << std::setfill('0') << hh_ << ":"
+  << std::setw(2) << std::setfill('0') << mm_ << ":"
+  << std::setw(2) << std::setfill('0') << ss_ << std::endl;
+}
+private:
+int hh_;
+int mm_;
+int ss_;
+};
+
+int main()
+{
+    // Declare t to be an array of 10 Time pointers.
+    // In a loop, allocate memory on the heap for t[i] to point to.
+    Time * t[10]
+    // In a loop, let the object that t[i] points to invoke method
+    // setHHMMSS(hh, mm, ss) with the right values for hh, mm, ss.
+    for (int i = 0; i < 10; i++)
+    {
+      time[i]->set_time(0, i, 0);
+    }
+    // In a loop, let the object t[i] points to invoke method println()
+    // to print the values that the the object t[i] points.
+    // Print in the format hh:mm:ss, followed by newline.
+    // Note that hh:mm:ss must be zero-filled. For instance
+    // midnight must be printed by 00:00:00 and not 0:0:0.
+    for (int i = 0; i < 10; ++i)
+    {
+      t[i]->println();
+    }
+    // Deallocate memory used by t.
+    for (int i = 0; i < 10; i++)
+    {
+      delete t[i];
+    }
+    
+    return 0;
+}
+
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Wumpus lives in the Wumpus world, which is a 4-by-4 grid.
+For instance in the following
+\begin{console}[frame=single,fontsize=\footnotesize]
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | |W|
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+\end{console}
+Wumpus is at row 1, column 3.
+You are given this:
+\begin{console}[frame=single,fontsize=\footnotesize]
+// file: WumpusWorld.h
+#ifndef WUMPUSWORLD_H
+#define WUMPUSWORLD_H
+
+#include <iostream>
+
+class WumpusWorld
+{
+public:
+    void init();         // initialize so that Wumpus is at (0,0).
+    void println();      // print according to the above format
+    void move_wumpus();  // randomize a direction rand() % 4 where 0,1,2,3
+                         // are N,S,E,W for Wumpus. Of course Wumpus
+                         // must stay in the world.
+                         // If wumpus tries to move N but its row is 0,
+                         // wumpus stays put.
+private:
+    char world_[4][4];
+};
+#endif
+\end{console}
+Do not add anything to the above.
+You want to make Wumpus wonder around like this:
+\begin{console}[frame=single,fontsize=\footnotesize]
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include "WumpusWorld.h"
+
+int main()
+{
+    srand((unsigned int) time(NULL));
+
+    WumpusWorld ww;
+    ww.init();
+    ww.println();
+    for (int i = 0; i < 5; ++i)
+    {
+        ww.move_wumpus();
+        ww.println();
+    }
+    return 0;
+}
+\end{console}
+Complete the following cpp file that contains the implementation
+of the methods declared in the WumpusWorld class.
+\\
+\ANSWER
+\begin{answercode}
+// file: WumpusWorld.cpp
+
+void WumpusWorld::init()
+{
+  for (int i = 0; i < 4; ++i)
+  {
+    for (int j = 0; j < 4; ++j)
+    {
+      world_[i][j] = ' ';
+    }
+  }
+
+  world_[0][0] = 'W';
+}
+
+void WumpusWorld::println()
+{
+  for (int i = 0; i < 4; i++)
+  {
+    std::cout << "+-+-+-+-+" << std::endl;
+    for (int j = 0; j < 4; j++)
+    {
+      std::cout << "|" << world_[i][j];
+    }
+    std::cout << "|" << std::endl;
+  }
+  std::cout << "+-+-+-+-+" << std::endl;
+}
+
+void WumpusWorld::move_wumpus()
+{
+  int wumpus_row = -1, wumpus_col = -1;
+  for (int i = 0; i < 4; i++)
+  {
+    for (int j = 0; j < 4; j++)
+    {
+      if (world_[i][j] == 'W')
+      {
+        wumpus_row = i;
+        wumpus_col = j;
+        break;
+      }
+    }
+    if (wumpus_row != -1)
+    {
+      break;
+    }
+  }
+
+  int direction = rand() % 4; // 0 - North, 1 - South, 2 - East, 3 - West
+
+  world_[wumpus_row][wumpus_col] = ' ';
+
+  switch (direction)
+  {
+    case 0: // North
+    if (wumpus_row > 0)
+    {
+      wumpus_row--;
+    }
+    break;
+    case 1: // South
+    if (wumpus_row < 3)
+    {
+      wumpus_row++;
+    }
+    break;
+    case 2: // East
+    if (wumpus_col < 3)
+    {
+      wumpus_col++;
+    }
+    break;
+    case 3: // West
+    if (wumpus_col > 0)
+    {
+      wumpus_col--;
+    }
+    break;
+  }
+
+  world_[wumpus_row][wumpus_col] = 'W';
+}
+
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

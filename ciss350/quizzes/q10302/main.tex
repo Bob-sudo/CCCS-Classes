@@ -1,0 +1,170 @@
+%-*-latex-*-
+\input{thispreamble}
+
+For big-O,
+your answer should be of the form $O(n^k)$ for $k=0, 1, 2, 3, ...$.
+Of course $O(n^0)$ is $O(1)$.
+
+The next few questions below refer to our standard insertionsort.
+
+%------------------------------------------------------------------------------
+\nextq
+Write down the array $\{ 5, 3, 1, 4, 2 \}$ after two passes.
+\\
+\ANSWER
+\begin{answerlong}
+$\{ 1, 3, 5, 4, 2 \}$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+For $\{ 5, 3, 1, 4, 2 \}$, how many comparisons were made when the sorting
+ends?
+\\
+\ANSWER
+\begin{answerlong}
+9
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+What array of size 5 with values 1,2,3,4,5 (in some order)
+will cause the algorithm to run with the highest wallclock time?
+\\
+\ANSWER
+\begin{answerlong}
+$\{ 5, 4, 3, 2, 1 \}$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+What array of size 5 with values 1,2,3,4,5 (in some order)
+will cause the algorithm to run with the lowest wallclock time?
+\\
+\ANSWER
+\begin{answerlong}
+$\{ 1, 2, 3, 4, 5 \}$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+Is it stable?
+Write YES, or write NO and then write down the simplest array
+of smallest size and using smallest positive integers $> 0$
+which when traced will show that the sorting is not stable.
+\\
+\ANSWER
+\begin{answerlong}
+YES
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the big-O of the runtime in $n$, the size of the array?
+\\
+\ANSWER
+\begin{answerlong}
+$O(n)$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the big-O of the best runtime in $n$, the size of the array?
+\\
+\ANSWER
+\begin{answerlong}
+$O(n^2)
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the space complexity (i.e., memory usage) in $n$,
+the size of the array?
+\\
+\ANSWER
+\begin{answerlong}
+$O(1)$
+\end{answerlong}
+
+\newpage
+\textbf{The next few questions below refer to our standard selectionsort.}
+
+%------------------------------------------------------------------------------
+\nextq
+Write down the array $\{ 5, 3, 1, 4, 2 \}$ after two passes.
+\\
+\ANSWER
+\begin{answerlong}
+$\{ 1, 2, 5, 3, 4 \}$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+For $\{ 5, 3, 1, 4, 2 \}$, how many comparisons were made when the sorting
+ends?
+\\
+\ANSWER
+\begin{answerlong}
+10
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+For $\{ 5, 3, 1, 4, 2 \}$, how many swaps are performed when the sorting ends?
+\\
+\ANSWER
+\begin{answerlong}
+
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+Is it stable?
+Write YES, or write NO and then write down the simplest array
+of smallest size and using smallest positive integers $> 0$
+which when traced will show that the sorting is not stable.
+\\
+\ANSWER
+\begin{answerlong}
+NO  $\{{ 2, 'a'}, { 2, 'b'}, { 1, 'a'}\}$.
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the big-O of the runtime in $n$, the size of the array?
+\\
+\ANSWER
+\begin{answerlong}
+$O(n^2)$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the big-O of the best runtime in $n$, the size of the array?
+\\
+\ANSWER
+\begin{answerlong}
+$O(n^2)$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\nextq
+What is the space complexity (i.e., memory usage)
+in $n$, the size of the array?
+\\
+\ANSWER
+\begin{answerlong}
+$O(1)$
+\end{answerlong}
+
+\textsc{Note.}
+For all $n$, it's possible that the descending array will take more
+wallclock time to sort than an ascending array, but
+asymptotically speaking, their runtimes can be the same, such as $O(n^2)$.
+In general, it's possible that for an algorithm for arrays,
+a particular pattern will require more wallclock time to process
+than another pattern, but their asymptotic runtimes (in $n$, the size
+of the array) might very well be the same.
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

@@ -1,0 +1,6 @@
+/usr/lib64/python3.12/site-packages/latextool_basic.py:890: SyntaxWarning: invalid escape sequence '\d'
+  """Form  a string s to be used in latex
+/usr/lib64/python3.12/site-packages/latextool_basic.py:8763: SyntaxWarning: invalid escape sequence '\A'
+  """ get assessment (example: "q0101") from s (a latex string \newcommand\ASSESSMENT{*} or from cwd """
+/usr/lib64/python3.12/site-packages/latextool_basic.py:8836: SyntaxWarning: invalid escape sequence '\}'
+  """

@@ -1,0 +1,94 @@
+%-*-latex-*-
+\input{thispreamble}
+
+For both questions, you are writing functions, not a complete programs.
+
+TURN PAGE
+
+%------------------------------------------------------------------------------
+\newpage
+\nextq
+Write a function that performs bubblesort using pointers and recursion
+that has the same behavior as our usual bubblesort
+(as specified in my 240 notes).
+Calling \verb!bubblesort(start, end)! will perform bubblesort (in ascending
+order) on the values at address \verb!start! up to \verb!end - 1!.
+If \verb!x[0..9]! is an array of size 10, then calling
+\verb!bubblesort(&x[0], &x[10])! will sort \verb!x[0..9]!.
+You cannot use for-, while-, do-while loops.
+You can only use recursion.
+A rough skeleton is given.
+
+\ANSWER
+\begin{answercode}
+void bubblesort_pass(int * start, int * end)
+{
+    if (start >= end)
+    {
+        return;
+    }
+    else
+    {
+      if(*start > *(start + 1))
+      {
+        int temp = *start;
+        *start = *(start + 1);
+        *(start + 1) = temp;
+      }
+        bubblesort_pass(start + 1, end);
+    }
+}
+
+void bubblesort(int * start, int * end)
+{
+    if (start >= end)
+    {
+        return;
+    }
+    else
+    {
+        bubblesort_pass(start, end);
+        bubblesort(start, end - 1);
+    }
+}
+\end{answercode}
+
+TURN PAGE
+
+%------------------------------------------------------------------------------
+\newpage
+\nextq
+Write a function that performs binary search (using pointers and recursion)
+on the values at address \verb!start! up to \verb!end - 1!.
+The values are assumed to be in ascending order.
+If \verb!x[0..9]! is an array of size 10, then calling
+\verb!binarysearch(&x[0], &x[10], 42)! will return the \textit{address} of 42
+in \verb!x[0..9]!.
+You cannot use for-, while-, do-while loops.
+You can only use recursion.
+A rough skeleton is given.
+
+\ANSWER
+\begin{answercode}
+int * binarysearch(int * start, int * end, int target)
+{
+    if (start > end)
+    {
+        return NULL; // target not found
+    }
+    else
+    {
+      int * mid = start + (end - start) / 2;
+      if(*mid == target)
+        return mid;
+      else if (target < *mid)
+        return binarysearch(start, mid - 1, target);
+      else
+        return binarysearch(mid + 1, end, target);
+        
+    }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

@@ -1,0 +1,182 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following to store value \verb!v! at the integers
+from address \verb!start! up to but not including \verb!end!.
+Recurse on \verb!start!, i.e., in your recursive case for
+\verb!fill(start, end, v)!, you should call
+\verb!fill(start + 1, end, v)!.
+(5 seconds. Test.)
+\\
+\ANSWER
+\begin{answercode}
+void fill(int * start, * end, int v)
+{
+  if(start == end) return;
+
+  *start = v;
+  
+  fill(start + 1, end, v);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+This is the same as above, except that you recurse on \verb!end!,
+i.e., in your recursive case for \verb!fill(start, end, v)!, you should call
+\verb!fill(start, end - 1, v)!.
+(5 seconds. Test.)
+\\
+\ANSWER
+\begin{answercode}
+void fill(int * start, * end, int v)
+{
+  if (start == end) return; 
+
+  fill(start, end - 1, v);
+  
+  *(end - 1) = v; 
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+This is the same as above, except that you recurse using divide-and-conquer.
+(20 seconds. Test.)
+\\
+\ANSWER
+\begin{answercode}
+void fill(int * start, * end, int v)
+{
+  if (start == end) return;
+  
+  int* mid = start + (end - start) / 2;
+  
+  fill(start, mid, v);
+  fill(mid, end, v);
+
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function that counts the number of times \verb!target!
+occurs in the integers
+from address \verb!start! up to but not including \verb!end!.
+Recurse at \verb!start!.
+(5 seconds.)
+\\
+\ANSWER
+\begin{answercode}
+int count(int * start, int * end, int target)
+{
+  if(start == end) return 0;
+  return (*start == target) + count(start + 1, end, target);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function that counts the number of times \verb!target!
+occurs in the integers
+from address \verb!start! up to but not including \verb!end!.
+Recurse at \verb!end!.
+(5 seconds.)
+\\
+\ANSWER
+\begin{answercode}
+int count(int * start, int * end, int target)
+{
+  if(start == end) return 0;
+  end--;
+
+  return (*end == target) + count(start, end, target);  
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function that counts the number of times \verb!target!
+occurs in the integers
+from address \verb!start! up to but not including \verb!end!.
+You must use divide-and-conquer.
+(20 seconds.)
+\\
+\ANSWER
+\begin{answercode}
+int count(int * start, int * end, int target)
+{
+  if (start >= end) return 0;
+
+  int * mid = start + (end - start) / 2;
+  return count(start, mid, target) + count(mid, end, target);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the \verb!bubblesort! function and the \verb!bubblesort_pass!
+function.
+This was already covered in class. So this is a freebie.
+Finish the following bubblesort function by completing all the functions using
+recursion.
+Do not look at your class notes and try to do is on your own.
+If you are lost, \textit{then} look at your notes.
+There must be no loops in the program.
+Your \verb!bubblesort! must call the \verb!bubblesort_pass! function that
+executes one pass of the \verb!bubblesort!.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+
+void swap(int * x, int * y)
+{
+  int * temp = *x;
+  *x = *y;
+  *y = *temp;
+}
+
+void bubblesort_pass(int * start, int * end)
+{
+  if (start >= end - 1) return;
+
+  if (*start > *(start + 1)) swap(start, start + 1);
+
+  bubblesort_pass(start + 1, end);
+}
+
+void bubblesort(int * start, int * end)
+{
+  if (start >= end - 1) return;
+
+  bubblesort_pass(start, end);
+  bubblesort(start, end - 1);
+}
+
+void println(int * start, int * end)
+{
+    if (start >= end - 1)
+    {
+        std::cout << '\n';
+    }
+    else
+    {
+        std::cout << *start << ' ';
+        println(start + 1, end);
+    }
+}
+
+int main()
+{
+    int x[] = {9, 7, 5, 3, 1, 0, 2, 4, 6, 8};
+    bubblesort(&x[0], &x[10]);
+    println(&x[0], &x[10]);
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

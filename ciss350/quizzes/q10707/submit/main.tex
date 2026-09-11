@@ -1,0 +1,193 @@
+%-*-latex-*-
+\input{thispreamble}
+
+Here's the \verb!BTNode! class:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+class BSTNode
+{
+public:
+    int key_;
+    BTNode * parent_;
+    BTNode * left_, * right_;
+};
+\end{Verbatim}
+
+For the following questions,
+here's an example on how to describe a binary tree in text.
+For this tree
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+you write
+\begin{console}[fontsize=\footnotesize]
+[10, [4, 25]]
+[4, [1, None]]
+[25, [12, 27]]
+[1, [None, None]]
+[12, [None, None]]
+[27, [None, 29]]
+[29, [None, None]]
+\end{console}
+
+%------------------------------------------------------------------------------
+\nextq
+In moving a pointer \verb!p! up one node at a time during
+balancing, you need to keep track on the pointer that is \lq\lq behind"
+\verb!p! and you also need to remember the path backward by two steps, whether
+the 2-step path downward is a
+LEFT-LEFT or LEFT-RIGHT or RIGHT-LEFT or RIGHT-RIGHT.
+For instance if \verb!p! is here:
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)    p-> (12)      (27)
+                           \
+                            (29)
+\end{console}
+and if it climbs up by one step, you have
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25) <- p, down = LEFT, downdown = NONE
+     /           /    \
+ ( 1)     q-> (12)      (27)
+                           \
+                            (29)
+\end{console}
+and if it climbs one step up, you have
+\begin{console}[fontsize=\footnotesize]
+            (10) <- p, down = RIGHT, downdown = LEFT
+          /      \
+      ( 4)        (25) <- q
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+
+\end{console}
+The constants \verb!LEFT!, \verb!RIGHT!, \verb!NONE! are defined in the code
+fragment below.
+If \verb!p! is the root node, after calling \verb!climbup!,
+you do the obvious -- for instance
+\verb!p! becomes \verb!NULL!, \verb!q! points to the root node,
+\verb!down! is \verb!NONE!, and \verb!downdown! is the previous value of
+\verb!down!.
+\\
+\ANSWER
+\begin{answercode}
+const int NONE = -1;
+const int LEFT = 0;
+const int RIGHT = 1;
+void climbup(BTNode *& p, BTNode *& q, int & down, int & downdown)
+{
+  BTNode * oldp = p;
+
+  p= p->parent_;
+
+  q = p;
+
+  down = downdown;
+
+  if(p == NULL)
+  {
+    down = NONE;
+  }
+  else if(p->left_ = q)
+  {
+    down = LEFT;
+  }
+  else
+  {
+    down = RIGHT;
+  }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+For this tree:
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+What is the tree after performing a right rotation at the node
+with key value of $10$?
+\\
+\ANSWER
+\begin{answercode}
+[4, [1, 10]]
+[1, [None, None]]
+[10, [None, 25]]
+[25, [12, 27]]
+[12, [None, None]]
+[27, [None, 29]]
+[29, [None, None]]
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+For this BST:
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+insert 30 and then balance it (if necessary).
+Write the resulting tree in text below.
+\ANSWER
+\begin{answercode}
+[25, [10, 29]]
+[10, [4, 12]]
+[29, [27, 30]]
+[4, [1, None]]
+[12, [None, None]]
+[27, [None, None]]
+[30, [None, None]]
+[1, [None, None]]
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+For this BST:
+\begin{console}[fontsize=\footnotesize]
+            (10)
+          /      \
+      ( 4)        (25)
+     /           /    \
+ ( 1)        (12)      (27)
+                           \
+                            (29)
+\end{console}
+insert 2 and then balance it (if necessary).
+Write the resulting tree in text below.
+\ANSWER
+\begin{answercode}
+[10, [4, 25]]
+[2, [1, 4]]
+[25, [12, 27]]
+[1, [None, None]]
+[4, [None, None]]
+[12, [None, None]]
+[27, [None, 29]]
+[29, [None, None]]
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

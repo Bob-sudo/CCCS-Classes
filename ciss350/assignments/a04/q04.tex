@@ -1,0 +1,44 @@
+%-*-latex-*-
+
+(a)
+The timings with the number of times a statement is executed
+is as follows (complete it like the solution given earlier):
+\begin{Verbatim}[frame=single]
+                                             best              worst
+          a = x[0] / 2            time t1    1                 1
+
+          i = 0                   time t2    1                 1     
+LOOP1:    if i > 100000:          time t3    100002            100002
+              goto ENDLOOP        time t4    1                 1
+
+          j = 0                   time t5    100001            100001
+LOOP2:    if j > n - 1:           time t6    100001(n + 1)     100001(n + 1)
+              goto ENDLOOP2       time t7    100001            100001
+          x[j] = x[j] + a         time t8    100001n           100001n
+          j = j + 1               time t9    100001n           100001n
+          goto LOOP2              time t10   100001n           100001n
+ENDLOOP2:
+          j = 0                   time t11   100001            100001
+LOOP3:    if j > (n - 1)/2:       time t12   100001((n/2) + 1) 100001((n/2) + 1) 
+              goto ENDLOOP3       time t13   100001            100001 
+
+          if x[j] >= 5:           time t14   100001(n/2)
+              goto ELSE           time t15   0                 100001(n/2)
+          x[j] = x[j] * x[0]      time t16   0                 100001(n/2)
+ELSE:     j = j + 1               time t17   100001(n/2)       100001(n/2)
+          goto LOOP3              time t18   100001(n/2)       100001(n/2)
+ENDLOOP3:
+          i = i + 1               time t19   100001            100001
+          goto LOOP1              time t20   100001            100001
+ENDLOOP1:
+\end{Verbatim}
+
+(b)
+\[
+T_w(n) = O(n)
+\]
+
+(c)
+\[
+T_b(n) = O(n)
+\]

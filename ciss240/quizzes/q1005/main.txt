@@ -1,0 +1,28 @@
+Q1 [
+      sum =           ; // declare and initialize
+for (int i =             ;            ;            )
+{
+    
+}
+std::cout << sum << std::endl;
+]
+
+Q2 [
+      sum =           ; // declare and initialize
+for (int i =             ;            ;            )
+{
+    
+}
+std::cout << sum << std::endl;
+]
+
+Q3 [
+      sum =           ; // declare and initialize
+for (int i =             ;            ;            )
+{
+    
+
+
+}
+std::cout << sum << std::endl;
+]

@@ -1,0 +1,38 @@
+Q1 [
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+int main()
+{
+    double area = 0.0;                // the required area
+    double a =       , b =        ;
+    int n =      ;                    // number of rectangles 
+    double dx =                     ; // width of each rectangle 
+    for (              ;                 ;               )
+    {
+    }
+    std::cout << std::fixed << std::setprecision(5) << area << std::endl;
+    return 0;
+}
+]
+
+Q2 [
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+int main()
+{
+    double root_x = 0.0;              // the required root
+    double min_y;                     // the running minimum y for given x
+    double a =       , b =        ;
+    int n =      ;                    // number of points 
+    double dx =                     ; // width of each rectangle 
+    for (              ;                 ;               )
+    {
+    }
+    std::cout << std::     << std::      << root_x << std::endl;
+    return 0;
+}
+]

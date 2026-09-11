@@ -1,0 +1,161 @@
+// File: main.cpp
+// Name: Ethan Graham
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+
+class Token
+{
+public:
+    virtual Token()
+    {}
+    virtual ~Token()
+    {}
+    virtal void print(std::ostream& cout) const;
+};
+
+std::ostream& operator<<(std::ostream& cout, Token& t)
+{
+    t.print(cout);
+    return cout;
+}
+
+class IntTok: public Token
+{
+public:
+    IntTok(int v)
+        : value(v)
+    {}
+    int value;
+    void print(std::ostream& cout) const override
+    {
+        cout << "IntTok(" << value << ")";
+    }
+    
+};
+
+class PlusTok: public Token
+{
+    void print(std::ostream& os) const override
+    {
+        os << "PlusTok";
+    }
+};
+
+class MinusTok: public Token
+{
+    void print(std::ostream& os) const override
+    {
+        os << "MinusTok";
+    }
+};
+
+class MultTok: public Tok
+{
+    void print(std::ostream& cout) const override
+    {
+        cout << "MultTok";
+    }
+};
+
+class DivTok: public Token
+{
+    void print(std::ostream& cout) const override
+    {
+        cout << "DivTok";
+    }
+};
+
+class LParenTok: public Token // Left parenthesis
+{
+    void print(std::ostream& cout) const override
+    {
+        cout << "LParenTok";
+    }
+};
+
+class RParenTok: public Token // Right parenthesis
+{
+    void print(std::ostream& cout) const override
+    {
+        cout << "RParenTok";
+    }
+};
+
+// lexer
+std::vector<Token*> lex(const std::string& str)
+{
+    std::vector<Token*> token;
+    int i = 0;
+
+    while (i < (int)str.size())
+    {
+        char c = s[i];
+
+        if(c == ' ')
+        {
+            i++;
+            continue;
+        }
+
+        if (c == '+')
+        {
+            tokens.push_back(new PlusTok());
+            i++;
+        }
+        else if (c == '-')
+        {
+            tokens.push_back(new MinusTok());
+            i++;
+        }
+        else if (c == '*')
+        {
+            tokens.push_back(new MultTok());
+            i++;
+        }
+        else if (c == '/')
+        {
+            tokens.push_back(new DivTok());
+            i++;
+        }
+        else if (c == '(')
+        {
+            tokens.push_back(new LParenTok());
+            i++;
+        }
+        else if (c == ')')
+        {
+            tokens.push_back(new RParenTok());
+            i++;
+        }
+        else if (std::isdigit(c))
+        {
+            // Build a multi-digit integer manually
+            int value = 0;
+            while (i < (int)s.size() && std::isdigit(s[i]))
+            {
+                value = value * 10 + (s[i] - '0');
+                i++;
+            }
+            tokens.push_back(new IntTok(value));
+        }
+        else
+        {
+            // Invalid character
+            std::cerr << "ERROR: Unknown character '" << c << "'\n";
+            i++;
+        }
+    }
+}
+
+std::ostream& operator<<(ostream& cout, vector<Token*> t)
+{
+    cout << '[' <<
+}
+
+int main()
+{
+    
+}

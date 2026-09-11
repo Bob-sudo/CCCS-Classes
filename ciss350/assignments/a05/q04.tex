@@ -1,0 +1,22 @@
+%-*-latex-*-
+[Insertion sort]
+
+Implement the standard insertion sort algorithm in C\texttt{++}.
+The following is the prototype:
+\begin{console}[frame=single, fontsize=\footnotesize]
+template < typename T >
+void insertionsort(T * start, T * end, bool verbose=false);
+
+template < typename T, typename C >
+void insertionsort(T * start, T * end, const C & less, bool verbose=false);
+\end{console}
+
+The following is a sample execution:
+\begin{console}[frame=single, commandchars=\~\!\@,fontsize=\footnotesize]
+~userinput!./a.out 42 4 10 1 0@
+{1, 9, 4, 2}
+{1, 9, 4, 2}
+{1, 4, 9, 2}
+{1, 2, 4, 9}
+\end{console}
+

@@ -1,0 +1,26 @@
+Q1 [
+// isprime(n) returns true exactly when n is a prime.
+bool isprime(int n)
+{
+    // TODO
+}
+]
+
+Q2 [
+// mypow(x, y) return x to the power of y. Both x and y are integers.
+// Assume y >= 0. Obviously you are not allowed to use the pow function.
+// HINT: You need a loop. 
+int mypow(int x, int y)
+{
+    // TODO
+}
+]
+
+Q3 [
+// numdigits(n) returns the number of digits in n.
+int numdigits(int n)
+{
+    // TODO
+}
+]
+

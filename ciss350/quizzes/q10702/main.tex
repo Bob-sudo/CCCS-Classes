@@ -1,0 +1,248 @@
+%-*-latex-*-
+\input{thispreamble}
+
+You are given the following binary tree node class:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+class BTNode
+{
+public:
+    int key_;
+    BTNode * parent_, * left_, * right_;
+};
+\end{Verbatim}
+The following questions uses this class.
+Make sure you test your code.
+
+%------------------------------------------------------------------------------
+\nextq
+In the following tree
+\begin{console}[fontsize=\footnotesize]
+        4
+       / \
+      3   2
+         / \
+        0   5
+       / \   \
+      1   7   6
+         /
+        9
+\end{console}
+assume that the tree contains unique values.
+Suppose \verb!p! points to the node with value 4.
+Then the tree that \verb!p! points to (i.e., the root of the tree
+that \verb!p! points to) has height 4.
+If \verb!p! points to the node with value 2.
+Then the tree that \verb!p! points to has height 3.
+Complete the following function that returns the height
+as described above.
+\\
+\ANSWER
+\begin{answercode}
+int height(BTNode * p)
+{
+  if(p == NULL)
+      return 0;
+
+  int leftH = height(p->left_);
+  int rightH = height(p->right_);
+
+  return 1 + (leftH > rightH ? leftH : rightH);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+In the following tree
+\begin{console}[fontsize=\footnotesize]
+        4
+       / \
+      3   2
+         / \
+        0   5
+       / \   \
+      1   7   6
+         /
+        9
+\end{console}
+assume that the tree contains unique values.
+\begin{enumerate}[nosep]
+\li
+Suppose \verb!p! points to the node with value 4
+and \verb!q! points to the node with value 5.
+Then we say that 5 is at a depth of 2 below 4
+and when I call \verb!depth(p, q)!, I get 2.
+\li
+If \verb!p! points to the node with value 2
+and \verb!q! points to the node with value 9.
+Then we say that 9 is at a depth of 3 below 2
+and when I call \verb!depth(p, q)!, I get 3.
+\li
+If \verb!p! points to the node with value 2
+then \verb!depth(p, p)! returns 0.
+\end{enumerate}
+The above describes the cases when
+\verb!p! and \verb!q! points to nodes
+and either \verb!p! and \verb!q! are the same
+or \verb!*q! is a descendent of \verb!*p!.
+In all other cases, the function should return $-1$.
+Complete the following function that returns the depth
+as described above.
+\\
+\ANSWER
+\begin{answercode}
+int depth(BTNode * p, BTNode * q)
+{
+  if(p == NULL && q == NULL
+      return -1;
+  if(p == q)
+      return 0;
+
+  BTNode * curr = q;
+  int d = 0;
+
+  while(curr != NULL)
+  {
+      if(curr == p)
+         return d;
+
+      curr = curr->parent_;
+      ++d;
+  }
+
+  return -1;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+In the following tree
+\begin{console}[fontsize=\footnotesize]
+        4
+       / \
+      3   2
+         / \
+        0   5
+       / \   \
+      1   7   6
+\end{console}
+assume that the tree contains unique values.
+\begin{enumerate}[nosep]
+\li
+Suppose \verb!p! points to the node with value 4,
+the depth of 0 (below 4) is said to be 2.
+The depth of 6 (below 4) is 3.
+\end{enumerate}
+Check the notes.
+Complete the following function that returns the depth
+of the node with \verb!key_! value of \verb!target!
+below the node that \verb!p! points to.
+If \verb!target! cannot be found, \verb!-1! is returned.
+\\
+\ANSWER
+\begin{answercode}
+int depth(BTNode * p, int target)
+{
+  if(p == NULL)
+    return -1;
+
+   std::queue<BTNode*> nodeq;
+   std::queue<int> depthq;
+
+   nodeq.push(p);
+   depthq.push(0);
+
+   while(!nodeQ.empty())
+   {
+     BTNode * curr = nodeq.front();
+     nodeq.pop();
+
+     int d = depthq.front();
+     depthq.pop();
+
+     if (curr->key_ == target)
+       return d;
+
+     if (curr->left_ != NULL)
+     {
+       nodeQ.push(curr->left_);
+       depthQ.push(d + 1);
+     }
+
+     if (curr->right_ != NULL)
+     {
+       nodeQ.push(curr->right_);
+       depthQ.push(d + 1);
+     }
+   }
+
+   return -1;
+}
+\end{answercode}
+(Hint: Do a BF traversal. Instead of putting node
+pointers into the queue, you want to put the node pointer together
+with its depth into the queue.
+Note that even if the tree has repeat \verb!key_! values,
+if you do a BF traversal,
+the depth computed is the \textit{shallowest} depth of all the nodes with the
+\verb!key_! value of \verb!target!.)
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the function below that returns true if
+\verb!p! and \verb!q! point to roots of binary trees which are the same.
+In this case, same means the tree has the same structure, i.e.,
+the root nodes have the same \verb!key_! value,
+while left child nodes have the same value, then right child node have the
+same \verb!key_! value, etc.
+And if a node in the tree \verb!p! points to
+does not have a left child, then the corresponding node in the tree \verb!q!
+points to does not have a left child; likewise for right child.
+The following trees are the same
+\begin{console}[fontsize=\footnotesize]
+        4             4
+       / \           / \
+      3   2         3   2
+         / \           / \
+        0   5         0   5
+\end{console}
+The following trees are different:
+\begin{console}[fontsize=\footnotesize]
+        4             4
+       / \           / \
+      3   2         3   2
+         / \           / \
+        0   5         5   0
+\end{console}
+The following trees are different:
+\begin{console}[fontsize=\footnotesize]
+        4             4
+       / \           / \
+      3   2         3   2
+         / \             \
+        0   5             5
+\end{console}
+Don't forget to check the parent pointer.
+\\
+\ANSWER
+\begin{answercode}
+bool is_same_tree(BTNode * p, BTNode * q)
+{
+  if(p == NULL && q == NULL) return true;
+  if(p == NULL || q == NULL) return false;
+  if(p->key_ != q->key_) return false;
+
+  if ((p->parent_ == NULL && q->parent_ != NULL) ||
+     (p->parent_ != NULL && q->parent_ == NULL))
+    return false;
+
+  if (p->parent_ != NULL && q->parent_ != NULL &&
+      p->parent_->key_ != q->parent_->key_)
+    return false;
+
+  return is_same_tree(p->left_, q->left_) &&
+         is_same_tree(p->right_, q->right_);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

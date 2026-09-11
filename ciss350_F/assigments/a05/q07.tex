@@ -1,0 +1,51 @@
+%-*-latex-*-
+Collect actual runtime data for each algorithm you have implemented in this
+assignment
+(bubblesort, bubblesort2, insertionsort, selectionsort,
+mergesort, quicksort)
+and create a graph.
+See the section \textsc{Plotting Runtimes}
+on drawing line graphs in \LaTeX.
+
+For each algorithm you have implemented, collect data for 
+vector of size 2000, 4000, 6000, 8000, ....
+and for each size, you should use an average of about 5 cases.
+Make sure you have enough data points to see the trend of your graph.
+Of course the size of the array for sorting depends on your laptop.
+Faster laptops will need larger array sizes, otherwise all the times
+are too small to see the trend.
+The values used in your vector should be integers --
+see the skeleton code.
+Make sure you have a legend for the plot.
+
+Of course when collecting runtime data, you should set
+\verb!verbose! to \verb!false! so that output is minimal.
+This will ensure that the time collected is due to the sorting process
+and not due to output.
+
+SOLUTION:
+
+[Open q07.tex and modify the graph below with your own data.]
+\begin{python}
+from latextool_basic import *
+plot = FunctionPlot(width="3in", height="2in")
+plot.add(((100, 1),
+          (200, 2),
+          (300, 0.5)),
+          (1000, 2.5),
+          (2000, 5.8),
+          line_width='2', color='red', legend='bubblesort')
+
+plot.add(((100, 5),
+          (200, 3),
+          (300, 7)),
+          line_width='2', color='green', legend='bubblesort2')
+
+plot.add(((100, 7),
+          (200, 4),
+          (300, 5)),
+          line_width='2', color='blue', legend='selectionsort')
+          
+print(plot)
+\end{python}
+

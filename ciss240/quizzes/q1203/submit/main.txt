@@ -1,0 +1,38 @@
+Q1 [
+#include <iostream>
+#include ?
+#include ?
+
+int main()
+{
+    srand(?);
+
+    while (?)
+    {
+        // generate a die roll and store it in die0
+        // generate a die roll and store it in die1
+        // print die0, die1
+        // if sum of die0 and die1 is 10, break
+    }
+    
+    return 0;
+}
+]
+
+Q2 [
+#include <iostream>
+
+int main()
+{
+    int n;
+    std::cin >> n;
+
+    while (?)
+    {
+        
+    }
+    
+    return 0;
+}
+]
+

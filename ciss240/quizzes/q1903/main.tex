@@ -1,0 +1,68 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+Write a function \verb!sign()! that accepts a \verb!double x! and return
+$1$, $0$, or $-1$ (integer) depending on whether \verb!x! is greater than $0$, is equal to $0$, or is less than $0$ respectively. In other words, the following code segment
+\begin{console}[fontsize=\footnotesize]
+std::cout << sign(5.3) << ' ' << sign(0.0) << ' ' << sign(-1.1);
+\end{console}
+will produce the output
+\begin{console}[fontsize=\footnotesize]
+1 0 -1
+\end{console}
+\ANSWER
+\begin{answercode}
+int sign(double x)
+{
+    if (x > 0)
+        return 1;
+    else if (x == 0)
+        return 0;
+    else
+        return -1;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write the function \verb!swap! so that swaps the values of two
+\verb!double! variables:
+\begin{console}[fontsize=\small]
+double x = 1.1, y = 2.2;
+swap(x, y);     // x becomes 2.2 and y becomes 1.1
+\end{console}
+\ANSWER
+\begin{answercode}
+void swap(double &x, double &y)
+{
+    double temp = x;
+    x = y;
+    y = temp;
+}
+\end{answercode}
+
+\nextq
+Write the function \verb!cut_tens! so that the following
+\begin{console}[fontsize=\small]
+int x = 1234, digit;
+digit = cut_tens(x); // digit 3 is returned and x becomes 124
+\end{console}
+will \lq\lq cut out" the digit in the tens place from \verb!x! and
+return this digit.
+\\
+\ANSWER
+\begin{answercode}
+int cut_tens(int &x)
+{
+    int digit = (x / 10) % 10;
+    x = (x / 100) * 10 + (x % 10);
+    return digit;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

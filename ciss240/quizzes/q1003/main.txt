@@ -1,0 +1,20 @@
+Q1 [
+for (int i =             ;            ;            )
+{
+    std::cout << i << ' ';
+}
+]
+
+Q2 [
+for (double x =             ;            ;            )
+{
+    std::cout << x << ' ';
+}
+]
+
+Q3 [
+for (int i =             ;            ;            )
+{
+    std::cout << i << ' ';
+}
+]

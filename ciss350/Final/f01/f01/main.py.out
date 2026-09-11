@@ -1,0 +1,31 @@
+
+\begin{center}
+
+\begin{tikzpicture}
+\node at (4,-1.3) [circle,draw,minimum size=5mm] (a) {$a$};
+\node at (2,-2.6) [circle,draw,minimum size=5mm] (b) {$b$};
+\node at (6,-2.6) [circle,draw,minimum size=5mm] (c) {$c$};
+\node at (1,-3.9000000000000004) [circle,draw,minimum size=5mm] (e) {$e$};
+\node at (3,-3.9000000000000004) [circle,draw,minimum size=5mm] (d) {$d$};
+\node at (5,-3.9000000000000004) [circle,draw,minimum size=5mm] (f) {$f$};
+\node at (7,-3.9000000000000004) [circle,draw,minimum size=5mm] (g) {$g$};
+\node at (0,-5.2) [circle,draw,minimum size=5mm] (k) {$k$};
+\node at (2,-5.2) [circle,draw,minimum size=5mm] (l) {$l$};
+\node at (4,-5.2) [circle,draw,minimum size=5mm] (n) {$n$};
+\node at (6,-5.2) [circle,draw,minimum size=5mm] (p) {$p$};
+\draw [->,thick] (a) -- (b);
+\draw [->,thick] (a) -- (c);
+\draw [->,thick] (b) -- (d);
+\draw [->,thick] (b) -- (e);
+\draw [->,thick] (c) -- (f);
+\draw [->,thick] (c) -- (g);
+\draw [->,thick] (e) -- (k);
+\draw [->,thick] (e) -- (l);
+\draw [->,thick] (f) -- (n);
+\draw [->,thick] (f) -- (p);
+
+;
+\end{tikzpicture}
+    
+\end{center}
+

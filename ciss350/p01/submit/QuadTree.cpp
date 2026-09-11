@@ -1,0 +1,161 @@
+#include "QuadTree.h"
+#include <iostream>
+
+// Node Functions
+
+bool Node::contains(Ball * ball)
+{
+    return (ball->x >= topLeft.x_ &&
+            ball->x < bottomRight.x_ &&
+            ball->y >= topLeft.y_ &&
+            ball->y < bottomRight.y_);
+}
+
+void Node::subdivide()
+{
+    double midX = (topLeft.x_ + bottomRight.x_) / 2.0;
+    double midY = (topLeft.y_ + bottomRight.y_) / 2.0;
+
+    NE = new Node(this);
+    NW = new Node(this);
+    SW = new Node(this);
+    SE = new Node(this);
+
+    NW->topLeft = topLeft;
+    NW->bottomRight = Point(midX, midY);
+
+    NE->topLeft = Point(midX, topLeft.y_);
+    NE->bottomRight = Point(bottomRight.x_, midY);
+
+    SW->topLeft = Point(topLeft.x_, midY);
+    SW->bottomRight = Point(midX, bottomRight.y_);
+
+    SE->topLeft = Point(midX, midY);
+    SE->bottomRight = bottomRight;
+    
+    divided = true;
+}
+
+bool Node::isLeaf()
+{
+    return (NE == NULL && NW == NULL &&
+            SW == NULL && SE == NULL);
+}
+
+void Node::clear(Node* node)
+{
+    if (node == NULL) return;
+
+    clear(node->NE);
+    clear(node->NW);
+    clear(node->SE);
+    clear(node->SW);
+
+    delete node;
+}
+
+std::ostream & operator<<(std::ostream & cout, const Node & node)
+{
+    cout << "<Node: " << &node
+         << ", parent:" << node.Parent
+         << ", SE:" << node.NE
+         << ", SW:" << node.NW
+         << ", SE:" << node.SE
+         << ", SW:" << node.SW << '>';
+    cout << "Num balls" << node.balls.size() << '\n';
+    return cout;
+}
+
+void print_inorder(const Node * node)
+{
+    if (node == NULL) return;
+    print_inorder(node->NE);
+    print_inorder(node->NW);
+    std::cout << (*node) << '\n';
+    print_inorder(node->SE);
+    print_inorder(node->SW);
+}
+
+// QuadTree
+
+void QuadTree::insert(Node* node, Ball * ball, int depth)
+{
+    if(depth >= max_height)
+    {
+        node->balls.push_back(ball);
+        return;
+    }
+    
+    if(!node->contains(ball))
+        return;
+    
+    if(node->isLeaf() && node->balls.size() < capacity)
+    {
+        node->balls.push_back(ball);
+        return;
+    }
+
+    if(node->isLeaf())
+    {
+        node->subdivide();
+
+        std::vector<Ball*> remaining;
+
+        // Move existing balls into correct children
+        for(int i = 0; i < node->balls.size(); i++)
+        {
+            Ball* x = node->balls[i];
+
+            if (node->NE->contains(x)) insert(node->NE, x, depth + 1);
+            else if (node->NW->contains(x)) insert(node->NW, x, depth + 1);
+            else if (node->SW->contains(x)) insert(node->SW, x, depth + 1);
+            else if (node->SE->contains(x)) insert(node->SE, x, depth + 1);
+            else remaining.push_back(x); // Balls that are not in the bounds
+                                         // Remain in the parnent
+        }
+        node->balls = remaining;
+    }
+    
+    if(node->NE->contains(ball)) insert(node->NE, ball, depth + 1);
+    else if(node->NW->contains(ball)) insert(node->NW, ball, depth + 1);
+    else if(node->SW->contains(ball)) insert(node->SW, ball, depth + 1);
+    else if(node->SE->contains(ball)) insert(node->SE, ball, depth + 1);
+    else node->balls.push_back(ball);
+}
+
+void QuadTree::clear()
+{
+    root_->clear(root_);
+}
+
+void print_inorder(const QuadTree & quad)
+{
+    print_inorder(quad.root_);
+}
+
+// Drawing
+
+void drawNode(Node* node, Surface& surf)
+{
+    if (node == NULL)
+        return;
+
+    double x1 = node->topLeft.x_;
+    double x2 = node->bottomRight.x_;
+    double y1 = node->topLeft.y_;
+    double y2 = node->bottomRight.y_;
+
+    surf.put_line(x1, y1, x2, y1, 255, 255, 255);
+    surf.put_line(x1, y1, x1, y2, 255, 255, 255);
+    surf.put_line(x2, y1, x2, y2, 255, 255, 255);
+    surf.put_line(x1, y2, x2, y2, 255, 255, 255);
+    
+    // draw children
+    if (!node->isLeaf())
+    {
+        drawNode(node->NE, surf);
+        drawNode(node->NW, surf);
+        drawNode(node->SE, surf);
+        drawNode(node->SW, surf);
+    }
+}

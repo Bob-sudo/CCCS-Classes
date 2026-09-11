@@ -1,0 +1,40 @@
+%-*-latex-*-
+
+(a) The timings with the number of times a statement is executed
+is as follows (complete it like the solution given earlier):
+\begin{Verbatim}[frame=single]
+          z = a + b * b                      time t1    1
+
+          i = 0                              time t2    1
+LOOP1:    if i >= n:                         time t3    n + 1
+              goto ENDLOOP1                  time t4    1
+ 
+          a = a + 1                          time t5    n
+          x[i] = a + z + b;                  time t6    n
+          z = z + 1                          time t7    n
+          i = i + 1                          time t8    n
+          goto LOOP1                         time t9    n
+ENDLOOP1:
+
+          i = 0                              time t10   1
+LOOP2:    if i > (n - 1) / 4:                time t11   ((n-1)/4) + 1
+              goto ENDLOOP2                  time t12   1
+          x[i] = x[i] * z                    time t13   (n-1)/4
+          i = i + 1                          time t14   (n-1)/4
+          goto LOOP2                         time t15   (n-1)/4
+ENDLOOP2:
+          z = z + n                          time t16   1
+\end{Verbatim}
+
+Therefore
+\[
+T(n) = (t_2 + t_4 + t_5 + t_6)n + (t_1 + t_2 + t_3)
+\]
+
+(b)
+We have
+\[
+T(n) = O(n)
+\]
+\qed
+

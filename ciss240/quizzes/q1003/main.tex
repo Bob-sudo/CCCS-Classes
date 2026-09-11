@@ -1,0 +1,52 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following code fragment below
+so that it produces this output:
+\begin{console}[fontsize=\small]
+100 101 102 103 104 105
+\end{console}
+\ANSWER
+\begin{answercode}
+for (int i = 100; i < 106; i++)
+{
+    std::cout << i << ' ';
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following code fragment below
+so that it produces this output:
+\begin{console}[fontsize=\small]
+0 0.2 0.4 0.6 0.8
+\end{console}
+\ANSWER
+\begin{answercode}
+for (double x = 0; x < 1; x += 0.2)
+{
+    std::cout << x << ' ';
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following code fragment below
+so that it produces this output:
+\begin{console}[fontsize=\small]
+50 40 30 20 10 0
+\end{console}
+\ANSWER
+\begin{answercode}
+for (int i = 50 ; i >= 0; i -= 10)
+{
+    std::cout << i << ' ';
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

@@ -1,0 +1,98 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+The following program uses the \verb!vec2d! library.
+\begin{Verbatim}[frame=single, fontsize=\footnotesize]
+#include <iostream>
+#include "vec2d.h"
+
+int main()
+{
+    vec2d v(1.2, 3.4);
+
+    int i = 2;
+    try
+    {
+        std::cout << v[0] << std::endl; // prints 1.2
+        std::cout << v[1] << std::endl; // prints 3.4
+        std::cout << v[i] << std::endl; // exception thrown if i < 0 or i > 1
+    }
+    catch (IndexError & e)
+    {
+        std::cout << "IndexError caught" << std::endl; // prints IndexError caught
+    }
+    return 0;
+}
+\end{Verbatim}
+Modify the \verb!vec2d.h! file
+so that the exception catching code runs when the value of \verb!i!
+is not \verb!0! or \verb!1!.
+\\
+\ANSWER
+\begin{answercode}
+// file: vec2d.h
+#ifndef VEC2D_H
+#define VEC2D_H
+
+class IndexError
+{};
+
+class vec2d
+{
+public:
+    vec2d(double x, double y)
+        : x_(x), y_(y)
+    {}
+    double operator[](int i) const
+    {
+        if (i > 1 || i < 0) throw IndexError();
+        return (i == 0 ? x_ : y_);
+    }
+    // other methods not shown
+private:
+    double x_, y_;
+};
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Modify the given \verb!Rational.h! so that exceptions are thrown whenever
+there is a denominator of zero.
+\\
+\ANSWER
+\begin{answercode}
+// file: Rational.h
+#ifndef RATIONAL_H
+#define RATIONAL_H
+
+class ZeroDenominatorError
+{};
+
+class Rational
+{
+public:
+    Rational(int n, int d)
+        : n_(x), d_(d)
+    {}
+    const Rational & operator/=(const Rational & f) const
+    {
+        if (f.d == 0 || d_ == 0) throw ZeroDenominatorError(); 
+        n_ /= f.d_;
+        d_ /= f.n_;
+        return (*this);
+    }
+    Rational operator/(const Rational & f) const
+    {
+        if (f.d == 0 || d_ == 0) throw ZeroDenominatorError(); 
+        return (Rational(*this) /= f);
+    }
+private:
+    int n_, d_;
+};
+\end{answercode}
+(Hint: Modify at two places.)
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

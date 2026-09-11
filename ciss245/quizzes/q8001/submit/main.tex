@@ -1,0 +1,119 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+In the code below, there are common member variables in
+\verb!TeslaOptimusRobot!
+and
+\verb!RoombaRobot!.
+The goal is to clean up the repetitive code by moving the common
+parts of these two classes into a parent class.
+\begin{enumerate}[nosep]
+\li Complete the \verb!Robot! class with the common member variables of
+\verb!TeslaOptimusRobot! and \verb!Roomba! in its private section.
+\li In the public section, write constructor for \verb!Robot! to initialize these member variables
+and write public constant methods \verb!Robot::get_name()!,
+\verb!Robot::get_x()!, and \verb!Robot::get_y()!.
+\li
+Make \verb!TeslaOptimusRobot! and \verb!RoombaRobot! subclasses of \verb!Robot!
+using public inheritance.
+Modify \verb!TeslaOptimusRobot! and \verb!RoombaRobot! accordingly.
+\li There should be no change to \verb!main()!
+and the completed code should run the same as before.
+\end{enumerate}
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <string>
+
+class Robot
+{
+public:
+Robot(std::string name, int x, int y)
+: name_(name), x_(x), y_(y)
+{}
+std::string get_name() const
+{
+  return name_;
+}
+int get_x() const
+{
+  return x_;
+}
+int get_y() const
+{
+  return y_;
+}
+private:
+std::string name_;
+int x_, y_;
+};
+
+class TeslaOptimusRobot: public Robot
+{
+public:
+    TeslaOptimusRobot(std::string name, int x, int y, int num_legs)
+        : Robot(name, x, y), num_legs_(num_legs)
+    {}
+    void print() const
+    {
+        std::cout << "<TeslaOptimusRobot "
+                  << "name:" << name_ << ' '
+                  << "x:" << get_x() << ' '
+                  << "y:" << get_y() << ' '
+                  << "num_legs:" << num_legs_
+                  << ">\n";
+    }
+    void talk() const
+    {
+        std::cout << "<TeslaOptimusRobot name:"
+                  << get_name()
+                  << "> says \"hello world\"\n";
+    }
+private:
+    int num_legs_;
+};
+
+class RoombaRobot: public Robot
+{
+public:
+    RoombaRobot(std::string name, int x, int y, int num_wheels)
+        : Robot(name, x, y), num_wheels_(num_wheels)
+    {}
+    void print() const
+    {
+        std::cout << "<RoombaRobot "
+                  << "name:" << get_name() << ' '
+                  << "x:" << get_x() << ' '
+                  << "y:" << get_y() << ' '
+                  << "num_wheels:" << num_wheels_
+                  << ">\n";
+    }
+    void talk() const
+    {
+        std::cout << "<RoombaRobot name:"
+                  << get_name()
+                  << "> says \"whirrrr\"\n";
+    }
+private:
+    int num_wheels_;
+};
+
+int main()
+{
+    TeslaOptimusRobot arnold("arnold", 0, 0, 2);
+    RoombaRobot neo("i_am_the_chosen_one", 5, 0, 3);
+
+    arnold.print();
+    neo.print();
+
+    arnold.talk();
+    neo.talk();
+
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

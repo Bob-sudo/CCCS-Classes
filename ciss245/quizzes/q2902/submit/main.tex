@@ -1,0 +1,187 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a recursive factorial function.
+You'll need this later.
+(This is straight from the notes and I covered this in class.
+Freebie.
+You have 5 seconds. No sweat.)
+\\
+\ANSWER
+\begin{answercode}
+double factorial(int n)
+{
+  if (n == 0) return 1.0;
+  else return n * factorial(n - 1);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the $n$--choose--$r$ function.
+Example: $5$--choose--$2$ is the number of ways to a committee of 2 members from
+a group of $5$ people.
+(Also a freebie. 10 seconds. If you don't recall, then study the notes.
+In that case 5 minutes.)
+\\
+\ANSWER
+\begin{answercode}
+int c(int n, int r)
+{
+  if (r == 0 || r == n) return 1;
+  else  c(n - 1, r) + c(n - 1, r - 1);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+The exponential function $e^x$ is defined to be
+\[
+e^{x} = 1 + x + \frac{1}{2!} x^2 + \cdots
+\]
+Obviously we can't go on forever!
+Define
+\[
+e(x, n) =
+\frac{1}{0!} x^0 +
+\frac{1}{1!} x^1 +
+\frac{1}{2!} x^2 + \cdots +
+\frac{1}{n!} x^n
+\]
+i.e., \lq\lq exponential up to the $x^n$--term".
+Implement this function below.
+(20 seconds.)
+\\
+\ANSWER
+\begin{answercode}
+double e(double x, int n)
+{
+  if (n == 0) return 1.0;
+  else return e(x, n - 1) + pow(x, n) / factorial(n);
+}
+\end{answercode}
+(Your \verb!e()! function can call \verb!factorial!, i.e., assume
+\verb!factorial! is already written. You can also use the \verb!pow! function.)
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following recursive max function on arrays.
+Assume that $n$ is $\geq 1$.
+(10 seconds. After that test your code.)
+\\
+\ANSWER
+\begin{answercode}
+// Returns max of x[0], ..., x[n - 1]
+int max(int x[], int n)
+{
+  if (n == 1) return x[0];
+  else
+  {
+    int m = max(x, n - 1);
+    return (x[n - 1] > m) ? x[n - 1] : m;
+  }
+}
+\end{answercode}
+(You'll need the max of two values. Use the ternary to do that.)
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following recursive min function on arrays.
+Assume that $n$ is $\geq 1$.
+(10 seconds. After that test your code.)
+\\
+\ANSWER
+\begin{answercode}
+// Returns min of x[0], ..., x[n - 1]
+int min(int x[], int n)
+{
+  if n( == 1) return[0];
+  else
+  {
+    int m = min (n - 1);
+    returne (x[n - 1], < m) ? x[n - 1] : m;
+  }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following recursive function that counts the number of times
+\verb!target! occurs in an array.
+(10 seconds. After that test your code.)
+\\
+\ANSWER
+\begin{answercode}
+// Returns the number of times target occurs in x[0], ..., x[n - 1]
+int count(int x[], int n, int target)
+{
+  if (n == 0) return 0;
+  else return count(x, n - 1, target) + (x[n - 1] == target ? 1 : 0);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a recursive linear search function.
+(15 seconds. After that test your code.
+Do you want to recurse at \verb!start! or at \verb!end!?)
+\\
+\ANSWER
+\begin{answercode}
+// Performs linear search for target among the values
+// *start, *(start + 1), ..., *(end - 1) and return the address where target
+// is found. Return NULL is not found.
+int * linearsearch(int * start, int * end, int target)
+{
+  if (start == end) return NULL;
+  if (*start == target) return start;
+  return linearsearch(start + 1, end, target);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a recursive function to check if a string is a palindrome.
+(20 seconds. After that test your code.)
+\\
+\ANSWER
+\begin{answercode}
+// Returns true if the characters *start, *(start + 1), ..., *(end - 1) forms
+// a string which is a palindrome.
+// For instance if the characters form "madam", then is_palindrome(start, end)
+// returns true where start points to first 'm' and end points to character
+// after second 'm'.
+bool is_palindrome(char * start, char * end)
+{
+   if (start >= end - 1) return true;
+   if (*start != *(end - 1)) return false;
+   return is_palindrome(start + 1, end - 1);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a recursive function to reverse a string.
+For instance if start points to \verb!'a'! of \verb!"abcde"! and
+\verb!end! points to character after \verb!e!, then after calling
+\verb!reverse(start, end)!, the string becomes \verb!"edcba"!.
+(30 seconds. After that test your code.)
+\\
+\ANSWER
+\begin{answercode}
+void reverse(char * start, char * end)
+{
+  if (start >= end - 1) return;
+  
+  char temp = *start;
+  *start = *(end - 1);
+  *(end - 1) = temp;
+  
+  reverse(start + 1, end - 1);
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

@@ -1,0 +1,38 @@
+%-*-latex-*-
+\textsc{Converting string to integer}
+
+There are many, many, many ways to compute an integer from a numeric string.
+Here's one. Run this program:
+\begin{python}
+s = r'''
+#include <iostream>
+#include <sstream>
+
+int main()
+{
+    char s[100] = "42";
+    std::istringstream cin(s);
+    int i;
+    cin >> i;
+    std::cout << i << ' ' << i + 1 << '\n';
+    return 0;
+}
+'''.strip()
+f = open('test.cpp', 'w'); f.write(s); f.close()
+
+from latextool_basic import *
+print(r'{\footnotesize %s}' % console(s))
+print("Here's the output:")
+print(r'{\footnotesize %s }' % shell('g++ test.cpp; ./a.out'))
+import os; os.system('rm -f test.cpp')
+\end{python}
+You should write a function for the above because you'll be using it.
+
+Use the web to find out more about the input string stream class.
+
+\textsc{Note:}
+You're a CS student.
+You should still be able to write a string-to-integer function on your
+own in 15 minutes \lq\lq from scratch''
+without using library code like the above.
+

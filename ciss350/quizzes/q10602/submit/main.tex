@@ -1,0 +1,127 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Write a function \verb!f!
+that sorts \verb!v! (a \verb!std::vector< int >! object)
+by the lowest order digit in the following
+way.
+(The lower order digit of \verb!42! is \verb!2!.)
+Create an array \verb!x! of 10 \verb!std::list! objects.
+\verb!x[0]! will be a list of integers with lower order digit \verb!0!.
+\verb!x[1]! will be a list of integers with lower order digit \verb!1!.
+Etc.
+If the integer you read from \verb!v! is \verb!42!, you perform
+insert tail on \verb!x[2]! with \verb!42!.
+If the integer you read from \verb!v! is \verb!705!, you perform
+insert tail on \verb!x[5]! with \verb!705!.
+For instance if \verb!42, 62, 32! are the only integers in \verb!v!
+with lowest order digit of \verb!2!, then \verb!x[2]! will
+be the linked list \verb!42, 62, 32! where \verb!42! is the head.
+After all values of \verb!v! are placed in \verb!x!, you copy the values from
+\verb!x! back into \verb!v! from index 0 to index 9,
+and for each \verb!x[i]!, you process the values from head to tail.
+
+(This is essentially a radix sort on the lowest order digit.
+If you repeat the above process for the 10s digit, for the 100s digit, etc.,
+you'll get the radix sort using linked lists.)
+
+A skeleton code is given. Here's a test case:
+\begin{console}[commandchars=\\\{\},fontsize=\small]
+\userinput{52 31 75 73 51 -1}
+v: [52, 31, 75, 73, 51]
+[]
+[31, 51]
+[52]
+[73]
+[]
+[75]
+[]
+[]
+[]
+[]
+v: [31, 51, 52, 73, 75]
+\end{console}
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <string>
+#include <vector>
+#include <list>
+
+std::ostream & operator<<(std::ostream & cout, const std::vector< int > & v)
+{
+    std::string delim = "";
+    cout << "[";
+    for (auto x: v)
+    {
+        cout << delim << x;
+        delim = ", ";
+    }
+    cout << "]";
+    return cout;
+}
+
+std::ostream & operator<<(std::ostream & cout, const std::list< int > & v)
+{
+    std::string delim = "";
+    cout << "[";
+    for (auto x: v)
+    {
+        cout << delim << x;
+        delim = ", ";
+    }
+    cout << "]";
+    return cout;
+}
+
+void f(std::vector< int > & v)
+{
+    std::vector< std::list< int > > lists(10);
+
+    // TODO: Add values in v to lists
+    for (int x : v)
+    {
+        int digit = x % 10;
+        lists[digit].push_back(x);
+    }
+
+    for (auto list: lists)
+    {
+        std::cout << list << '\n';
+    }
+
+    // TODO: Copy values in lists to v
+    int index = 0;
+    for (int i = 0; i < 10; ++i)
+    {
+        for (int x : lists[i])
+        {
+            v[index++] = x;
+        }
+    }
+    
+}
+
+int main()
+{
+    std::vector< int > v;
+    while (1)
+    {
+        int t;
+        std::cin >> t;
+        if (t == -1) break;
+        v.push_back(t);
+    }
+    std::cout << "v: " << v << '\n';
+    f(v);
+    std::cout << "v: " << v << '\n';
+
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

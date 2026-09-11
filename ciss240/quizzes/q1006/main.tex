@@ -1,0 +1,100 @@
+%-*-latex-*-
+\input{thispreamble}
+
+This is a closed-book, no compiler, 5 minute quiz.
+
+%------------------------------------------------------------------------------
+\nextq
+The following is the graph of $y = x^2 \sin(x^3) + 10$:
+\begin{python}
+from latextool_basic import *
+p = FunctionPlot(domain='0:3', height='1.5in')
+p.add('x * sin(x**3) + 10', color='red', python=1, pin='below', num_points=1000,
+pin_message='')
+print(p)
+\end{python}
+Using exactly 1000 rectangles, compute the area under the above curve
+from $x = 0.5$ to $x = 2.5$.
+The area of each rectangle must be computed using the method in the notes
+(i.e., use the left endpoint of the rectangle to determine the area of the rectangle).
+The printout of the area must be in fixed point format with 5 decimal
+places.
+Skeleton code is provided.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+int main()
+{
+    double area = 0.0;                // the required area
+    double a = 0.5, b = 2.5;          // bounds
+    int n = 1000;                     // number of rectangles
+    double dx = (b - a) / n;          // width of each rectangle
+
+    for (int i = 0; i < n; ++i)       
+    {
+        double x = a + i * dx;        
+        double y = x * x * sin(x * x * x) + 10; 
+        area += y * dx;
+    }
+    std::cout << std::fixed << std::setprecision(5) << area << std::endl;
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+The following is the graph of $y = x^2 \sin(x^3)$:
+\begin{python}
+from latextool_basic import *
+p = FunctionPlot(domain='0:3', height='1.5in')
+p.add('x**2 * sin(x**3)', color='red', python=1, pin='below', num_points=1000,
+pin_message='')
+p.add('0', color='blue', python=1, pin='below', num_points=10,
+pin_message='')
+print(p)
+\end{python}
+Notice that there's a root at approximately $x = 1.7$.
+Use exactly 1000 equally spaced points from $a = 1.6$ to $b = 2.0$ to
+compute an approximation to this root.
+The printout of the value $x$ of the root
+must be in fixed point format with 5 decimal places.
+Skeleton code is provided.
+\\
+\ANSWER
+\begin{answercode}
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+int main()
+{
+    double area = 0.0;                // the required area
+    double min_y;                     // the running minimum y for given x 
+    double a = 0.5, b = 2.5;          // bounds
+    int n = 1000;                     // number of points
+    double dx = (b - a) / n;          // width of each rectangle
+
+     for (int i = 0; i <= n; ++i)
+    {
+        double x = a + i * dx;        
+        double y = x * x * sin(x * x * x); 
+
+        if ((y > 0 && y < min_y) || (y < 0 && -y < min_y)) 
+        {
+            min_y = (y > 0) ? y : -y;
+            root_x = x;
+        }
+    }
+
+    std::cout << std::fixed << std::setprecision(5) << area << std::endl;
+    return 0;
+}
+
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

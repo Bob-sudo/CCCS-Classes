@@ -1,0 +1,57 @@
+%-*-latex-*-
+[Quicksort] 
+
+Implement the quicksort algorithm in \cpp, using the 
+algorithm I mentioned in class (the inplace version).
+The following is the prototype:
+\begin{console}[frame=single, fontsize=\footnotesize]
+template < typename T >
+void quicksort(T * start, T * end, bool verbose=false);
+
+template < typename T, typename C >
+void quicksort(T * start, T * end, const C & less, bool verbose=false);
+\end{console}
+You must use the median of three method to pick the pivot
+and the partitioning
+method I mentioned in class where the pivot is first placed in front
+(the method I called pLRT).
+
+The base case should include array size $n \leq 3$.
+This is because since we are using median of 3.
+The recursive case should have $n \geq 3$.
+But if $n = 3$ in the recursive since, the 3 values would already be
+sorted by the median of 3.
+If $n = 3$ is included in the base case, then the function
+can return right away after sorting 3 values.
+The sorting done in the base case should not use loops.
+Just unroll the loop.
+
+Here's the expected verbose printing
+\begin{Verbatim}[fontsize=\footnotesize,frame=single]
+quicksort({3, 6, 17, 15, 13, 15, 6, 12, 9, 1})
+pivot = 3
+left = {1}
+right = {17, 15, 13, 6, 6, 12, 9, 15}
+    quicksort({1})
+    return {1}
+    quicksort({17, 15, 13, 6, 6, 12, 9, 15})
+    pivot = 15
+    left = {9, 15, 13, 6, 6, 12}
+    right = {17}
+        quicksort({9, 15, 13, 6, 6, 12})
+        pivot = 9
+        left = {6, 6}
+        right = {15, 13, 12}
+            quicksort({6, 6})
+            return {6, 6}
+            quicksort({15, 13, 12})
+            return {12, 13, 15}
+        combine({6, 6}, 9, {12, 13, 15}) = {6, 6, 9, 12, 13, 15}
+        return {6, 6, 9, 12, 13, 15}
+        quicksort({17})
+        return {17}
+    combine({6, 6, 9, 12, 13, 15}, 15, {17}) = {6, 6, 9, 12, 13, 15, 15, 17}
+    return {6, 6, 9, 12, 13, 15, 15, 17}
+combine({1}, 3, {6, 6, 9, 12, 13, 15, 15, 17}) = {1, 3, 6, 6, 9, 12, 13, 15, 15, 17}
+return {1, 3, 6, 6, 9, 12, 13, 15, 15, 17}
+\end{Verbatim}

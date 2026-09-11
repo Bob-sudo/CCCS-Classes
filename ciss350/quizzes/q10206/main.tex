@@ -1,0 +1,141 @@
+%-*-latex-*-
+\input{thispreamble}
+
+\LATEXHELPTHREEFIVEZERO
+
+\newpage
+\textsc{Plotting graphs}
+
+This quiz involves computing the $N$ and $C$ in the big-O definition
+using graphical method.
+Recall that the graphical method, strictly speaking,
+does not provide a proof.
+It's only a plausible verification.
+
+Here are some examples on plotting graphs.
+Make sure you look at the \LaTeX\ code
+(look for \texttt{TO BE COMPLETED}).
+
+Plotting some hand-coded points:
+\begin{python}
+from latextool_basic import *
+plot = FunctionPlot(width="3in", height="2in")
+
+plot.add(((100, 1),
+          (200, 2),
+          (300, 0.5)),
+         line_width='2', color='red', legend='$f_1(n)$')
+
+plot.add(((100, 5),
+          (200, 3),
+          (300, 7)),
+          line_width='2', color='green', legend='$f_2(n)$')
+
+plot.add(((100, 7),
+          (200, 4),
+          (300, 5)),
+          line_width='2', color='blue', legend='$f_3(n)$')
+print(plot)
+\end{python}
+
+Plotting points using formulas:
+\begin{python}
+from latextool_basic import *
+plot = FunctionPlot(width="6in", height="3in")
+
+plot.add(tuple((n, n**2) for n in range(0, 100)),        # plotting n^2
+         line_width='2', color='red', legend='$n^2$')
+
+plot.add(tuple((n, 5 * n**2) for n in range(0, 100)),    # plotting 5 * n^2
+         line_width='2', color='green', legend='$5 n^2$')
+
+plot.add(tuple((n, 10 * n**2) for n in range(0, 100)),   # plotting 10 * n^2
+         line_width='2', color='blue', legend='$10 n^2$')
+
+print(plot)
+\end{python}
+
+\TURNPAGE
+\newpage
+
+%------------------------------------------------------------------------------
+\nextq
+Find $N$ and $C$ such that $|f(n)| \leq C |n^2|$ for $n \geq N$
+for $n$ up to $100$.
+Choose $C$ to be an integer and as small as possible and then choose
+$N$ to be one of the values in $\{0, 10, 20, 30, ..., 100\}$ and as small as
+possible.
+Modify the graph accordingly.
+
+(Note: In the formal definition of big-$O$, the choice of $N$ and $C$ can be
+any real numbers.
+I'm restricting your choice of $N$ and $C$ for question to make the answer
+simple.
+Also, note that this does not really imply $f(n) = O(n^2)$ since this question only
+verifies of $|f(n)| \leq C |g(n)|$  where $g(n) = n^2$ for $n$ only up to $100$.)
+\begin{python}
+from latextool_basic import *
+plot = FunctionPlot(width="6in", height="3in")
+
+plot.add(((0,2000),(10,12000),(20,6000),(30,13000),(40,17000),(50,9000),(60,10000),(70,12000),(80,18000),(90,25000),(100,75000)),
+         line_width='2', color='red', legend='$f(n)$')
+
+#===============================================================================
+# TO BE COMPLETED: Test n^2, 2n^2, 3n^2, 4n^2, etc.
+#===============================================================================
+C = 1
+plot.add(tuple((n, C * n**2) for n in range(0, 100)),    # plotting C * n^2
+         line_width='2', color='green', legend='$C g(n) = %s \cdot n^2$' % C)
+
+print(plot)
+\end{python}
+\ANSWER
+\begin{answerlong}
+$N = 50, C = 8$
+\end{answerlong}
+
+\TURNPAGE
+
+%------------------------------------------------------------------------------
+\newpage
+\nextq
+Find positive integer $k$ such that there exist
+$N$ and $C$ such that $|f(n)| \leq C |n^k|$ for $n \geq N$
+for $n$ up to $1000$.
+First you want $k$ be an as small as possible.
+Then choose $C$ to be an integer and as small as possible and then choose
+$N$ to be one of the values in $\{0, 100, 200, 300, ..., 1000\}$ and as small as
+possible.
+Modify the graph accordingly.
+
+(Note: In the formal definition of big-$O$, the choice of $N$ and $C$ can be
+any real numbers.
+I'm restricting your choice of $N$ and $C$ for question to make the answer
+simple.
+Also, note that this does not really imply $f(n) = O(n^k)$ since this question only
+verifies of $|f(n)| \leq C |n^k|$ for $n$ only up to $1000$.)
+\begin{python}
+import math
+from latextool_basic import *
+plot = FunctionPlot(width="6in", height="3in")
+
+plot.add(tuple((n, 3.5 * n**3/(1 + 2 * n + n * sin(2*n))) for n in range(0, 1000, 10)),
+         line_width='2', color='red', legend='$f(n)$')
+
+#===============================================================================
+# TO BE COMPLETED: Test C * n**k for different values of C and k
+#===============================================================================
+C = 1
+k = 2
+plot.add(tuple((n, C * n**k) for n in range(0, 1000, 10)),    # plotting C * n^k
+         line_width='2', color='green', legend='$C \cdot g(n) = %s \cdot n^%s$' % (C, k))
+
+print(plot)
+\end{python}
+\ANSWER
+\begin{answerlong}
+$k = 2, N = 100, C = 4$
+\end{answerlong}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

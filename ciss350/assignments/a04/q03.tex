@@ -1,0 +1,33 @@
+%-*-latex-*-
+
+
+(a) 
+The timings with the number of times a statement is executed
+is as follows (complete it like the solution given earlier):
+\begin{Verbatim}[frame=single,commandchars]
+           a = a * a               time t1    1
+
+           i = 0                   time t2    1
+LOOP1:     if i >= n:              time t3    n + 1
+               goto ENDLOOP1       time t4    1
+           x[i] = x[i] + a         time t5    n
+
+           j = 0                   time t6    n
+LOOP2:     if j > i:               time t7    n(n + 1) / 2 + n
+               goto ENDLOOP2       time t8    n
+           x[j] = x[i] * a         time t9    n(n + 1) / 2
+           j = j + 1               time t10   n(n + 1) / 2
+           goto LOOP2              time t11   n(n + 1) / 2
+ENDLOOP2:
+           i = i + 1               time t12   n
+           goto LOOP1              time t13   n
+ENDLOOP1:
+\end{Verbatim}
+Therefore
+\[
+T(n) = (t_7 + t_9 + t_{10} + t_{11})n(n + 1)/2 + (t_3 + t_5 + t_6 + t_7 + t_8 + t_{12} + t_{13})n + (t_1 + t_2 + t_3 + t_4)
+\]
+We have
+\[
+T(n) = An(n+1)/2 + Bn + C = O(n^2)
+\]

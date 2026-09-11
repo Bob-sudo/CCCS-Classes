@@ -1,0 +1,5 @@
+(The first line of output is given.)
+Q1 [
+i:1
+]
+

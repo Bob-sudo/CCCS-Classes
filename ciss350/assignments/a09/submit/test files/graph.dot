@@ -1,0 +1,9 @@
+digraph G
+{
+a -> b;
+a -> c;
+a -> d;
+b -> e;
+a [shape=box];
+b [label="hello\nworld"];
+}

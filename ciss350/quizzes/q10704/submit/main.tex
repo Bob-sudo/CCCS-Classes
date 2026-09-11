@@ -1,0 +1,135 @@
+%-*-latex-*-
+\input{thispreamble}
+
+The following is the node for the binary search tree.
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+class BSTNode
+{
+public:
+    int key_;
+    BSTNode * parent_;
+    BSTNode * left_, * right_;
+};
+\end{Verbatim}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the function below to return the address
+of the BST node with the given target key value.
+If it is not found, return \verb!NULL!.
+Calling \verb!bst_find(p, 42)! will search for the node with
+key value 42 among all the children of the node with address \verb!p!.
+(This is just our usual BST find.)
+\\
+\ANSWER
+\begin{answercode}
+BSTNode * bst_find(BSTNode * p, int target)
+{
+  if(p == NULL)
+    return NULL;
+
+  if(p->key_ == target)
+    return p;
+
+  else
+  {
+    if(p->key_ < target)
+      return bst_find(p->right_, target);
+    else
+      return bst_find(p->left_, target);
+  }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the function below to return the address
+of the \textit{parent} node of the BST node with the given target key value.
+If it is not found, return \verb!NULL!.
+(There are two cases where \verb!NULL! is returned:
+when the target key is at the root of the tree and when the target key
+is not in the tree.)
+\\
+\ANSWER
+\begin{answercode}
+BSTNode * bst_find_parent(BSTNode * p, int target)
+{
+  if(p == NULL)
+    return NULL;
+
+  if(p->key_ == target)
+    return p->parent_;
+
+  else
+  {
+    if(p->key_ < target)
+      return bst_find_parent(p->right_, target);
+    else
+      return bst_find_parent(p->left_, target);
+  }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete the following function which is similar to the BST find.
+If the target key value is found, the address of this target node is
+returned and \verb!found! (pass by reference) is set to \verb!true!.
+If the target key value is not found, the address of the last node
+reached is returned and \verb!found! is set to \verb!false!.
+For instance when you perform this version of find
+on the following tree starting at \verb!5!
+and searching for target value \verb!7!
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+      (5)
+     /   \
+  (3)     (8)
+         /   \
+      (6)     (9)
+\end{Verbatim}
+the address returned is the address of the node with value \verb!6!
+and \verb!found! is set to \verb!false!.
+(This function is helpful: after failing to find a target key value
+and you want to insert this new key,
+it tells you where is the parent node for the new node.)
+\\
+\ANSWER
+\begin{answercode}
+BSTNode * bst_find_up_to(BSTNode * p, int target, bool & found)
+{
+  if(p == NULL)
+  {
+    found = false;
+    return NULL;
+  }
+
+  if(p->key_ == target)
+  {
+    found = true;
+    return p;
+  }
+
+  if(p->key_ < target)
+  {
+    if(p->left_ == NULL)
+    {
+      found = false;
+      return p;
+    }
+    return bst_find_up_to(p->right_, target, found);
+  }
+  
+  else
+  {
+    if(p->right == NULL)
+    {
+      found = false;
+      return p;
+    }
+    return bst_find_parent(p->left_, target, found);
+  }
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

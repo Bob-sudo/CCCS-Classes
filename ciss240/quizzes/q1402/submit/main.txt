@@ -1,0 +1,42 @@
+Q1 [
+#include <iostream>
+
+int main()
+{
+    int n, i;
+    std::cin >> n >> i;
+    int digit;
+
+
+    std::cout << digit << '\n';
+    return 0;
+}
+]
+(You need not use the above skeleton code.)
+
+Q2 [
+#include <iostream>
+
+int main()
+{
+    int n;
+    std::cin >> n;
+
+    int num_digits; // number of digits in n
+    // compute num_digits
+    
+    while ([number of digits in n is > 1])
+    {
+        int sum_digits = 0;
+        // compute sum_digits
+        // print sum_sigits
+
+        // get ready for the next iteration
+        n = sum_digits;
+        // compute num_digits
+    }
+    
+    return 0;
+}
+]
+(You need not use the above skeleton code.)

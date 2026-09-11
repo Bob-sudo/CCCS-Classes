@@ -1,0 +1,59 @@
+%-*-latex-*-
+\input{thispreamble}
+
+%------------------------------------------------------------------------------
+\nextq
+Write function \verb!bubblesort(int x[], int start, int end)!
+that sorts the array \verb!x! from index \verb!start! to index \verb!end - 1!
+in \textit{descending} order.
+Do not do unnecessary computation: if \verb!start! is 5, there's no
+reason to touch \verb!x[0]!.
+\\
+\ANSWER
+\begin{answercode}
+  void bubblesort(int x[], int start, int end)
+  {
+    for (int i = start; i < end - 1; i++)
+    {
+      for (int j = start; j < end - 1 - (i - start); j++)
+      {
+        if (x[j] < x[j + 1])
+        {
+          int temp = x[j];
+          x[j] = x[j + 1];
+          x[j + 1] = temp;
+        }
+      }
+    }
+  }
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Write function \verb!int binarysearch(int x[], int start, int end, int target)!
+performs binary search for \verb!target! in array x
+from index \verb!start! to index \verb!end - 1! and
+returns the index where \verb!target! is found.
+If \verb!target! is not found, \verb!-1! is returned.
+Assume that \verb!x! is already sorted in \textit{descending} order
+from index \verb!start! to index \verb!end - 1!
+and the values in \verb!x! are unique (i.e. no duplicates).
+\\
+\ANSWER
+\begin{answercode}
+int binarysearch(int x[], int start, int end, int target)
+{
+    int left = start, right = end - 1;
+    while (left <= right)
+    {
+        int mid = left + (right - left) / 2;
+        if (x[mid] == target) return mid;
+        else if (x[mid] > target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\input{thispostamble}

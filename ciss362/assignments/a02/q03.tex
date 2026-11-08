@@ -1,0 +1,35 @@
+
+
+We will prove the above statement by weak induction. For n >= 0, let P(n) be the statments
+
+P(n) = 4(1^3 + 2^3 + ... + n^3) = n^2(n + 1)^2
+
+Basis: We now prove the base case P(0).
+P(0): 4(0) = 0(0) -> 0 = 0
+Hence P(n) holds
+
+Induction Step: We now prove the inductive case.
+
+For each k >= 1, assume the claim is true for P(k) and prove that it is true for p(k + 1). The induction hypothesis states that
+
+4(1^3 + 2^3 + \cdots + k^3) = k^2(k+1)^2
+
+Our objective is to prove that
+
+4(1^3 + 2^3 + \cdots + k^3 + (k + 1)^3) = (k + 1)^2(k+2)^2
+
+Starting on the left-hand side:
+
+4(1^3 + 2^3 + \cdots + k^3 + (k + 1)^3)
+= 4(1^3 + 2^3 + \cdots + k^3) + 4(k + 1)^3
+= k^2(k + 1)^2 + 4(k + 1)^3
+= (k + 1)^2 [k^2 + 4(k + 1)]
+= (k + 1)^2 + [k^2 + 4k + 4]
+= (k + 1)^2 + [(k + 2)(k + 2)]
+= (k + 1)^2 + (k + 2)^2
+
+Hence P(k + 1) holds
+
+Therefore, by weak mathematical induction, P(n) is ture for all n >= 0. i.e., for any n >= 0.
+
+4(1^3 + 2^3 + ... + n^3) = n^2(n + 1)^2

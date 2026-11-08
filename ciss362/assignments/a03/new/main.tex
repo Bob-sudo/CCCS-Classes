@@ -1,0 +1,92 @@
+%-*-latex-*-
+\input{thispreamble.tex}
+
+\newcommand\myincludetex[1]{\textbox{{\scriptsize \texttt{#1}}}
+
+  \input{#1}
+  
+}
+
+\newcommand\myincludesrc[1]{\textbox{{\scriptsize \texttt{#1}}}
+
+  \VerbatimInput[fontsize=\footnotesize,frame=single]{#1}
+  
+}
+
+
+\textsc{Objectives}
+\begin{myenum}
+  \li Write a hello world program.
+  \li Trace a hello world program.
+\end{myenum}
+
+File structure is
+\begin{console}[fontsize=\footnotesize]
+a01/
+  main.tex
+  makefile
+  a01q01/ .... (example with LaTeX and code)
+    question/
+      doc/
+        q01.tex
+    answer/
+      doc/
+        q01s.tex
+      skel/
+        main.cpp
+      src/
+        main.cpp
+  a01q02/ .... (example with LaTeX)
+    question/
+      doc/
+        q02.tex
+    answer/
+      doc/
+        q02s.tex
+      skel/
+      src/  
+  a01q03/ .... (example with code)
+    question/
+      doc/
+        q03.tex
+    answer/
+      doc/    
+      skel/
+        main.cpp
+      src/
+        main.cpp
+\end{console}
+Need not include files in \verb!skel!.
+
+%-------------------------------------------------------------------------------
+\newpage
+Q1.
+\input{a01q01/question/doc/q01.tex}
+
+\ANSWER
+
+\myincludetex{a01q01/answer/doc/q01s.tex}
+\myincludesrc{a01q01/answer/skel/main.cpp}
+\myincludesrc{a01q01/answer/src/main.cpp}
+
+%-------------------------------------------------------------------------------
+\newpage
+Q2.
+\input{a01q02/question/doc/q02.tex}
+
+\ANSWER
+
+\myincludetex{a01q02/answer/doc/q02s.tex}
+
+%-------------------------------------------------------------------------------
+\newpage
+Q3.
+\input{a01q03/question/doc/q03.tex}
+
+\ANSWER
+
+\myincludesrc{a01q03/answer/skel/main.cpp}
+\myincludesrc{a01q03/answer/src/main.cpp}
+
+%-------------------------------------------------------------------------------
+\input{thispostamble.tex}

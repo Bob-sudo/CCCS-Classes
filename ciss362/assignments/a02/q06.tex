@@ -1,0 +1,34 @@
+We are going to prove the above statement using weak induction. For n >= 1, we will prove that every integer n is a product of primes
+
+Basis: We will now prove the base case P(1)
+
+By definition, the product of the empty collection of primes () is 1. Therefore 1 is a product of primes. Thus, P(1) holds
+
+Induction Step: We now prove the unductive case.
+
+Assume every positive integer m with 1 <= m < k is a product of primes.
+For each k >= 1, assume the claim is true for P(k) and prove that it is true for P(k + 1).
+
+There are 2 cases
+
+Case 1: k + 1 is prime
+
+Then k + 1 is already a product of primes consisting of a one-element collection, (k + 1)
+
+Therefore P(k + 1) is true
+
+Case 2: k + 1 is not prime
+
+Since k + 1 > 1 is not prime, it is composite. Therefore, there exists integers ab such that k + 1 = ab. With 1 < a < k + 1, and 1 < b < k + 1. In particular a <= k and b <= k.
+
+By the induction hypothesis, every positive integer from 1 to k is a product of primes. Therefore, both a and b are products of primes.
+
+Suppose a = p_1p_2...p_i and b = q_1q_2...q_j
+Where all p_i and q_j are primes
+
+Then k + 1 = ab = (p_1p_2...p_i)(q_1q_2...q_j) = p_1p_2...p_iq_1q_2...q_3
+
+Thus k + 1 is also a product of primes and P(k + 1) holds
+
+Therefore, by weak mathematical induction, P(n) is true for all n >= 1. i.e., for any n >= 1.
+P(n) = (Every positive integer n >= 1 is a product of primes)

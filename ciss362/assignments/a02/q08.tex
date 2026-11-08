@@ -1,0 +1,57 @@
+(a) P(X \times Y) = P(X) \times P(Y)
+This statement is false
+Counterexample:
+
+X = {1}, Y = {2}
+
+P(X \times Y) = {\emptyset, {(1,2)}}
+
+P(X) = {\emptyset, 1}
+P(Y) = {\emptyset, 2}
+
+Therefore,
+
+P(X)\times P(Y) = {\emptyset, (\emptyset, {1}), (\emptyset, {2}), ({1}, {2})}
+
+|P(X\times Y)| = 2
+|P(X)\times P(Y)| = 4
+
+Thus, P(X\times Y) != P(X)\times P(Y) and (a) is false
+
+(b) P(X\cup Y) = P(X)\cup P(Y)
+This statement is false
+Counterexample:
+
+X = {1}, Y = {2}
+
+X\cup Y = {1, 2}
+
+P(X\cup Y) = {\emptyset, {1}, {2}, ({1, 2})}
+
+P(X) = {\emptyset, 1}
+P(Y) = {\emptyset, 2}
+
+Therefore,
+
+P(X)\cup P(Y) = {\emptyset, {1}, {2}}
+
+Now {1,2}\in P(X\cup Y), but {1,2}\notin P(X)\cup P(Y).
+
+Therefore, P(X\cup Y) != P(X)\cup P(Y) and (b) is false
+
+(c) \(|P(X)|=2^{|X|}\) if X is a finite set
+
+This statment is true
+
+Suppose
+
+\(|X|\) = n
+
+To construct a subset of X, we make a decision for each element of X, include it or don't include it. So each element of n gives us to choices. By the the mulltiplication principle, the total number of subsets is
+
+2 * 2 * ... * 2 = 2^{n}
+
+Since n = \(|X|\), the above statment is true.
+
+
+

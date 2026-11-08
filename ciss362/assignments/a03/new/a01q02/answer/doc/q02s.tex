@@ -1,0 +1,44 @@
+We will prove this by weak mathematical induction.
+Let $P(n)$ be the statement
+\[
+P(n) =
+\left(
+1 + 2 + \cdots + n = \frac{n(n + 1)}{2}
+\right)
+\]
+for $n \geq 0$.
+
+\textsc{Base case}.
+When $n = 0$,
+\begin{align*}
+1 + 2 + \cdots + n
+&= 0 \\
+&= \frac{0(0 + 1)}{2} \\
+&= \frac{n(n + 1)}{2} 
+\end{align*}
+Hence $P(0)$ holds.
+
+\textsc{Inductive case}.
+Let $n \geq 0$ and assume $P(n)$ holds, i.e.,
+\[
+1 + 2 + \cdots + n = \frac{n(n + 1)}{2}
+\]
+Therefore
+\begin{align*}
+1 + 2 + \cdots + n + (n + 1)
+&= \frac{n(n + 1)}{2} + (n + 1) \\
+&= (n + 1) \left( \frac{n}{2} + 1 \right) \\
+&= (n + 1) \left( \frac{n + 2}{2} \right) \\
+&= \frac{(n + 1)((n + 1) + 1)}{2} 
+\end{align*}
+i.e., $P(n + 1)$ holds.
+
+Therefore by weak mathematical induction, $P(n)$ holds for all
+$n \geq 0$, i.e.,
+\[
+1 + 2 + \cdots + n 
+= \frac{n(n + 1)}{2} 
+\]
+for all $n \geq 0$.
+\qed
+

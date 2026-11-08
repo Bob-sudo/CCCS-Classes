@@ -1,0 +1,30 @@
+
+We are going to prove the above statement using weak induction. For n >= 4, let P(n) be the statement
+
+2^n >= n^2
+
+Basis Step: We will now prove the base case P(4)
+
+P(4) = 2^4 >= 4^2 = 16 >= 16
+
+Thus, P(4) holds
+
+Induction Step: We will now prove the inductive case
+
+For each k >= 1, assume the claim is true for P(k) and prove that is is true for P(k + 1). The induction hypothesis states that
+
+2^k > k^2, for k >= 4
+
+Our object is to prove that
+
+2^(k+1) >= (k + 1)^2
+
+So,
+
+2^(k+1) = 2*2k^2 >= 2k^2 >= (k + 1)^2
+
+Hence, P(k + 1) holds
+
+Therefore, by weak mathematical induction, P(n) is true for all n >= 4.
+
+2^n >= n^2

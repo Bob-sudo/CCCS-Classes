@@ -1,0 +1,50 @@
+
+Write a complete proof of the Euclidean property of integers:
+If a and b are integers such that a ≥ 0 and b > 0,
+then there exists integers q and r such that q ≥ 0 and
+a = bq + r, 0 ≤ r < b
+
+
+We will prove the above statement use the well-ordering principle. For a >= 0, b > 0
+
+a = bq + r, for some q >= 0, and 0 <=  r < b
+
+Consider the set
+
+X = {a - bx | x ∈ N, a - bx > 0}
+
+This set is a nonempty set because x = 0 gives
+
+a - b(0) = a >= 0
+
+Thus a ∈ X
+
+Since X is a nonempty set with non-negative numbers, the WOP says that X has a least element. Let this least element be r. Therefore, for some integer x >= 0
+
+r = a - bx
+
+rearanging gives
+
+a = bx + r
+
+also since r ∈ X
+
+r >= 0
+
+Now, I am going to show that r < b. Assume on the contrary that r >= b, then
+
+r - b >= 0
+
+but r - b = (a - bx) - b = a - b(x + 1)
+
+since x >= 0 we have
+
+x + 1 >= 0
+
+Therefore, r - b ∈ X. However, r - b < r, because b > 0. This is a contradiction because of the fact r was the least element of X. So, our assumption was false and r < b.
+
+Combining everything, we have found integers q, r such that
+
+q >= 0, a = bq + r, 0 <= r < b
+
+Therefore, by the WOP, the Euclidean property of integers holds

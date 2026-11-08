@@ -1,0 +1,20 @@
+# CMake and Qt build files
+build/
+build-*/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+*.o
+*.a
+*.so
+*.exe
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+*~
+
+# Python cache
+__pycache__/
+*.pyc

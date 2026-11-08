@@ -1,0 +1,63 @@
+Let $x$ be a word in $\Sigma^*$. Then 
+
+We have the following:
+\begin{align*}
+           |x| &= 0                                                       & & \tag{a} \\
+\THEREFORE x &= \ep \\
+\THEREFORE (x)^R &= \ep^R \\
+\THEREFORE (x)^R &= \ep \\
+\THEREFORE (x)^R &= x \\
+\end{align*}
+
+Hence, P(0) is true
+
+Therefore, for some $x \in \Sigma^*$
+
+\begin{align*}
+           |x| &= 1                                                       & & \tag{b} \\
+\THEREFORE |x| &= a
+\THEREFORE (x)^R &= a^R \\
+\THEREFORE (x)^R &= a \\
+\THEREFORE (x)^R &= x \\
+\end{align*}
+
+Hence, P(1) is true
+
+Therefore, for some $a, b \in \Sigma$ and $x'' \in \Sigma^*$, |x| &\geq 2
+
+\begin{align*}
+  Assume x is palindromic
+\THEREFORE x = x^R
+
+  And since |x| &\geq 2
+           x = ax''b
+
+           x^R = (ax''b)^R
+\THEREFORE x^R = b^R(x'')^Ra^R
+\THEREFORE x^R = b(x'')^Ra
+
+Comparing the first and last characters in the string, we obtain
+           a = b
+
+Comparing the middle string gives us
+           x'' = x''^R
+
+\THEREFORE x'' is palindromic
+
+Substituting b = a
+           x = ax''a
+Thus, (c) holds, with x' = a
+
+Assume condition (c) holds, Then
+           x = x'x''x'
+where x' \in \Sigma and x'' is palindromic
+Since x'' is palindromic
+           x'' = x''^R
+\THEREFORE x^R = (x'x''x')^R
+\THRERFORE x^R = (x')^R(x'')^R(x')^R
+\THEREFORE x^R = x'(x'')^Rx'
+\THEREFORE x^R = x'x''x'
+\THEREFORE x^R = x
+           
+  
+\end{align*}
